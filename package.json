@@ -1,0 +1,25 @@
+{
+  "name": "telegram.link",
+  "version": "0.0.1",
+  "description": "Telegram - Node.js communication library",
+  "keywords": ["telegram", "api"],
+  "author": "Enrico Stara <enrico.stara@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/enricostara/telegram.link.git"
+  },
+  "dependencies": {
+      "bignum": "*",
+      "jsbn": "*"
+  },
+  "devDependencies": {
+    "debug": "*",
+    "gulp": "*",
+    "gulp-docco": "*",
+    "gulp-jshint": "*",
+    "gulp-mocha": "*",
+    "mocha": "*",
+    "should": "*"
+  },
+  "main": "index"
+}
