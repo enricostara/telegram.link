@@ -1,9 +1,10 @@
 require('should');
+var staticInfo = require('../lib/static');
 var TelegramLink = require('../index');
 
 describe('TelegramLink', function () {
 
-    var primaryDC = {host: "173.240.5.253", port: "443"};
+    var primaryDC = staticInfo.telegram.test.primaryDataCenter;
 
     describe('#connect()', function () {
         it('should connect and disconnect to primary DC', function (done) {
