@@ -4,7 +4,6 @@ var AbstractObject = require('../../index').type_language.AbstractObject;
 
 describe('Vector', function () {
 
-
     describe('#init()', function () {
         it('should return an instance', function (done) {
             var list = new Vector();
@@ -18,7 +17,7 @@ describe('Vector', function () {
             list.should.have.properties({id: '481674261', type: 'Long'});
             list.isReadonly().should.be.true;
 
-            var list = new Vector({type: 'long', props: {list: [1,2,3]}});
+            var list = new Vector({type: 'long', list: [1,2,3]});
             list.should.have.properties({id: '481674261', type: 'Long'});
             list.isReadonly().should.be.false;
             list.getList().should.be.eql([1,2,3]);
@@ -33,7 +32,6 @@ describe('Vector', function () {
             list.deserialize().should.be.ok;
             list.getList().length.should.be.equal(1);
             list.getList().pop().should.be.equal('0xc3b42b026ce86b21');
-
             done();
         })
     });
@@ -45,4 +43,14 @@ describe('Vector', function () {
             done();
         })
     });
+
+    describe('#serialize()', function () {
+        it('should de-serialize the list', function (done) {
+            var list = new Vector({type: 'long', list: ['0xc3b42b026ce86b21']});
+            list.serialize().should.be.ok;
+            list.retrieveBuffer().toString('hex').should.be.equal('15c4b51c01000000216be86c022bb4c3');
+            done();
+        })
+    });
+
 });
