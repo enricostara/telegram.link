@@ -47,8 +47,9 @@ describe('Vector', function () {
     describe('#serialize()', function () {
         it('should de-serialize the list', function (done) {
             var list = new Vector({type: 'long', list: ['0xc3b42b026ce86b21']});
-            list.serialize().should.be.ok;
-            list.retrieveBuffer().toString('hex').should.be.equal('15c4b51c01000000216be86c022bb4c3');
+            var buffer =  list.serialize();
+            buffer.should.be.ok;
+            buffer.toString('hex').should.be.equal('15c4b51c01000000216be86c022bb4c3');
             done();
         })
     });
