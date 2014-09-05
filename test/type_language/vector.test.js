@@ -45,7 +45,7 @@ describe('Vector', function () {
     });
 
     describe('#serialize()', function () {
-        it('should de-serialize the list', function (done) {
+        it('should serialize the list', function (done) {
             var list = new Vector({type: 'long', list: ['0xc3b42b026ce86b21']});
             var buffer =  list.serialize();
             buffer.should.be.ok;
