@@ -47,17 +47,5 @@ describe('mtproto', function () {
             })
         });
 
-        /*
-
-                describe('#deserialize()', function () {
-                    it('should not de-serialize the msg cause type id mismatch', function (done) {
-                        var msg = new Vector({type: 'long', buffer: new Buffer('25C4B51C01000000216BE86C022BB4C3', 'hex')});
-                        msg.deserialize().should.not.be.ok;
-                        done();
-                    })
-                });
-
-        */
-
     });
 });
