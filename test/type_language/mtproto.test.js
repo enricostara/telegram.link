@@ -4,6 +4,18 @@ var AbstractObject = require('../../index').type_language.AbstractObject;
 
 describe('mtproto', function () {
 
+    describe('#class building', function () {
+        it('should build all requested classes', function (done) {
+            for(var i = 0; i < mtproto._classes.length; i++) {
+                var className = mtproto._classes[i];
+                var obj = new mtproto[className]();
+                obj.should.be.ok;
+                obj.should.be.an.instanceof(AbstractObject);
+            }
+            done();
+        })
+    });
+
     describe('PlainMessage', function () {
 
         describe('#init()', function () {
@@ -46,6 +58,5 @@ describe('mtproto', function () {
                 done();
             })
         });
-
     });
 });
