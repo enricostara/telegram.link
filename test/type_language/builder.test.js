@@ -9,9 +9,9 @@ var AbstractObject = require('../../index').type_language.AbstractObject;
 
 describe('Builder', function () {
 
-    describe('#build({P_Q_inner_data})', function () {
+    describe('#buildType({P_Q_inner_data})', function () {
         it('should return a P_Q_inner_data', function (done) {
-            var P_Q_inner_data = Builder.build({"id": "-2083955988", "predicate": "p_q_inner_data", "params": [
+            var P_Q_inner_data = Builder.buildType({"id": "-2083955988", "predicate": "p_q_inner_data", "params": [
                 {"name": "pq", "type": "bytes"},
                 {"name": "p", "type": "bytes"},
                 {"name": "q", "type": "bytes"},
@@ -33,9 +33,9 @@ describe('Builder', function () {
         })
     });
 
-    describe('#build({ResPQ})', function () {
+    describe('#buildType({ResPQ})', function () {
         it('should return a ResPQ', function (done) {
-            var ResPQ = Builder.build({"id": "85337187", "predicate": "resPQ", "params": [
+            var ResPQ = Builder.buildType({"id": "85337187", "predicate": "resPQ", "params": [
                 {"name": "nonce", "type": "int128"},
                 {"name": "server_nonce", "type": "int128"},
                 {"name": "pq", "type": "bytes"},
