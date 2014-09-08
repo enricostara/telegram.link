@@ -2,7 +2,7 @@
   "name": "telegram.link",
   "version": "0.0.1",
   "description": "Telegram - Node.js communication library",
-  "keywords": ["telegram", "api"],
+  "keywords": ["telegram", "api", "library", "node", "nodejs", "node.js", "js", "javascript"],
   "author": "Enrico Stara <enrico.stara@gmail.com>",
   "repository": {
     "type": "git",
