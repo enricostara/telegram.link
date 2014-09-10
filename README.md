@@ -10,14 +10,14 @@ on the **Node.js** platform and on a standard **web browser**.
 Telegram users can exchange encrypted and self-destructing messages, photos, videos and documents (all file-types supported). 
 Telegram is officially available for Android and iOS (including tablets and devices without Wi-Fi). 
 Unofficial clients for Windows Phone, as well as a web version, OS X version, Linux version and a Windows desktop client 
-are available from independent developers using the **Telegram API**.
-[from Wikipedia](http://en.wikipedia.org/wiki/Telegram_\(software\))
+are available from independent developers using the **Telegram API**
+([from Wikipedia](http://en.wikipedia.org/wiki/Telegram_\(software\))).
 
 ### about Node.JS..
 
 Node.js is a cross-platform runtime environment for server-side and networking applications. 
-Node.js applications are written in JavaScript, and can be run within the Node.js runtime on OS X, Microsoft Windows and Linux with no changes.
-[from Wikipedia](http://en.wikipedia.org/wiki/Node.js)
+Node.js applications are written in JavaScript, and can be run within the Node.js runtime on OS X, Microsoft Windows and Linux with no changes
+([from Wikipedia](http://en.wikipedia.org/wiki/Node.js)).
 
 
 ### telegram.link in short..
