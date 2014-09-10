@@ -19,7 +19,8 @@
     "gulp-jshint": "*",
     "gulp-mocha": "*",
     "mocha": "*",
-    "should": "*"
+    "should": "*",
+    "colors": "*"
   },
   "main": "index"
 }
