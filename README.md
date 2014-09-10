@@ -20,9 +20,24 @@ Node.js applications are written in JavaScript, and can be run within the Node.j
 ([from Wikipedia](http://en.wikipedia.org/wiki/Node.js)).
 
 
-### telegram.link in short..
+## telegram.link in short..
 
 **telegram.link** is an unofficial **porting in javascript** of [Telegram-API](https://core.telegram.org/api). 
 With Node.js technology and the javascript language, telegram.link enables to **write once** a Telegram-Client application 
 that **runs both on a Node.js server and on a standard web browser** 
 (using, in this case, a technology like [browserify](https://www.npmjs.org/package/browserify)).
+
+## Project status
+
+This an **early version**, the current state of progress includes:
+
+- a first implementation of the builder that reads [TypeLanguage schema constructors](https://core.telegram.org/schema) and writes dynamically 
+javascript classes, while a [TypeLanguage schemas functions](https://core.telegram.org/mtproto/TL) reader that builds javascript methods is on going.
+
+- a basic Tcp connection implementation to Telegram Messanger 
+
+- a first [MTProto protocol](https://core.telegram.org/mtproto) implementation to 
+[create an authorization](https://core.telegram.org/mtproto/auth_key) key is on going.
+
+
+## that's it, check back later :)
