@@ -88,46 +88,15 @@ describe('Builder', function () {
                 server_public_key_fingerprints: new Vector({type: 'long', list: ['0xc3b42b026ce86b21']})
             }
             });
-            obj.serialize().toString('hex').toUpperCase().should.be.
+            var objBuffer = obj.serialize();
+            objBuffer.toString('hex').toUpperCase().should.be.
                 eql('632416053E0549828CCA27E966B301A48FECE2FCA5CF4D33F4A11EA877BA4AA5739073300817ED48941A08F98100000015C4B51C01000000216BE86C022BB4C3')
+
+            var obj2 = new ResPQ({buffer: objBuffer});
+            obj2.id.should.be.eql('85337187');
 
             done();
         })
     });
 });
 
-function anonymous(options) {
-    var super_ = this.constructor.super_.bind(this);
-    var opts = options ? options : {};
-    util._extend(this, opts.props);
-    super_(opts.buffer, opts.offset);
-    this.id = "85337187";
-    this.typeName = "ResPQ";
-    this.serialize = function () {
-        var super_serialize = this.constructor.super_.prototype.serialize.bind(this);
-        if (!super_serialize()) {
-            return false;
-        }
-        this.writeInt128(this.nonce);
-        this.writeInt128(this.server_nonce);
-        this.writeBytes(this.pq);
-        this._writeBytes(this.server_public_key_fingerprints.serialize());
-        return this.retrieveBuffer();
-    }
-    this.deserialize = function () {
-        var super_deserialize = this.constructor.super_.prototype.deserialize.bind(this);
-        if (!super_deserialize()) {
-            return false;
-        }
-        this.nonce = this.readInt128();
-        this.server_nonce = this.readInt128();
-        this.pq = this.readBytes();
-        var Vector = this.constructor.require('Vector');
-        var obj = new Vector({type: 'long', buffer: this._buffer, offset: this.getReadOffset()}).deserialize();
-        if (obj) {
-            this.server_public_key_fingerprints = obj;
-            this._readOffset = obj.getReadOffset();
-        }
-        return this;
-    }
-}
