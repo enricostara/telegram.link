@@ -25,7 +25,7 @@ describe('mtproto', function () {
                     var requestBuffer = new mtproto.PlainMessage({buffer: requestBuffer}).deserialize().getMessage();
                     console.log('plainMessage %s', requestBuffer.toString('hex'));
                     var reqPQ = new mtproto._req_pq({buffer: requestBuffer}).deserialize();
-                    console.log(reqPQ);
+//                    console.log(reqPQ);
                     var resPQ = new mtproto.ResPQ({props: {
                         nonce: reqPQ.nonce,
                         server_nonce: '0x30739073a54aba77a81ea1f4334dcfa5',
@@ -61,7 +61,7 @@ describe('mtproto', function () {
                 },
                 conn: tcpConn,
                 callback: function (resPQ) {
-                    console.log(resPQ);
+//                    console.log(resPQ);
                     resPQ.nonce.should.be.eql(nonce);
                     done();
                 },

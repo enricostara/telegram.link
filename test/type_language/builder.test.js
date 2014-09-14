@@ -10,19 +10,17 @@ var Vector = require('../../index').type_language.Vector;
 
 describe('Builder', function () {
 
-    describe('#buildType({P_Q_inner_data})', function () {
+    describe('#buildTypeConstructor({P_Q_inner_data})', function () {
         it('should return a P_Q_inner_data', function (done) {
-            var P_Q_inner_data = Builder.buildType({"id": "-2083955988", "predicate": "p_q_inner_data", "params": [
+            var P_Q_inner_data = new Builder({tlSchema:{"id": "-2083955988", "predicate": "p_q_inner_data", "params": [
                 {"name": "pq", "type": "bytes"},
                 {"name": "p", "type": "bytes"},
                 {"name": "q", "type": "bytes"},
                 {"name": "nonce", "type": "int128"},
                 {"name": "server_nonce", "type": "int128"},
                 {"name": "new_nonce", "type": "int256"}
-            ], "type": "P_Q_inner_data"});
-
-            console.log(P_Q_inner_data.toString());
-
+            ], "type": "P_Q_inner_data"}}).getType();
+//            console.log(P_Q_inner_data.toString());
             P_Q_inner_data.should.be.an.instanceof(Function);
             var obj = new P_Q_inner_data();
             obj.should.be.an.instanceof(P_Q_inner_data);
@@ -34,25 +32,23 @@ describe('Builder', function () {
         })
     });
 
-    describe('#buildType({ResPQ}).deserialize()', function () {
+    describe('#buildTypeConstructor({ResPQ}).deserialize()', function () {
         it('should build and de-serialize an instance of ResPQ', function (done) {
-            var ResPQ = Builder.buildType({"id": "85337187", "predicate": "resPQ", "params": [
+            var ResPQ = new Builder({tlSchema: {"id": "85337187", "predicate": "resPQ", "params": [
                 {"name": "nonce", "type": "int128"},
                 {"name": "server_nonce", "type": "int128"},
                 {"name": "pq", "type": "bytes"},
                 {"name": "server_public_key_fingerprints", "type": "Vector<long>"}
-            ], "type": "ResPQ"});
-
-            console.log(ResPQ.toString());
-
+            ], "type": "ResPQ"}}).getType();
+//            console.log(ResPQ.toString());
             ResPQ.should.be.an.instanceof(Function);
             var obj = new ResPQ({buffer: new Buffer(
                 '632416053E0549828CCA27E966B301A48FECE2FCA5CF4D33F4A11EA877BA4AA5739073300817ED48941A08F98100000015C4B51C01000000216BE86C022BB4C3',
                 'hex')});
             obj.should.be.an.instanceof(ResPQ);
             obj.should.be.an.instanceof(AbstractObject);
-            obj.deserialize()
-            console.log(obj);
+            obj.deserialize();
+//            console.log(obj);
             obj.should.have.properties({
                 id: '85337187',
                 typeName: 'ResPQ',
@@ -68,16 +64,16 @@ describe('Builder', function () {
         })
     });
 
-    describe('#buildType({ResPQ}).serialize()', function () {
+    describe('#buildTypeConstructor({ResPQ}).serialize()', function () {
         it('should build and serialize an instance of ResPQ', function (done) {
-            var ResPQ = Builder.buildType({"id": "85337187", "predicate": "resPQ", "params": [
+            var ResPQ = new Builder({tlSchema: {"id": "85337187", "predicate": "resPQ", "params": [
                 {"name": "nonce", "type": "int128"},
                 {"name": "server_nonce", "type": "int128"},
                 {"name": "pq", "type": "bytes"},
                 {"name": "server_public_key_fingerprints", "type": "Vector<long>"}
-            ], "type": "ResPQ"});
+            ], "type": "ResPQ"}}).getType();
 
-            console.log(ResPQ.toString());
+//            console.log(ResPQ.toString());
 
             ResPQ.should.be.an.instanceof(Function);
 
