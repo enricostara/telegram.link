@@ -16,8 +16,8 @@ are available from independent developers using the **Telegram API**
 ### about Node.JS..
 
 Node.js is a cross-platform runtime environment for server-side and networking applications. 
-Node.js applications are written in JavaScript, and can be run within the Node.js runtime on OS X, Microsoft Windows and Linux with no changes
-([from Wikipedia](http://en.wikipedia.org/wiki/Node.js)).
+Node.js applications are written in JavaScript, and can be run within the Node.js runtime on OS X, Microsoft Windows and 
+Linux with no changes ([from Wikipedia](http://en.wikipedia.org/wiki/Node.js)).
 
 
 ## telegram.link in short..
@@ -31,13 +31,17 @@ that **runs both on a Node.js server and on a standard web browser**
 
 This an **early version**, the current state of progress includes:
 
-- a first implementation of the builder that reads [TypeLanguage schema constructors](https://core.telegram.org/schema) and writes dynamically 
-javascript classes, while a [TypeLanguage schemas functions](https://core.telegram.org/mtproto/TL) reader that builds javascript methods is on going.
+- A first implementation of the **Builder** class that reads [Telegram schemas](https://core.telegram.org/schema) 
+and writes dynamically **javascript classes and functions** parsing [TypeLanguage](https://core.telegram.org/mtproto/TL).
 
-- a basic Tcp connection implementation to Telegram Messanger 
+- A basic **TCP connection**  based on [Telegram protocol spec](https://core.telegram.org/mtproto#tcp-transport). 
 
-- a first [MTProto protocol](https://core.telegram.org/mtproto) implementation to 
-[create an authorization](https://core.telegram.org/mtproto/auth_key) key is on going.
+- A first [MTProto protocol](https://core.telegram.org/mtproto) implementation to 
+[create an authorization key](https://core.telegram.org/mtproto/auth_key) is on going.
 
+- An awesome **Logger** class, based on [debug project](https://github.com/visionmedia/debug), that provide a productive
+tool for debugging.
+
+- A **unit-test suite** to cover them all!
 
 ## that's it, check back later :)
