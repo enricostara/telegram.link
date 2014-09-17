@@ -12,7 +12,7 @@ describe('Builder', function () {
 
     describe('#buildTypeConstructor({P_Q_inner_data})', function () {
         it('should return a P_Q_inner_data', function (done) {
-            var P_Q_inner_data = new Builder({tlSchema:{"id": "-2083955988", "predicate": "p_q_inner_data", "params": [
+            var P_Q_inner_data = new Builder({module: 'builder', tlSchema:{"id": "-2083955988", "predicate": "p_q_inner_data", "params": [
                 {"name": "pq", "type": "bytes"},
                 {"name": "p", "type": "bytes"},
                 {"name": "q", "type": "bytes"},
@@ -34,7 +34,7 @@ describe('Builder', function () {
 
     describe('#buildTypeConstructor({ResPQ}).deserialize()', function () {
         it('should build and de-serialize an instance of ResPQ', function (done) {
-            var ResPQ = new Builder({tlSchema: {"id": "85337187", "predicate": "resPQ", "params": [
+            var ResPQ = new Builder({module: 'type_language/builder',tlSchema: {"id": "85337187", "predicate": "resPQ", "params": [
                 {"name": "nonce", "type": "int128"},
                 {"name": "server_nonce", "type": "int128"},
                 {"name": "pq", "type": "bytes"},
@@ -66,7 +66,7 @@ describe('Builder', function () {
 
     describe('#buildTypeConstructor({ResPQ}).serialize()', function () {
         it('should build and serialize an instance of ResPQ', function (done) {
-            var ResPQ = new Builder({tlSchema: {"id": "85337187", "predicate": "resPQ", "params": [
+            var ResPQ = new Builder({module: 'builder',tlSchema: {"id": "85337187", "predicate": "resPQ", "params": [
                 {"name": "nonce", "type": "int128"},
                 {"name": "server_nonce", "type": "int128"},
                 {"name": "pq", "type": "bytes"},
