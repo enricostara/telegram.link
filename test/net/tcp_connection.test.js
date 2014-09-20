@@ -40,7 +40,10 @@ describe('TcpConnection', function () {
     describe('#connect()', function () {
         it('should notify error back trying connection', function (done) {
             tcpConn = new TcpConnection({host: "nohost"});
-            tcpConn.connect(null, done);
+            tcpConn.connect(null, function(e) {
+                console.log(e);
+                done();
+            });
         });
     });
 
