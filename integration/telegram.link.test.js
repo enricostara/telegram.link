@@ -19,12 +19,11 @@ describe('TelegramLink', function () {
     });
 
     describe('#authorization()', function () {
-        it('should return a resPQ', function (done) {
+        it('should returns', function (done) {
             var telegramLink = new TelegramLink(primaryDC);
             telegramLink.connect(function () {
-                telegramLink.authorization(function (config) {
-                    console.log("received resPQ:");
-                    console.log(config);
+                telegramLink.authorization(function () {
+                    console.log("Authorization method returns!");
                     telegramLink.end(done, function (error) {
                         console.log(error);
                         done();
