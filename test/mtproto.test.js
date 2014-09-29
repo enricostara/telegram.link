@@ -73,6 +73,7 @@ describe('mtproto', function () {
         })
     });
 
+/*
     describe('#class building', function () {
         it('should build all requested classes', function (done) {
             for (var i = 0; i < mtproto._classes.length; i++) {
@@ -84,6 +85,7 @@ describe('mtproto', function () {
             done();
         })
     });
+*/
 
     describe('PlainMessage', function () {
 

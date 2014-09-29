@@ -116,14 +116,8 @@ describe('AbstractObject', function () {
         })
     });
 
-
     describe('#readInt()', function () {
         it('should read an int value', function (done) {
-            var obj = new AbstractObject(new Buffer('feffffff', 'hex'));
-            var intValue = obj.readInt(true);
-            intValue.should.be.equal(-2);
-            obj.getReadOffset().should.be.equal(4);
-
             obj = new AbstractObject(new Buffer('feffffff', 'hex'));
             intValue = obj.readInt();
             intValue.should.be.equal(4294967294);

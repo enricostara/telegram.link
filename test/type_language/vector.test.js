@@ -10,15 +10,15 @@ describe('Vector', function () {
             list.should.be.ok;
             list.should.be.an.instanceof(Vector);
             list.should.be.an.instanceof(AbstractObject);
-            list.should.have.properties({id: '481674261', type: 'Int'});
+            list.should.have.properties({id: '15c4b51c', type: 'Int'});
             list.isReadonly().should.be.false;
 
             var list = new Vector({type: 'long', buffer: new Buffer('15C4B51C01000000216BE86C022BB4C3', 'hex')});
-            list.should.have.properties({id: '481674261', type: 'Long'});
+            list.should.have.properties({id: '15c4b51c', type: 'Long'});
             list.isReadonly().should.be.true;
 
             var list = new Vector({type: 'long', list: [1,2,3]});
-            list.should.have.properties({id: '481674261', type: 'Long'});
+            list.should.have.properties({id: '15c4b51c', type: 'Long'});
             list.isReadonly().should.be.false;
             list.getList().should.be.eql([1,2,3]);
 
