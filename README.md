@@ -1,3 +1,6 @@
+
+<img src="./telegram.link.png" style="width:120px;" />
+
 telegram.link
 ===
 
@@ -43,5 +46,9 @@ and writes dynamically **javascript classes and functions** parsing [TypeLanguag
 tool for debugging.
 
 - A **unit-test suite** to cover them all!
+
+### about the logo..
+
+Logo crafted by [Diego Pasquali](http://dribbble.com/diegopq)
 
 ## that's it, check back later :)
