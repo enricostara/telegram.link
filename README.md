@@ -1,5 +1,5 @@
 
-<img src="./telegram.link.png" style="width:120px;" />
+<img src="./telegram.link.png" width="120" />
 
 telegram.link
 ===
