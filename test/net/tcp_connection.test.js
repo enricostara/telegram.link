@@ -40,7 +40,7 @@ describe('TcpConnection', function () {
     describe('#connect()', function () {
         it('should notify error back trying connection', function (done) {
             tcpConn = new TcpConnection({host: "nohost"});
-            tcpConn.connect(null, function(e) {
+            tcpConn.connect(function(e) {
                 console.log(e);
                 done();
             });
@@ -51,7 +51,7 @@ describe('TcpConnection', function () {
         it('should notify error back on writing', function (done) {
             tcpConn = new TcpConnection({host: "nohost"});
             tcpConn.connect();
-            tcpConn.write("a string", null, function (e) {
+            tcpConn.write("a string", function (e) {
                 console.log(e);
                 done();
             });
@@ -62,7 +62,7 @@ describe('TcpConnection', function () {
         it('should notify error back on reading', function (done) {
             tcpConn = new TcpConnection({host: "nohost"});
             tcpConn.connect();
-            tcpConn.read(null, function (e) {
+            tcpConn.read(function (e) {
                 console.log(e);
                 done();
             });
@@ -73,7 +73,7 @@ describe('TcpConnection', function () {
         it('should notify error back trying disconnection', function (done) {
             tcpConn = new TcpConnection({host: "nohost"});
             tcpConn.connect();
-            tcpConn.close(null, function (e) {
+            tcpConn.close(function (e) {
                 console.log(e);
                 done();
             });
@@ -122,7 +122,7 @@ describe('TcpConnection', function () {
         it('should notify error back writing data with length not multiple of 4', function (done) {
             tcpConn = new TcpConnection({host: "0.0.0.0", port: port});
             tcpConn.connect(function () {
-                tcpConn.write("1234567890", null, function (e) {
+                tcpConn.write("1234567890", function (e) {
                     console.log(e);
                     tcpConn.close();
                     done();
@@ -136,7 +136,7 @@ describe('TcpConnection', function () {
             tcpConn = new TcpConnection({host: "0.0.0.0", port: port});
             tcpConn.connect();
             tcpConn.write(new Buffer(">string<"));
-            tcpConn.read(function (data) {
+            tcpConn.read(function (ex, data) {
                 data.should.be.a.Buffer;
                 console.log(data);
                 console.log(data.toString());
@@ -163,7 +163,7 @@ describe('TcpConnection', function () {
             tcpConn.connect();
             var buffer = new Buffer(600);
             tcpConn.write(buffer);
-            tcpConn.read(function (data) {
+            tcpConn.read(function (ex, data) {
                 data.should.be.a.Buffer;
                 data.length.should.equal(600);
                 tcpConn.close();

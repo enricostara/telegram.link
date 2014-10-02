@@ -18,7 +18,7 @@ gulp.task('test', function () {
 
 gulp.task('integration', function () {
     return gulp.src('./integration/**/*.js')
-        .pipe(mocha({reporter: 'tap', timeout: '10s'}));
+        .pipe(mocha({reporter: 'tap', timeout: '20s'}));
 });
 
 gulp.task('default', ['src', 'test']);

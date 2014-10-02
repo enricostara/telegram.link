@@ -60,13 +60,9 @@ describe('mtproto', function () {
                     nonce: nonce
                 },
                 conn: tcpConn,
-                callback: function (resPQ) {
-//                    console.log(resPQ);
+                callback: function (ex, resPQ) {
+                    if(ex) console.warn(ex);
                     resPQ.nonce.should.be.eql(nonce);
-                    done();
-                },
-                errorback: function (e) {
-                    console.log('Client: received exception %s', e);
                     done();
                 }
             })

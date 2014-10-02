@@ -9,9 +9,10 @@ describe('TelegramLink', function () {
     describe('#connect()', function () {
         it('should connect and disconnect to primary DC', function (done) {
             var telegramLink = new TelegramLink(primaryDC);
-            telegramLink.connect(function () {
-                telegramLink.end(done, function (error) {
-                    console.log(error);
+            telegramLink.connect(function (ex) {
+                if(ex) console.log(ex);
+                else telegramLink.end(function (ex) {
+                    if(ex) console.log(ex);
                     done();
                 });
             });
@@ -22,16 +23,16 @@ describe('TelegramLink', function () {
         it('should returns', function (done) {
             var telegramLink = new TelegramLink(primaryDC);
             telegramLink.connect(function () {
-                telegramLink.authorization(function () {
-                    console.log("Authorization method returns!");
-                    telegramLink.end(done, function (error) {
-                        console.log(error);
+                telegramLink.authorization(function (ex) {
+                    if(ex) console.log('Authorization KO: %s', ex);
+                    else console.log('Authorization OK');
+                    telegramLink.end(function (ex) {
+                        if(ex) console.log(ex);
                         done();
                     });
                 });
             });
         })
     });
-
 });
 
