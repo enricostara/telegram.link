@@ -1,6 +1,6 @@
 {
   "name": "telegram.link",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Telegram - Node.js communication library",
   "keywords": ["telegram", "api", "library", "node", "nodejs", "node.js", "js", "javascript"],
   "author": "Enrico Stara <enrico.stara@gmail.com>",
