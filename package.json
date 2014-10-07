@@ -1,26 +1,33 @@
 {
-  "name": "telegram.link",
-  "version": "0.0.3",
-  "description": "Telegram - Node.js communication library",
-  "keywords": ["telegram", "api", "library", "node", "nodejs", "node.js", "js", "javascript"],
-  "author": "Enrico Stara <enrico.stara@gmail.com>",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/enricostara/telegram.link.git"
-  },
-  "dependencies": {
-      "bignum": "*",
-      "jsbn": "*"
-  },
-  "devDependencies": {
-    "debug": "*",
-    "gulp": "*",
-    "gulp-docco": "*",
-    "gulp-jshint": "*",
-    "gulp-mocha": "*",
-    "mocha": "*",
-    "should": "*",
-    "colors": "*"
-  },
-  "main": "index"
+    "name": "telegram.link",
+    "version": "0.0.3",
+    "description": "Telegram API Node.js library",
+    "keywords": ["telegram", "api", "library", "node", "nodejs", "node.js", "js", "javascript"],
+    "author": "Enrico Stara <enrico.stara@gmail.com>",
+    "homepage": "http://telegram.link",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/enricostara/telegram.link.git"
+    },
+    "bugs": {
+        "url": "https://github.com/enricostara/telegram.link/issues"
+    },
+    "license": "BSD-3-Clause",
+    "dependencies": {
+        "debug": ">=2.0.0",
+        "colors": ">=1.0.2",
+        "bignum": ">=0.9.0",
+        "jsbn": ">=0.0.0",
+        "crypto-js": ">=3.1.2"
+    },
+    "devDependencies": {
+        "gulp": "*",
+        "gulp-docco": "*",
+        "gulp-jshint": "*",
+        "gulp-mocha": "*",
+        "mocha": "*",
+        "should": "*"
+    },
+    "main": "index",
+    "engines": { "node": "0.10.x" }
 }
