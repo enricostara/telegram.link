@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/enricostara/telegram.link.svg?branch=master)](https://travis-ci.org/enricostara/telegram.link)
 
 <img src="./telegram.link.png" width="120" />
 
