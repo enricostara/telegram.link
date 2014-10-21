@@ -1,6 +1,6 @@
 {
     "name": "telegram.link",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "Telegram API Node.js library",
     "keywords": ["telegram", "api", "library"],
     "author": "Enrico Stara <enrico.stara@gmail.com>",
@@ -29,5 +29,8 @@
         "should": "*"
     },
     "main": "index",
-    "engines": { "node": "0.10.x" }
+    "engines": { "node": "0.10.x" },
+    "scripts": {
+        "test": "gulp test"
+    }
 }
