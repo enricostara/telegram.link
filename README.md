@@ -1,12 +1,12 @@
-[![Build Status](https://travis-ci.org/enricostara/telegram.link.svg?branch=master)](https://travis-ci.org/enricostara/telegram.link)
-
 <img src="./telegram.link.png" width="120" />
 
-telegram.link
+telegram.link  [![Build Status][travis-image]][travis-url]
+
 ===
 
 This is an unofficial **javascript library** to connect to **Telegram Messanger** and write a Telegram client that runs 
 on the **Node.js** platform and on a standard **web browser**.
+
 
 ### about Telegram Messenger.. 
 
@@ -53,3 +53,7 @@ tool for debugging.
 Logo crafted by [Diego Pasquali](http://dribbble.com/diegopq)
 
 ## that's it, check back later :)
+
+
+[travis-url]: https://travis-ci.org/enricostara/telegram.link
+[travis-image]: https://travis-ci.org/enricostara/telegram.link.svg?branch=master
