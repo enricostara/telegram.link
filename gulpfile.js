@@ -20,14 +20,14 @@ gulp.task('integration', function () {
         .pipe(mocha({reporter: 'tap', timeout: '20s'}));
 });
 
-gulp.task('covered-test', function () {
+gulp.task('cov-test', function () {
     return gulp.src('./test/**/*.js')
-        .pipe(mocha({reporter: 'mocha-lcov-reporter', timeout: '10s'}));
+        .pipe(mocha({reporter: 'mocha-lcov-reporter', timeout: '120s'}));
 });
-gulp.task('covered-integration', function () {
+gulp.task('cov-integration', function () {
     return gulp.src('./integration/**/*.js')
-        .pipe(mocha({reporter: 'mocha-lcov-reporter', timeout: '60s'}));
+        .pipe(mocha({reporter: 'mocha-lcov-reporter', timeout: '120s'}));
 });
 
 gulp.task('default', ['src', 'test']);
-gulp.task('cover', ['covered-test', 'covered-integration']);
+gulp.task('cover', ['cov-test', 'cov-integration']);
