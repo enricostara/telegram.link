@@ -31,7 +31,9 @@
         "gulp-mocha": "*",
         "mocha": "*",
         "mocha-lcov-reporter": "*",
-        "should": "*"
+        "should": "*",
+        "istanbul": "*",
+        "coveralls": "*"
     },
     "main": "index",
     "engines": {
