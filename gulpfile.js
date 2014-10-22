@@ -15,15 +15,19 @@ gulp.task('test', function () {
     return gulp.src('./test/**/*.js')
         .pipe(mocha({reporter: 'tap', timeout: '10s'}));
 });
-
-gulp.task('cover', function () {
-    return gulp.src('./test/**/*.js')
-        .pipe(mocha({reporter: 'mocha-lcov-reporter', timeout: '10s'}));
-});
-
 gulp.task('integration', function () {
     return gulp.src('./integration/**/*.js')
         .pipe(mocha({reporter: 'tap', timeout: '20s'}));
 });
 
+gulp.task('covered-test', function () {
+    return gulp.src('./test/**/*.js')
+        .pipe(mocha({reporter: 'mocha-lcov-reporter', timeout: '10s'}));
+});
+gulp.task('covered-integration', function () {
+    return gulp.src('./integration/**/*.js')
+        .pipe(mocha({reporter: 'mocha-lcov-reporter', timeout: '60s'}));
+});
+
 gulp.task('default', ['src', 'test']);
+gulp.task('cover', ['covered-test', 'covered-integration']);
