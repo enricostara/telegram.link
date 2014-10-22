@@ -2,7 +2,7 @@
 <img src="./telegram.link.png" width="120" />
 
 
-# telegram.link  [![Build Status][travis-image]][travis-url] [![Dependency Status][gemnasium-image]][gemnasium-url]
+# telegram.link  [![Build Status][travis-image]][travis-url] [![Coverage Status][coverage-image]][coverage-url] [![Dependency Status][gemnasium-image]][gemnasium-url]
 
 This is an unofficial **javascript library** to connect to **Telegram Messanger** and write a Telegram client that runs 
 on the **Node.js** platform and on a standard **web browser**.
@@ -58,5 +58,9 @@ Logo crafted by [Diego Pasquali](http://dribbble.com/diegopq)
 [travis-url]: https://travis-ci.org/enricostara/telegram.link
 [travis-image]: https://travis-ci.org/enricostara/telegram.link.svg?branch=master
 
+[coverage-url]: https://coveralls.io/r/enricostara/telegram.link?branch=master
+[coverage-image]: https://img.shields.io/coveralls/enricostara/telegram.link.svg
+
 [gemnasium-url]: https://gemnasium.com/enricostara/telegram.link
 [gemnasium-image]: https://gemnasium.com/enricostara/telegram.link.svg
+
