@@ -96,10 +96,10 @@ describe('mtproto', function () {
 
                 msg = new mtproto.PlainMessage({message: new Buffer('FFFF', 'hex')});
                 msg.should.have.properties({_authKeyId: 0, _messageLength: 2});
-                msg.getMessage().toString('hex').should.eql('ffff');
+                msg.getMessage().toString('hex').should.equal('ffff');
 
                 msg = new mtproto.PlainMessage({buffer: new Buffer('FFFF', 'hex')});
-                msg.retrieveBuffer().toString('hex').should.eql('ffff');
+                msg.retrieveBuffer().toString('hex').should.equal('ffff');
 
                 done();
             })
@@ -120,8 +120,8 @@ describe('mtproto', function () {
             it('should de-serialize the msg', function (done) {
                 var msg = new mtproto.PlainMessage({buffer: new Buffer('0000000000000000010000000000000002000000ffff', 'hex')});
                 msg.deserialize().should.be.ok;
-                msg.getMessageId().should.be.eql(1);
-                msg.getMessage().toString('hex').should.eql('ffff');
+                msg.getMessageId().should.be.equal('0x0000000000000001');
+                msg.getMessage().toString('hex').should.equal('ffff');
                 done();
             })
         });

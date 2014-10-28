@@ -40,7 +40,7 @@ describe('AbstractObject', function () {
     });
 
     describe('#_writeBigInt()', function () {
-        it('should write an big int value', function (done) {
+        it('should write a big int value', function (done) {
             var obj = new AbstractObject();
             obj._writeBigInt('1', 4).should.be.true;
             var bytes = obj.retrieveBuffer();
@@ -54,13 +54,37 @@ describe('AbstractObject', function () {
             bytes.toJSON().should.be.eql([1, 0, 0, 0, 0, 0, 0, 0]);
 
             obj = new AbstractObject();
+            obj._writeBigInt(1, 4).should.be.true;
+            bytes = obj.retrieveBuffer();
+            bytes.length.should.be.equal(4);
+            bytes.toString('hex').should.be.eql('01000000');
+
+            obj = new AbstractObject();
+            obj._writeBigInt('0x01', 4).should.be.true;
+            bytes = obj.retrieveBuffer();
+            bytes.length.should.be.equal(4);
+            bytes.toString('hex').should.be.eql('01000000');
+
+            obj = new AbstractObject();
+            obj._writeBigInt('0xee000000ff', 4).should.be.true;
+            bytes = obj.retrieveBuffer();
+            bytes.length.should.be.equal(4);
+            bytes.toString('hex').should.be.eql('ff000000');
+
+            obj = new AbstractObject();
+            obj._writeBigInt('1022202216703' /*'0xee000000ff'*/, 4).should.be.true;
+            bytes = obj.retrieveBuffer();
+            bytes.length.should.be.equal(4);
+            bytes.toString('hex').should.be.eql('ff000000');
+
+            obj = new AbstractObject();
             obj._writeBigInt('18441921394529845472', 8).should.be.true;
             bytes = obj.retrieveBuffer();
             bytes.length.should.be.equal(8);
             bytes.toString('hex').should.be.eql('e0c0a080ccddeeff');
 
             obj = new AbstractObject();
-            obj._writeBigInt('0xFFEEDDCC80A0C0E0', 8).should.be.true;
+            obj._writeBigInt('0xffeeddcc80a0c0e0', 8).should.be.true;
             bytes = obj.retrieveBuffer();
             bytes.length.should.be.equal(8);
             bytes.toString('hex').should.be.eql('e0c0a080ccddeeff');
