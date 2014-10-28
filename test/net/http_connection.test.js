@@ -55,7 +55,7 @@ describe('HttpConnection', function () {
     describe('#init(host, port)', function () {
         it('should return an instance with given host and port', function (done) {
             conn = new HttpConnection({host: "0.0.0.0", port: port});
-            conn.options.should.have.properties({path: 'http://0.0.0.0:' + port + '/apiw1'});
+            conn.options.should.have.properties({path: '/apiw1'});
             done();
         })
     });
