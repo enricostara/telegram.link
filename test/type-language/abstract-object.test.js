@@ -1,5 +1,5 @@
 require('should');
-var AbstractObject = require("../../index").type_language.AbstractObject;
+var AbstractObject = require('../../index').type_language.AbstractObject;
 
 describe('AbstractObject', function () {
 
