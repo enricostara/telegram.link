@@ -1,6 +1,6 @@
 {
     "name": "telegram.link",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "description": "Telegram API Node.js library",
     "keywords": [
         "telegram",
@@ -18,8 +18,8 @@
     },
     "license": "BSD-2-Clause",
     "dependencies": {
-        "colors": ">=1.0.2",
-        "debug": ">=2.0.0",
+        "get-log": "latest",
+        "get-flow": "latest",
         "jsbn": ">=0.0.0",
         "bigint-node": ">=1.0.3",
         "node-cryptojs-aes": "https://github.com/enricostara/node-cryptojs-aes/tarball/master"
