@@ -40,7 +40,7 @@
         "node": "0.10.x"
     },
     "scripts": {
-        "test": "gulp test",
+        "test": "gulp",
         "coveralls": "istanbul cover ./node_modules/gulp/bin/gulp.js cover && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
     }
 }
