@@ -16,7 +16,7 @@
     "bugs": {
         "url": "https://github.com/enricostara/telegram.link/issues"
     },
-    "license": "BSD-3-Clause",
+    "license": "BSD-2-Clause",
     "dependencies": {
         "colors": ">=1.0.2",
         "debug": ">=2.0.0",
