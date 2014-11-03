@@ -47,7 +47,9 @@ and writes dynamically **javascript classes and functions** parsing [TypeLanguag
 ## Installation
 
 ```bash
-$ npm install telegram.link
+$ git clone --branch=master git://github.com/enricostara/telegram.link.git
+$ cd telegram.link
+$ npm install
 ```
 
 ## Unit Testing 
