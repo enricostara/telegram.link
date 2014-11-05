@@ -27,14 +27,14 @@ describe('AbstractObject', function () {
             obj.writeInt(0x80a0c0e0).should.be.true;
             var bytes = obj.retrieveBuffer();
             bytes.length.should.be.equal(4);
-            bytes.toJSON().should.be.eql([224, 192, 160, 128]);
+            bytes.should.be.eql(new Buffer([0xe0, 0xc0, 0xa0, 0x80]));
             obj.writeInt(0).should.be.false;
 
             obj = new AbstractObject();
             obj.writeInt(-2).should.be.true;
             bytes = obj.retrieveBuffer();
             bytes.length.should.be.equal(4);
-            bytes.toJSON().should.be.eql([254, 255, 255, 255]);
+            bytes.should.be.eql(new Buffer([254, 255, 255, 255]));
             done();
         })
     });
@@ -45,13 +45,13 @@ describe('AbstractObject', function () {
             obj._writeBigInt('1', 4).should.be.true;
             var bytes = obj.retrieveBuffer();
             bytes.length.should.be.equal(4);
-            bytes.toJSON().should.be.eql([1, 0, 0, 0]);
+            bytes.should.be.eql(new Buffer([1, 0, 0, 0]));
 
             obj = new AbstractObject();
             obj._writeBigInt('1', 8).should.be.true;
             var bytes = obj.retrieveBuffer();
             bytes.length.should.be.equal(8);
-            bytes.toJSON().should.be.eql([1, 0, 0, 0, 0, 0, 0, 0]);
+            bytes.should.be.eql(new Buffer([1, 0, 0, 0, 0, 0, 0, 0]));
 
             obj = new AbstractObject();
             obj._writeBigInt(1, 4).should.be.true;
@@ -142,8 +142,8 @@ describe('AbstractObject', function () {
 
     describe('#readInt()', function () {
         it('should read an int value', function (done) {
-            obj = new AbstractObject(new Buffer('feffffff', 'hex'));
-            intValue = obj.readInt();
+            var obj = new AbstractObject(new Buffer('feffffff', 'hex'));
+            var intValue = obj.readInt();
             intValue.should.be.equal(4294967294);
             obj.getReadOffset().should.be.equal(4);
             done();
