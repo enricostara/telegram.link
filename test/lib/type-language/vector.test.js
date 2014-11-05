@@ -1,6 +1,6 @@
 require('should');
-var Vector = require('../../index').type_language.Vector;
-var AbstractObject = require('../../index').type_language.AbstractObject;
+var Vector = require('lib/type-language').Vector;
+var AbstractObject = require('lib/type-language').AbstractObject;
 
 describe('Vector', function () {
 

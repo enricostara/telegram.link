@@ -10,17 +10,17 @@
 // with `TELEGRAM MESSANGER`
 
 // Print library version
-console.log(require('./static').signature);
-console.log(('v.%s', require('../package.json').version));
+console.log(require('lib/static').signature);
+console.log(('v.%s', require('./package.json').version));
 
 // Export the class
 module.exports = exports = TelegramLink;
 
 // Export modules
-exports.mtproto = require('./mtproto');
-exports.net = require('./net');
-exports.type_language = require('./type-language');
-exports.crypto_util = require('./crypto-util');
+exports.mtproto = require('lib/mtproto');
+exports.net = require('lib/net');
+exports.type_language = require('lib/type-language');
+exports.crypto_util = require('lib/crypto-util');
 
 // Import dependencies
 var crypto = exports.crypto_util;
@@ -29,7 +29,7 @@ var HttpConnection = exports.net.HttpConnection;
 var AbstractObject = exports.type_language.AbstractObject;
 var mtproto = exports.mtproto;
 var getLogger = require('get-log');
-getLogger.PROJECT_NAME = require('../package.json').name;
+getLogger.PROJECT_NAME = require('./package.json').name;
 var flow = require('get-flow');
 
 // The constructor requires a primary telegram DataCenter address as argument

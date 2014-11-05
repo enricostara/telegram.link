@@ -1,46 +1,47 @@
 {
-    "name": "telegram.link",
-    "version": "0.0.7",
-    "description": "Telegram API Node.js library",
-    "keywords": [
-        "telegram",
-        "api",
-        "library"
-    ],
-    "author": "Enrico Stara <enrico.stara@gmail.com>",
-    "homepage": "http://telegram.link",
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/enricostara/telegram.link.git"
-    },
-    "bugs": {
-        "url": "https://github.com/enricostara/telegram.link/issues"
-    },
-    "license": "BSD-2-Clause",
-    "dependencies": {
-        "get-log": "latest",
-        "get-flow": "latest",
-        "jsbn": ">=0.0.0",
-        "bigint-node": ">=1.0.3",
-        "node-cryptojs-aes": "https://github.com/enricostara/node-cryptojs-aes/tarball/master"
-    },
-    "devDependencies": {
-        "gulp": "*",
-        "gulp-docco": "*",
-        "gulp-jshint": "*",
-        "gulp-mocha": "*",
-        "mocha": "*",
-        "mocha-lcov-reporter": "*",
-        "should": "*",
-        "istanbul": "*",
-        "coveralls": "*"
-    },
-    "main": "index",
-    "engines": {
-        "node": "0.10.x"
-    },
-    "scripts": {
-        "test": "gulp",
-        "coveralls": "istanbul cover ./node_modules/gulp/bin/gulp.js cover && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
-    }
+  "name": "telegram.link",
+  "version": "0.1.0",
+  "description": "Telegram API Node.js library",
+  "keywords": [
+    "telegram",
+    "api",
+    "library"
+  ],
+  "author": "Enrico Stara <enrico.stara@gmail.com>",
+  "homepage": "http://telegram.link",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/enricostara/telegram.link.git"
+  },
+  "bugs": {
+    "url": "https://github.com/enricostara/telegram.link/issues"
+  },
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "get-log": "latest",
+    "get-flow": "latest",
+    "jsbn": "latest",
+    "bigint-node": "https://github.com/enricostara/bigint-node/tarball/master",
+    "node-cryptojs-aes": "https://github.com/enricostara/node-cryptojs-aes/tarball/master"
+  },
+  "devDependencies": {
+    "coveralls": "latest",
+    "del": "^0.1.3",
+    "gulp": "^3.8.10",
+    "gulp-docco": "latest",
+    "gulp-jshint": "latest",
+    "gulp-mocha": "latest",
+    "istanbul": "latest",
+    "mocha": "latest",
+    "mocha-lcov-reporter": "latest",
+    "should": "latest"
+  },
+  "main": "telegram.link",
+  "engines": {
+    "node": "0.10.x"
+  },
+  "scripts": {
+    "test": "gulp test",
+    "coveralls": "istanbul cover ./node_modules/gulp/bin/gulp.js cover && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
+  }
 }

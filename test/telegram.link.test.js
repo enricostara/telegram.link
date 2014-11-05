@@ -1,6 +1,6 @@
 require('should');
-var staticInfo = require('../lib/static');
-var TelegramLink = require('../index');
+var staticInfo = require('lib/static');
+var TelegramLink = require('../telegram.link');
 
 describe('TelegramLink', function () {
     var primaryDC = staticInfo.telegram.test.primaryDataCenter;

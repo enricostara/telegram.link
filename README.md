@@ -2,7 +2,7 @@
 <img src="./telegram.link.png" width="120" />
 
 
-# telegram.link  [![Build Status][travis-image]][travis-url] [![Coverage Status][coverage-image]][coverage-url] [![Dependency Status][gemnasium-image]][gemnasium-url]
+# telegram.link [![npm version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coverage-image]][coverage-url] [![Dependency Status][gemnasium-image]][gemnasium-url]
 
 This is an unofficial **javascript library** to connect to **Telegram Messanger** and write a Telegram client that runs 
 on the **Node.js** platform and on a standard **web browser**.
@@ -73,6 +73,10 @@ The project is released under the [Simplified BSD license](./LICENSE)
 Logo crafted by [Diego Pasquali](http://dribbble.com/diegopq)
 
 ## That's it, check back later :)
+
+
+[npm-url]: https://www.npmjs.org/package/telegram.link
+[npm-image]: https://badge.fury.io/js/telegram.link.svg
 
 [travis-url]: https://travis-ci.org/enricostara/telegram.link
 [travis-image]: https://travis-ci.org/enricostara/telegram.link.svg?branch=master

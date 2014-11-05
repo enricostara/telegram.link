@@ -1,5 +1,5 @@
 require('should');
-var PQFinder = require("../../index").crypto_util.PQFinder;
+var PQFinder = require("lib/crypto-util").PQFinder;
 
 describe('PQFinder', function () {
 

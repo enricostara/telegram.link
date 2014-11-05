@@ -2,32 +2,46 @@ var gulp = require('gulp');
 var jshint = require('gulp-jshint');
 var mocha = require('gulp-mocha');
 var docco = require('gulp-docco');
+var del = require('del');
 
-gulp.task('src', function () {
-    return gulp.src('lib/**/*.js')
+gulp.task('docs-api', function () {
+    del(['./docs/api'], function() {
+        gulp.src('telegram.link.js')
+            .pipe(docco({'layout': 'linear'}))
+            .pipe(gulp.dest('./docs/api'))
+    });
+});
+
+gulp.task('quality-lib', function () {
+    return gulp.src('node_modules/lib/**/*.js')
         .pipe(jshint())
         .pipe(jshint.reporter('default'))
-        .pipe(docco({'layout': 'linear'}))
-        .pipe(gulp.dest('./docs/api'));
+});
+gulp.task('quality-api', function () {
+    return gulp.src('telegram.link.js')
+        .pipe(jshint())
+        .pipe(jshint.reporter('default'))
 });
 
-gulp.task('test', function () {
-    return gulp.src('./test/**/*.js')
+gulp.task('test-lib', function () {
+    return gulp.src('./test/lib/**/*.js')
         .pipe(mocha({reporter: 'tap', timeout: '10s'}));
 });
-gulp.task('integration', function () {
-    return gulp.src('./integration/**/*.js')
+gulp.task('test-api', function () {
+    return gulp.src('./test/*.js')
         .pipe(mocha({reporter: 'tap', timeout: '20s'}));
 });
 
-gulp.task('cov-test', function () {
-    return gulp.src('./test/**/*.js')
+gulp.task('cov-test-lib', function () {
+    return gulp.src('./test/lib/**/*.js')
         .pipe(mocha({reporter: 'mocha-lcov-reporter', timeout: '120s'}));
 });
-gulp.task('cov-integration', function () {
-    return gulp.src('./integration/**/*.js')
+gulp.task('cov-test-api', function () {
+    return gulp.src('./test/*.js')
         .pipe(mocha({reporter: 'mocha-lcov-reporter', timeout: '120s'}));
 });
 
-gulp.task('default', ['src', 'test']);
-gulp.task('cover', ['cov-test', 'cov-integration']);
+gulp.task('default', ['quality', 'test-lib']);
+gulp.task('quality', ['quality-lib', 'quality-api']);
+gulp.task('test', ['quality', 'test-lib', 'test-api']);
+gulp.task('cover', ['cov-test-lib', 'cov-test-api']);

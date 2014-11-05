@@ -1,12 +1,7 @@
-//       Telegram.link 0.0.1
-//       Copyright 2014 Enrico Stara 'enrico.stara@gmail.com'
-//       Released under the MIT license
-//       http://telegram.link
-
 require('should');
-var Builder = require('../../index').type_language.Builder;
-var AbstractObject = require('../../index').type_language.AbstractObject;
-var Vector = require('../../index').type_language.Vector;
+var Builder = require('lib/type-language').Builder;
+var AbstractObject = require('lib/type-language').AbstractObject;
+var Vector = require('lib/type-language').Vector;
 
 describe('Builder', function () {
 

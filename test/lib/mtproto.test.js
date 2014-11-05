@@ -1,9 +1,9 @@
 require('should');
 var net = require('net');
-var mtproto = require('../index').mtproto;
-var AbstractObject = require('../index').type_language.AbstractObject;
-var Vector = require('../index').type_language.Vector;
-var TcpConnection = require("../index").net.TcpConnection;
+var mtproto = require('lib/mtproto');
+var AbstractObject = require('lib/type-language').AbstractObject;
+var Vector = require('lib/type-language').Vector;
+var TcpConnection = require("lib/net").TcpConnection;
 
 describe('mtproto', function () {
 

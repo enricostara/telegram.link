@@ -6,7 +6,7 @@
 
 require('should');
 var http = require('http');
-var HttpConnection = require("../../index").net.HttpConnection;
+var HttpConnection = require("lib/net").HttpConnection;
 
 describe('HttpConnection', function () {
 
