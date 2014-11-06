@@ -2,7 +2,8 @@
 <img src="./telegram.link.png" width="120" />
 
 
-# telegram.link [![npm version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coverage-image]][coverage-url] [![Dependency Status][gemnasium-image]][gemnasium-url]
+# telegram.link 
+[![npm version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coverage-image]][coverage-url] [![Dependency Status][gemnasium-image]][gemnasium-url]
 
 This is an unofficial **javascript library** to connect to **Telegram Messanger** and write a Telegram client that runs 
 on the **Node.js** platform and on a standard **web browser**.
@@ -63,6 +64,11 @@ $ npm test
 ```bash
 $ gulp integration
 ```
+
+## Documentation
+ 
+The API documentation was generated [here](./docs/api/telegram.link.html)
+
 
 ## License
 

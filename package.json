@@ -26,8 +26,8 @@
   },
   "devDependencies": {
     "coveralls": "latest",
-    "del": "^0.1.3",
-    "gulp": "^3.8.10",
+    "del": "latest",
+    "gulp": "latest",
     "gulp-docco": "latest",
     "gulp-jshint": "latest",
     "gulp-mocha": "latest",

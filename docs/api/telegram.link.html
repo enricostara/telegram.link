@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>telegram.link.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="public/stylesheets/normalize.css" />
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="page">
+
+      <div class="header">
+        
+          <h1>telegram.link.js</h1>
+        
+
+        
+      </div>
+
+      
+        
+        <pre><code>  telegram.link
+
+  Copyright <span class="hljs-number">2014</span> Enrico Stara <span class="hljs-string">'enrico.stara@gmail.com'</span>
+  Released under the Simplified BSD License
+  http:<span class="hljs-comment">//telegram.link</span>
+</code></pre>
+        
+      
+        
+        <pre><code> TelegramLink <span class="hljs-keyword">class</span>
+</code></pre><p>This is the entry-point of Telegram.link library, and it lists high level methods to communicate
+with <code>TELEGRAM MESSANGER</code></p>
+
+        
+      
+        
+        <p>Print library version</p>
+
+        
+          <div class='highlight'><pre><span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">require</span>(<span class="hljs-string">'lib/static'</span>).signature);
+<span class="hljs-built_in">console</span>.log((<span class="hljs-string">'v.%s'</span>, <span class="hljs-built_in">require</span>(<span class="hljs-string">'./package.json'</span>).version));</pre></div>
+        
+      
+        
+        <p>Export the class</p>
+
+        
+          <div class='highlight'><pre><span class="hljs-built_in">module</span>.exports = exports = TelegramLink;</pre></div>
+        
+      
+        
+        <p>Export modules</p>
+
+        
+          <div class='highlight'><pre>exports.mtproto = <span class="hljs-built_in">require</span>(<span class="hljs-string">'lib/mtproto'</span>);
+exports.net = <span class="hljs-built_in">require</span>(<span class="hljs-string">'lib/net'</span>);
+exports.type_language = <span class="hljs-built_in">require</span>(<span class="hljs-string">'lib/type-language'</span>);
+exports.crypto_util = <span class="hljs-built_in">require</span>(<span class="hljs-string">'lib/crypto-util'</span>);</pre></div>
+        
+      
+        
+        <p>Import dependencies</p>
+
+        
+          <div class='highlight'><pre><span class="hljs-keyword">var</span> crypto = exports.crypto_util;
+<span class="hljs-keyword">var</span> TcpConnection = exports.net.TcpConnection;
+<span class="hljs-keyword">var</span> HttpConnection = exports.net.HttpConnection;
+<span class="hljs-keyword">var</span> AbstractObject = exports.type_language.AbstractObject;
+<span class="hljs-keyword">var</span> mtproto = exports.mtproto;
+<span class="hljs-keyword">var</span> getLogger = <span class="hljs-built_in">require</span>(<span class="hljs-string">'get-log'</span>);
+getLogger.PROJECT_NAME = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./package.json'</span>).name;
+<span class="hljs-keyword">var</span> flow = <span class="hljs-built_in">require</span>(<span class="hljs-string">'get-flow'</span>);</pre></div>
+        
+      
+        
+        <p>The constructor requires a primary telegram DataCenter address as argument</p>
+
+        
+          <div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">TelegramLink</span><span class="hljs-params">(primaryDC)</span> </span>{</pre></div>
+        
+      
+        
+        <p>   this._connection = new TcpConnection(primaryDC);</p>
+
+        
+          <div class='highlight'><pre>    <span class="hljs-keyword">this</span>._connection = <span class="hljs-keyword">new</span> HttpConnection({
+        proxyHost: process.env.PROXY_HOST,
+        proxyPort: process.env.PROXY_PORT,
+        host: primaryDC.host,
+        port: primaryDC.port
+    });
+}</pre></div>
+        
+      
+        
+        <p>The method creates a connection to the DataCenter,
+provide a callback function to know when is done or to catch an error</p>
+
+        
+          <div class='highlight'><pre>TelegramLink.prototype.connect = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(callback)</span> </span>{
+    <span class="hljs-keyword">this</span>._connection.connect(callback);
+};</pre></div>
+        
+      
+        
+        <p>The method states the authorization key with the DataCenter,
+provide a callback function to know when is done or to catch an error</p>
+
+        
+          <div class='highlight'><pre>TelegramLink.prototype.authorization = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(callback)</span> </span>{
+    <span class="hljs-keyword">var</span> logger = getLogger(<span class="hljs-string">'TelegramLink.authorization'</span>);</pre></div>
+        
+      
+        
+        <p>Put connection in the scope</p>
+
+        
+          <div class='highlight'><pre>    <span class="hljs-keyword">var</span> connection = <span class="hljs-keyword">this</span>._connection;</pre></div>
+        
+      
+        
+        <p>Run, run, run …</p>
+
+        
+          <div class='highlight'><pre>    flow.retryUntilIsDone(callback, <span class="hljs-literal">null</span>,
+        <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(callback)</span> </span>{
+            flow.runSeries([
+                requestPQ,
+                findPAndQ,
+                findPublicKey,
+                createPQInnerData,
+                encryptDataWithRSA,
+                requestDHParams,
+                decryptDHParams
+            ], callback);
+        });</pre></div>
+        
+      
+        
+        <p>Request a PQ pair number</p>
+
+        
+          <div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">requestPQ</span><span class="hljs-params">(callback)</span> </span>{</pre></div>
+        
+      
+        
+        <p>Create a nonce for the client</p>
+
+        
+          <div class='highlight'><pre>        <span class="hljs-keyword">var</span> clientNonce = crypto.createNonce(<span class="hljs-number">16</span>);
+        mtproto.req_pq({
+            props: {
+                nonce: clientNonce
+            },
+            conn: connection,
+            callback: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(ex, resPQ)</span> </span>{
+                <span class="hljs-keyword">if</span> (clientNonce == resPQ.nonce) {
+                    callback(<span class="hljs-literal">null</span>, resPQ);
+                } <span class="hljs-keyword">else</span> {
+                    callback(createError(<span class="hljs-string">'Nonce mismatch.'</span>, <span class="hljs-string">'ENONCE'</span>));
+                }
+            }
+        });
+    }</pre></div>
+        
+      
+        
+        <p>Find the P and Q prime numbers</p>
+
+        
+          <div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">findPAndQ</span><span class="hljs-params">(resPQ)</span> </span>{
+        <span class="hljs-keyword">var</span> pqFinder = <span class="hljs-keyword">new</span> crypto.PQFinder(resPQ.pq);
+        <span class="hljs-keyword">if</span> (logger.isDebugEnabled()) logger.debug(<span class="hljs-string">'Start finding P and Q, with PQ = %s'</span>, pqFinder.getPQPairNumber());
+        <span class="hljs-keyword">var</span> pq = pqFinder.findPQ();
+        <span class="hljs-keyword">if</span> (logger.isDebugEnabled()) logger.debug(<span class="hljs-string">'Found P = %s and Q = %s'</span>, pq[<span class="hljs-number">0</span>], pq[<span class="hljs-number">1</span>]);
+        <span class="hljs-keyword">return</span> {
+            pBuffer: pqFinder.getPQAsBuffer()[<span class="hljs-number">0</span>],
+            qBuffer: pqFinder.getPQAsBuffer()[<span class="hljs-number">1</span>],
+            resPQ: resPQ
+        };
+    }</pre></div>
+        
+      
+        
+        <p>Find the correct Public Key using fingerprint from server response</p>
+
+        
+          <div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">findPublicKey</span><span class="hljs-params">(obj)</span> </span>{
+        <span class="hljs-keyword">var</span> fingerprints = obj.resPQ.server_public_key_fingerprints.getList();
+        <span class="hljs-keyword">if</span> (logger.isDebugEnabled()) logger.debug(<span class="hljs-string">'Public keys fingerprints from server: %s'</span>, fingerprints);
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; fingerprints.length; i++) {
+            <span class="hljs-keyword">var</span> fingerprint = fingerprints[i];
+            <span class="hljs-keyword">if</span> (logger.isDebugEnabled()) logger.debug(<span class="hljs-string">'Searching fingerprint %s in store'</span>, fingerprint);
+            <span class="hljs-keyword">var</span> publicKey = crypto.PublicKey.retrieveKey(fingerprint);
+            <span class="hljs-keyword">if</span> (publicKey) {
+                <span class="hljs-keyword">if</span> (logger.isDebugEnabled()) logger.debug(<span class="hljs-string">'Fingerprint %s found in keyStore.'</span>, fingerprint);
+                obj.fingerprint = fingerprint;
+                obj.publicKey = publicKey;
+                <span class="hljs-keyword">return</span> obj;
+            }
+        }
+        <span class="hljs-keyword">throw</span> createError(<span class="hljs-string">'Fingerprints from server not found in keyStore.'</span>, <span class="hljs-string">'EFINGERNOTFOUND'</span>);
+    }</pre></div>
+        
+      
+        
+        <p>Create the pq_inner_data buffer</p>
+
+        
+          <div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createPQInnerData</span><span class="hljs-params">(obj)</span> </span>{
+        <span class="hljs-keyword">var</span> resPQ = obj.resPQ;
+        <span class="hljs-keyword">var</span> newNonce = crypto.createNonce(<span class="hljs-number">32</span>);
+        <span class="hljs-keyword">var</span> pqInnerData = <span class="hljs-keyword">new</span> mtproto.P_q_inner_data({props: {
+            pq: resPQ.pq,
+            p: obj.pBuffer,
+            q: obj.qBuffer,
+            nonce: resPQ.nonce,
+            server_nonce: resPQ.server_nonce,
+            new_nonce: newNonce
+        }}).serialize();
+        obj.pqInnerData = pqInnerData;
+        obj.newNonce = newNonce;
+        <span class="hljs-keyword">return</span> obj;
+    }</pre></div>
+        
+      
+        
+        <p>Encrypt the pq_inner_data</p>
+
+        
+          <div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">encryptDataWithRSA</span><span class="hljs-params">(obj)</span> </span>{</pre></div>
+        
+      
+        
+        <p>Create the data with hash to be encrypt</p>
+
+        
+          <div class='highlight'><pre>        <span class="hljs-keyword">var</span> hash = crypto.createSHA1Hash(obj.pqInnerData);
+        <span class="hljs-keyword">var</span> dataWithHash = Buffer.concat([hash, obj.pqInnerData]);
+        <span class="hljs-keyword">if</span> (logger.isDebugEnabled()) {
+            logger.debug(<span class="hljs-string">'Data to be encrypt contain: hash(%s), pqInnerData(%s), total length %s'</span>,
+                hash.toString(<span class="hljs-string">'hex'</span>), obj.pqInnerData.toString(<span class="hljs-string">'hex'</span>), dataWithHash.length);
+        }</pre></div>
+        
+      
+        
+        <p>Encrypt data with RSA</p>
+
+        
+          <div class='highlight'><pre>        obj.encryptedData = crypto.rsaEncrypt({message: dataWithHash, key: obj.publicKey});
+        <span class="hljs-keyword">return</span> obj;
+    }</pre></div>
+        
+      
+        
+        <p>Request server DH parameters</p>
+
+        
+          <div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">requestDHParams</span><span class="hljs-params">(callback, obj)</span> </span>{
+        <span class="hljs-keyword">var</span> resPQ = obj.resPQ;
+        mtproto.req_DH_params({
+            props: {
+                nonce: resPQ.nonce,
+                server_nonce: resPQ.server_nonce,
+                p: obj.pBuffer,
+                q: obj.qBuffer,
+                public_key_fingerprint: obj.fingerprint,
+                encrypted_data: obj.encryptedData
+            },
+            conn: connection,
+            callback: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(ex, serverDHParams, duration)</span> </span>{
+                <span class="hljs-keyword">if</span> (ex) {
+                    logger.error(ex);
+                    <span class="hljs-keyword">if</span> (callback) callback(ex);
+                } <span class="hljs-keyword">else</span> {
+                    <span class="hljs-keyword">if</span> (serverDHParams.typeName == <span class="hljs-string">'mtproto.Server_DH_params_ok'</span>) {
+                        <span class="hljs-keyword">if</span> (logger.isDebugEnabled()) logger.debug(<span class="hljs-string">'\'Server_DH_params_ok\' received from Telegram.'</span>);
+                        obj.serverDHParams = serverDHParams;
+                        callback(<span class="hljs-literal">null</span>, obj, duration);
+                    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (serverDHParams.typeName == <span class="hljs-string">'mtproto.Server_DH_params_ko'</span>) {
+                        logger.warn(<span class="hljs-string">'\'Server_DH_params_ko\' received from Telegram!'</span>);
+                        callback(createError(<span class="hljs-built_in">JSON</span>.stringify(serverDHParams), <span class="hljs-string">'EDHPARAMKO'</span>));
+                    } <span class="hljs-keyword">else</span> {
+                        <span class="hljs-keyword">var</span> msg = <span class="hljs-string">'Unknown error received from Telegram!'</span>;
+                        logger.error(msg);
+                        callback(createError(msg, <span class="hljs-string">'EUNKNOWN'</span>));
+                    }
+                }
+            }
+        });
+    }</pre></div>
+        
+      
+        
+        <p>Decrypt DH parameters and synch the local time with the server time</p>
+
+        
+          <div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">decryptDHParams</span><span class="hljs-params">(obj, duration)</span> </span>{
+        <span class="hljs-keyword">var</span> newNonce = AbstractObject.stringValue2Buffer(obj.newNonce, <span class="hljs-number">32</span>);
+        <span class="hljs-keyword">var</span> serverNonce = AbstractObject.stringValue2Buffer(obj.resPQ.server_nonce, <span class="hljs-number">16</span>);
+        <span class="hljs-keyword">if</span> (logger.isDebugEnabled()) logger.debug(<span class="hljs-string">'newNonce = %s, serverNonce = %s'</span>, newNonce.toString(<span class="hljs-string">'hex'</span>), serverNonce.toString(<span class="hljs-string">'hex'</span>));
+        <span class="hljs-keyword">var</span> hashNS = crypto.createSHA1Hash([newNonce, serverNonce]);
+        <span class="hljs-keyword">if</span> (logger.isDebugEnabled()) logger.debug(<span class="hljs-string">'hashNS = %s'</span>, hashNS.toString(<span class="hljs-string">'hex'</span>));
+        <span class="hljs-keyword">var</span> hashSN = crypto.createSHA1Hash([serverNonce, newNonce]);
+        <span class="hljs-keyword">if</span> (logger.isDebugEnabled()) logger.debug(<span class="hljs-string">'hashSN = %s'</span>, hashSN.toString(<span class="hljs-string">'hex'</span>));
+        <span class="hljs-keyword">var</span> hashNN = crypto.createSHA1Hash([newNonce, newNonce]);
+        <span class="hljs-keyword">if</span> (logger.isDebugEnabled()) logger.debug(<span class="hljs-string">'hashNN = %s'</span>, hashNN.toString(<span class="hljs-string">'hex'</span>));
+        <span class="hljs-keyword">var</span> aesKey = Buffer.concat([hashNS, hashSN.slice(<span class="hljs-number">0</span>, <span class="hljs-number">12</span>)]);
+        <span class="hljs-keyword">if</span> (logger.isDebugEnabled()) logger.debug(<span class="hljs-string">'aesKey = %s'</span>, aesKey.toString(<span class="hljs-string">'hex'</span>));
+        <span class="hljs-keyword">var</span> aesIv = Buffer.concat([Buffer.concat([hashSN.slice(<span class="hljs-number">12</span>), hashNN]), newNonce.slice(<span class="hljs-number">0</span>, <span class="hljs-number">4</span>)]);
+        <span class="hljs-keyword">if</span> (logger.isDebugEnabled()) logger.debug(<span class="hljs-string">'aesIv = %s'</span>, aesIv.toString(<span class="hljs-string">'hex'</span>));</pre></div>
+        
+      
+        
+        <p>Decrypt the message</p>
+
+        
+          <div class='highlight'><pre>        <span class="hljs-keyword">var</span> answerWithHash = crypto.aesDecrypt({
+            msg: obj.serverDHParams.encrypted_answer,
+            key: aesKey,
+            iv: aesIv
+        });
+        <span class="hljs-keyword">if</span> (logger.isDebugEnabled()) logger.debug(<span class="hljs-string">'answerWithHash(%s) = %s'</span>, answerWithHash.length, answerWithHash.toString(<span class="hljs-string">'hex'</span>));
+        <span class="hljs-keyword">var</span> answer = answerWithHash.slice(<span class="hljs-number">20</span>, <span class="hljs-number">564</span> + <span class="hljs-number">20</span>);
+        <span class="hljs-keyword">if</span> (logger.isDebugEnabled()) logger.debug(<span class="hljs-string">'answer(%s) = %s'</span>, answer.length, answer.toString(<span class="hljs-string">'hex'</span>));</pre></div>
+        
+      
+        
+        <p>De-serialize the inner data</p>
+
+        
+          <div class='highlight'><pre>        <span class="hljs-keyword">var</span> serverDHInnerData = <span class="hljs-keyword">new</span> mtproto.Server_DH_inner_data({
+            buffer: answer
+        }).deserialize();
+        <span class="hljs-keyword">if</span> (logger.isDebugEnabled()) logger.debug(<span class="hljs-string">'serverDHInnerData = %s obtained in %sms'</span>, <span class="hljs-built_in">JSON</span>.stringify(serverDHInnerData), duration);</pre></div>
+        
+      
+        
+        <p>Check if the nonces are consistent</p>
+
+        
+          <div class='highlight'><pre>        <span class="hljs-keyword">if</span> (serverDHInnerData.nonce != obj.serverDHParams.nonce) {
+            <span class="hljs-keyword">throw</span> createError(<span class="hljs-string">'Nonce mismatch %s != %s'</span>, obj.serverDHParams.nonce, serverDHInnerData.nonce);
+        }
+        <span class="hljs-keyword">if</span> (serverDHInnerData.server_nonce != obj.serverDHParams.server_nonce) {
+            <span class="hljs-keyword">throw</span> createError(<span class="hljs-string">'ServerNonce mismatch %s != %s'</span>, obj.serverDHParams.server_nonce, serverDHInnerData.server_nonce);
+        }</pre></div>
+        
+      
+        
+        <p>Synch the local time with the server time</p>
+
+        
+          <div class='highlight'><pre>        crypto.timeSynchronization(serverDHInnerData.server_time * <span class="hljs-number">1000</span>, duration);
+        obj.serverDHInnerData = serverDHInnerData;
+        <span class="hljs-keyword">return</span> obj;
+    }
+};
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createError</span><span class="hljs-params">(msg, code)</span> </span>{
+    <span class="hljs-keyword">var</span> error = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(msg);
+    error.code = code;
+    <span class="hljs-keyword">return</span> error;
+}</pre></div>
+        
+      
+        
+        <p>The method closes the communication with the DataCenter,
+provide a callback function to know when is done or to catch an error</p>
+
+        
+          <div class='highlight'><pre>TelegramLink.prototype.end = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(callback)</span> </span>{
+    <span class="hljs-keyword">this</span>._connection.close(callback);
+};</pre></div>
+        
+      
+      <div class="fleur">h</div>
+    </div>
+  </div>
+</body>
+</html>
