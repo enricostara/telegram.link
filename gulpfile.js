@@ -25,11 +25,11 @@ gulp.task('quality-api', function () {
 
 gulp.task('test-lib', function () {
     return gulp.src('./test/lib/**/*.js')
-        .pipe(mocha({reporter: 'tap', timeout: '10s'}));
+        .pipe(mocha({reporter: 'mocha-better-spec-reporter', timeout: '10s'}));
 });
 gulp.task('test-api', function () {
     return gulp.src('./test/*.js')
-        .pipe(mocha({reporter: 'tap', timeout: '10s'}));
+        .pipe(mocha({reporter: 'mocha-better-spec-reporter', timeout: '10s'}));
 });
 
 gulp.task('cov-test-lib', function () {
