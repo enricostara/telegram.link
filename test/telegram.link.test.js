@@ -20,6 +20,9 @@ describe('TelegramLink', function () {
 
     describe('#authorization()', function () {
         it('should returns', function (done) {
+
+            this.timeout(30000);
+            require('get-log').enable('*');
             var telegramLink = new TelegramLink(primaryDC);
             telegramLink.connect(function (e) {
                 if(e) {

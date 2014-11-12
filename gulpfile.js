@@ -29,7 +29,7 @@ gulp.task('test-lib', function () {
 });
 gulp.task('test-api', function () {
     return gulp.src('./test/*.js')
-        .pipe(mocha({reporter: 'tap', timeout: '20s'}));
+        .pipe(mocha({reporter: 'tap', timeout: '10s'}));
 });
 
 gulp.task('cov-test-lib', function () {

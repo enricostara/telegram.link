@@ -13,6 +13,10 @@
 console.log(require('lib/static').signature);
 console.log(('v.%s', require('./package.json').version));
 
+// Register the project name on the logging sys
+var getLogger = require('get-log');
+getLogger.PROJECT_NAME = require('./package.json').name;
+
 // Export the class
 module.exports = exports = TelegramLink;
 
@@ -28,8 +32,6 @@ var TcpConnection = exports.net.TcpConnection;
 var HttpConnection = exports.net.HttpConnection;
 var AbstractObject = exports.type_language.AbstractObject;
 var mtproto = exports.mtproto;
-var getLogger = require('get-log');
-getLogger.PROJECT_NAME = require('./package.json').name;
 var flow = require('get-flow');
 
 // The constructor requires a primary telegram DataCenter address as argument
