@@ -4,6 +4,7 @@
 
 # telegram.link 
 [![npm version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coverage-image]][coverage-url] [![Dependency Status][gemnasium-image]][gemnasium-url]
+[![Sauce Test Status][sauce-image]][sauce-url]
 
 This is an unofficial **javascript library** to connect to **Telegram Messanger** and write a Telegram client that runs 
 on the **Node.js** platform and on a standard **web browser**.
@@ -92,4 +93,7 @@ Logo crafted by [Diego Pasquali](http://dribbble.com/diegopq)
 
 [gemnasium-url]: https://gemnasium.com/enricostara/telegram.link
 [gemnasium-image]: https://gemnasium.com/enricostara/telegram.link.svg
+
+[sauce-url]: https://saucelabs.com/u/enricostara
+[sauce-image]: https://saucelabs.com/browser-matrix/enricostara.svg
 
