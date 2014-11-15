@@ -70,7 +70,8 @@ TelegramLink.prototype.authorization = function (callback) {
                 requestDHParams,
                 decryptDHParams,
                 createClientDHInnerData,
-                encryptClientDHInnerDataWithAES
+                encryptClientDHInnerDataWithAES,
+                setClientDHParams
             ], callback);
         });
 
@@ -238,7 +239,8 @@ TelegramLink.prototype.authorization = function (callback) {
         return obj;
     }
 
-    // Calculate the g_b and create the client DH parametersr
+    // Calculate the g_b = pow(g, b) mod dh_prime
+    // Create the client DH inner data
     function createClientDHInnerData(obj) {
         var retryCount = 0;
         if (logger.isDebugEnabled()) logger.debug('Start calculating g_b');
@@ -276,6 +278,40 @@ TelegramLink.prototype.authorization = function (callback) {
                 obj.encryptClientDHInnerData.length, obj.encryptClientDHInnerData.toString('hex'));
         }
         return obj;
+    }
+
+    // Set client DH parameters
+    function setClientDHParams(callback, obj) {
+        mtproto.set_client_DH_params({
+            props: {
+                nonce: obj.resPQ.nonce,
+                server_nonce: obj.resPQ.server_nonce,
+                encrypted_data: obj.encryptClientDHInnerData
+            },
+            conn: connection,
+            callback: function (ex, setClientDHParamsAnswer, duration) {
+                if (ex) {
+                    logger.error(ex);
+                    if (callback) callback(ex);
+                } else {
+                    if (setClientDHParamsAnswer.typeName == 'mtproto.Dh_gen_ok') {
+                        if (logger.isDebugEnabled()) logger.debug('\'Dh_gen_ok\' received from Telegram.');
+                        obj.setClientDHParamsAnswer = setClientDHParamsAnswer;
+                        callback(null, obj, duration);
+                    } else if (setClientDHParamsAnswer.typeName == 'mtproto.Dh_gen_retry') {
+                        logger.warn('\'Dh_gen_retry\' received from Telegram!');
+                        callback(createError(JSON.stringify(serverDHParams), 'EDHPARAMRETRY'));
+                    } else if (setClientDHParamsAnswer.typeName == 'mtproto.Dh_gen_fail') {
+                        logger.warn('\'Dh_gen_fail\' received from Telegram!');
+                        callback(createError(JSON.stringify(serverDHParams), 'EDHPARAMFAIL'));
+                    } else {
+                        var msg = 'Unknown error received from Telegram!';
+                        logger.error(msg);
+                        callback(createError(msg, 'EUNKNOWN'));
+                    }
+                }
+            }
+        });
     }
 };
 
