@@ -1,9 +1,9 @@
 require('should');
 var net = require('net');
 var mtproto = require('lib/mtproto');
-var AbstractObject = require('lib/type-language').AbstractObject;
-var Vector = require('lib/type-language').Vector;
 var TcpConnection = require("lib/net").TcpConnection;
+var TypeObject = require('telegram-tl-node').TypeObject;
+var TypeVector = require('telegram-tl-node').TypeVector;
 
 describe('mtproto', function () {
 
@@ -24,13 +24,13 @@ describe('mtproto', function () {
                     console.log('tcpMessage %s', requestBuffer.toString('hex'));
                     var requestBuffer = new mtproto.PlainMessage({buffer: requestBuffer}).deserialize().getMessage();
                     console.log('plainMessage %s', requestBuffer.toString('hex'));
-                    var reqPQ = new mtproto._req_pq({buffer: requestBuffer}).deserialize();
+                    var reqPQ = new mtproto.req_pq.PayloadType({buffer: requestBuffer}).deserialize();
 //                    console.log(reqPQ);
                     var resPQ = new mtproto.ResPQ({props: {
                         nonce: reqPQ.nonce,
                         server_nonce: '0x30739073a54aba77a81ea1f4334dcfa5',
                         pq: new Buffer('17ed48941a08f981', 'hex'),
-                        server_public_key_fingerprints: new Vector({type: 'long', list: ['0xc3b42b026ce86b21']})
+                        server_public_key_fingerprints: new TypeVector({type: 'long', list: ['0xc3b42b026ce86b21']})
                     }});
                     var resPQBuffer = resPQ.serialize();
                     console.log('Server: Send resPQ  %s', resPQBuffer.toString('hex'));
@@ -51,9 +51,6 @@ describe('mtproto', function () {
 
     describe('#method reqPQ', function () {
         it('should works', function (done) {
-            var obj = new mtproto._req_pq();
-            obj.should.be.ok;
-            obj.should.be.an.instanceof(AbstractObject);
             var nonce = '0xf67b7768bf4854bb15fa840ec843875f';
             mtproto.req_pq({
                 props: {
@@ -76,7 +73,7 @@ describe('mtproto', function () {
                 var className = mtproto._classes[i];
                 var obj = new mtproto[className]();
                 obj.should.be.ok;
-                obj.should.be.an.instanceof(AbstractObject);
+                obj.should.be.an.instanceof(TypeObject);
             }
             done();
         })
@@ -91,7 +88,7 @@ describe('mtproto', function () {
                 var msg = new mtproto.PlainMessage();
                 msg.should.be.ok;
                 msg.should.be.an.instanceof(mtproto.PlainMessage);
-                msg.should.be.an.instanceof(AbstractObject);
+                msg.should.be.an.instanceof(TypeObject);
                 msg.isReadonly().should.be.false;
 
                 msg = new mtproto.PlainMessage({message: new Buffer('FFFF', 'hex')});

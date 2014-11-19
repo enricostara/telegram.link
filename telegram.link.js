@@ -20,18 +20,12 @@ getLogger.PROJECT_NAME = require('./package.json').name;
 // Export the class
 module.exports = exports = TelegramLink;
 
-// Export modules
-exports.mtproto = require('lib/mtproto');
-exports.net = require('lib/net');
-exports.type_language = require('lib/type-language');
-exports.crypto_util = require('lib/crypto-util');
-
 // Import dependencies
-var crypto = exports.crypto_util;
-var TcpConnection = exports.net.TcpConnection;
-var HttpConnection = exports.net.HttpConnection;
-var AbstractObject = exports.type_language.AbstractObject;
-var mtproto = exports.mtproto;
+var crypto = require('lib/crypto-util');
+var TcpConnection = require('lib/net').TcpConnection;
+var HttpConnection = require('lib/net').HttpConnection;
+var TypeObject = require('telegram-tl-node').TypeObject;
+var mtproto = require('lib/mtproto');
 var flow = require('get-flow');
 
 // The constructor requires a primary telegram DataCenter address as argument
@@ -193,8 +187,8 @@ TelegramLink.prototype.authorization = function (callback) {
 
     // Decrypt DH parameters and synch the local time with the server time
     function decryptDHParams(obj, duration) {
-        var newNonce = AbstractObject.stringValue2Buffer(obj.newNonce, 32);
-        var serverNonce = AbstractObject.stringValue2Buffer(obj.resPQ.server_nonce, 16);
+        var newNonce = TypeObject.stringValue2Buffer(obj.newNonce, 32);
+        var serverNonce = TypeObject.stringValue2Buffer(obj.resPQ.server_nonce, 16);
         if (logger.isDebugEnabled()) {
             logger.debug('newNonce = %s, serverNonce = %s', newNonce.toString('hex'), serverNonce.toString('hex'));
         }
