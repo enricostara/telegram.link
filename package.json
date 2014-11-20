@@ -47,6 +47,6 @@
     "scripts": {
         "test": "gulp test",
         "coveralls": "istanbul cover ./node_modules/gulp/bin/gulp.js cover && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage",
-        "zuul": "zuul -- ./test/lib/type-language/** ./test/lib/crypto-util/**"
+        "zuul": "zuul -- ./test/lib/crypto-util/**"
     }
 }
