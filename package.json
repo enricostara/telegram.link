@@ -1,7 +1,7 @@
 {
     "name": "telegram.link",
-    "version": "0.1.2",
-    "description": "Telegram API Node.js library",
+    "version": "0.2.0",
+    "description": "Telegram API library",
     "keywords": [
         "telegram",
         "api",
@@ -16,37 +16,35 @@
     "bugs": {
         "url": "https://github.com/enricostara/telegram.link/issues"
     },
-    "license": "BSD-2-Clause",
+    "license": "MIT",
     "dependencies": {
         "telegram-tl-node": "latest",
+        "telegram-mt-node": "latest",
         "get-log": "latest",
-        "get-flow": "latest",
-        "jsbn": "latest",
-        "bigint-node": "latest",
-        "node-cryptojs-aes": "enricostara/node-cryptojs-aes",
-        "http-browserify": "enricostara/http-browserify"
+        "get-flow": "latest"
     },
     "devDependencies": {
-        "coveralls": "latest",
-        "del": "latest",
         "gulp": "latest",
-        "gulp-docco": "latest",
         "gulp-jshint": "latest",
         "gulp-mocha": "latest",
-        "istanbul": "latest",
-        "mocha": "latest",
-        "mocha-lcov-reporter": "latest",
-        "mocha-better-spec-reporter": "latest",
+        "gulp-docco": "latest",
+        "del": "latest",
         "should": "latest",
+        "mocha": "latest",
+        "mocha-better-spec-reporter": "latest",
+        "mocha-lcov-reporter": "latest",
+        "coveralls": "latest",
+        "codeclimate-test-reporter": "latest",
+        "istanbul": "latest",
         "zuul": "latest"
     },
-    "main": "telegram.link",
+    "main": "./lib/telegram.link",
     "engines": {
         "node": "0.10.x"
     },
     "scripts": {
-        "test": "gulp test",
-        "coveralls": "istanbul cover ./node_modules/gulp/bin/gulp.js cover && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage",
-        "zuul": "zuul -- ./test/lib/crypto-util/**"
+        "test": "DEBUG=-mocha*,* gulp test",
+        "coveralls": "DEBUG=-mocha*,* istanbul cover ./node_modules/gulp/bin/gulp.js cover && cat ./coverage/lcov.info | coveralls && codeclimate < ./coverage/lcov.info && rm -rf ./coverage",
+        "zuul": "zuul -- ./test/**"
     }
 }

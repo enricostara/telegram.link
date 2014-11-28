@@ -4,44 +4,26 @@ var mocha = require('gulp-mocha');
 var docco = require('gulp-docco');
 var del = require('del');
 
-gulp.task('docs-api', function () {
+gulp.task('docs', function () {
     del(['./docs/api'], function() {
-        gulp.src('telegram.link.js')
+        gulp.src('./lib/**')
             .pipe(docco({'layout': 'linear'}))
-            .pipe(gulp.dest('./docs/api'))
+            .pipe(gulp.dest('./docs/api'));
     });
 });
-
-gulp.task('quality-lib', function () {
-    return gulp.src('node_modules/lib/**/*.js')
+gulp.task('quality', function () {
+    return gulp.src('../lib/**')
         .pipe(jshint())
-        .pipe(jshint.reporter('default'))
+        .pipe(jshint.reporter('default'));
 });
-gulp.task('quality-api', function () {
-    return gulp.src('telegram.link.js')
-        .pipe(jshint())
-        .pipe(jshint.reporter('default'))
-});
-
-gulp.task('test-lib', function () {
-    return gulp.src('./test/lib/**/*.js')
-        .pipe(mocha({reporter: 'mocha-better-spec-reporter', timeout: '10s'}));
-});
-gulp.task('test-api', function () {
+gulp.task('test', function () {
     return gulp.src('./test/*.js')
-        .pipe(mocha({reporter: 'mocha-better-spec-reporter', timeout: '10s'}));
+        .pipe(mocha({reporter: 'mocha-better-spec-reporter', timeout: '20s'}));
 });
 
-gulp.task('cov-test-lib', function () {
-    return gulp.src('./test/lib/**/*.js')
-        .pipe(mocha({reporter: 'mocha-lcov-reporter', timeout: '120s'}));
-});
-gulp.task('cov-test-api', function () {
+gulp.task('cover', function () {
     return gulp.src('./test/*.js')
         .pipe(mocha({reporter: 'mocha-lcov-reporter', timeout: '120s'}));
 });
 
-gulp.task('default', ['quality', 'test-lib']);
-gulp.task('quality', ['quality-lib', 'quality-api']);
-gulp.task('test', ['quality', 'test-lib', 'test-api']);
-gulp.task('cover', ['cov-test-lib', 'cov-test-api']);
+gulp.task('default', ['quality', 'test']);

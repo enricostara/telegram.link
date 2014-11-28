@@ -1,6 +1,6 @@
 require('should');
-var staticInfo = require('lib/static');
-var TelegramLink = require('../telegram.link');
+var staticInfo = require('../lib/static');
+var TelegramLink = require('../lib/telegram.link');
 
 describe('TelegramLink', function () {
     var primaryDC = staticInfo.telegram.test.primaryDataCenter;
@@ -22,7 +22,6 @@ describe('TelegramLink', function () {
         it('should returns', function (done) {
 
             this.timeout(120000);
-//            require('get-log').enable('*');
             var telegramLink = new TelegramLink(primaryDC);
             telegramLink.connect(function (e) {
                 if(e) {
