@@ -1,5 +1,5 @@
 
-# <img src="./telegram.link.png" width="30"/> telegram.link 
+# <img src="./telegram.link.png" width="40"/> telegram.link 
 [![npm version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Climate Status][climate-image]][climate-url] [![Dependency Status][gemnasium-image]][gemnasium-url]
 [![Sauce Test Status][sauce-image]][sauce-url]
 
@@ -14,7 +14,7 @@
 
 **telegram.link** is an unofficial **porting in javascript** of the [Telegram Application Programming Interface](https://core.telegram.org/api).
  
-**telegram.link** library enables to **write once**  a **client-application** (whole or the communication part)  
+**telegram.link** library enables to **write once**  a **client-application** (whole or only the communication part)  
 that runs both on **mobile and desktop browsers** and also on a **Node.js server**  and connect to the  
 **Telegram data-centers** via standard [protocol](https://core.telegram.org/mtproto) and API.
 
@@ -42,9 +42,9 @@ TypeLanguage types represent the **building blocks of the Telegram protocol**.
 
 ### Other direct dependencies
 
-- [get-flow](https://github.com/enricostara/get-flow): just yet another Node.js Flow Control Utility, powerful and easy to use
+- [get-flow](https://github.com/enricostara/get-flow): just yet another Node.js flow control utility, powerful and easy to use
 
-- [get-log](https://github.com/enricostara/get-log): a Node.js Logging Utility, easy to use and ready for production.
+- [get-log](https://github.com/enricostara/get-log): a Node.js logging utility, easy to use and ready for production environment.
 
 ## Installation
 
@@ -84,7 +84,7 @@ are available from independent developers using the **Telegram API**
 Node.js applications are written in JavaScript, and can be run within the Node.js runtime on OS X, Microsoft Windows and 
 Linux with no changes ([from Wikipedia](http://en.wikipedia.org/wiki/Node.js)).
 
-### About the telegram.link logo  <img src="./telegram.link.png" width="20"/>..
+### About the telegram.link logo  <img src="./telegram.link.png" width="25"/>..
 
 Logo crafted by [Diego Pasquali](http://dribbble.com/diegopq)
 
