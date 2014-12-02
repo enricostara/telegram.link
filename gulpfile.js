@@ -4,15 +4,15 @@ var mocha = require('gulp-mocha');
 var docco = require('gulp-docco');
 var del = require('del');
 
-gulp.task('docs', function () {
+gulp.task('apidocs', function () {
     del(['./docs/api'], function() {
-        gulp.src('./lib/**')
+        gulp.src('./lib/**/*.js')
             .pipe(docco({'layout': 'linear'}))
             .pipe(gulp.dest('./docs/api'));
     });
 });
 gulp.task('quality', function () {
-    return gulp.src('../lib/**')
+    return gulp.src('./lib/**')
         .pipe(jshint())
         .pipe(jshint.reporter('default'));
 });
