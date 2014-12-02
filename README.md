@@ -1,17 +1,77 @@
 
-<img src="./telegram.link.png" width="120" />
-
-
-# telegram.link 
-[![npm version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coverage-image]][coverage-url] [![Dependency Status][gemnasium-image]][gemnasium-url]
+# <img src="./telegram.link.png" width="30"/> telegram.link 
+[![npm version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Climate Status][climate-image]][climate-url] [![Dependency Status][gemnasium-image]][gemnasium-url]
 [![Sauce Test Status][sauce-image]][sauce-url]
 
-This is an unofficial **javascript library** to connect to **Telegram Messanger** and write a Telegram client that runs 
-on the **Node.js** platform and on a standard **web browser**.
 
-### About Telegram Messenger.. 
+###_telegram.link_ is a Telegram API library for
 
-[Telegram Messenger](http://www.telegram.org ) is a cross-platform messenger whose clients are **open source**. 
+- **Hybrid Mobile Apps** (phone and tablet)
+
+- **Desktop Web Apps** (standard HTML5 browsers)
+
+- **Server-side Apps**  (i.e. a Command-Line Interface) 
+
+**telegram.link** is an unofficial **porting in javascript** of the [Telegram Application Programming Interface](https://core.telegram.org/api).
+ 
+**telegram.link** library enables to **write once**  a **client-application** (whole or the communication part)  
+that runs both on **mobile and desktop browsers** and also on a **Node.js server**  and connect to the  
+**Telegram data-centers** via standard [protocol](https://core.telegram.org/mtproto) and API.
+
+
+## Project Status
+
+- [Creating an Authorization Key](https://core.telegram.org/mtproto/auth_key): almost completed
+
+- [User Autorization](https://core.telegram.org/api/auth): next step, ongoing
+
+
+## Project Architecture
+
+The whole project is split in **three modules**:
+  
+- **telegram.link** (this library): is the main module and provides the **highest-level interface** to communicate with the Telegram data-center. 
+When you write your **_'telegram-like-app'_** you should deal only with this module.
+
+- [**telegram-mt-node**](https://github.com/enricostara/telegram-mt-node) (dependency): implements the **Telegram Mobile Protocol** [(MTProto)](https://core.telegram.org/mtproto),
+the protocol level to establish a secure communication with the Telegram cloud.
+
+- [**telegram-tl-node**](https://github.com/enricostara/telegram-tl-node) (dependency): implements the core [**TypeLanguage types**](https://core.telegram.org/mtproto/TL) and 
+a type-builder that writes **Type classes and functions** in pure javascript parsing TypeLanguage [schemas](https://core.telegram.org/schema). 
+TypeLanguage types represent the **building blocks of the Telegram protocol**.
+
+### Other direct dependencies
+
+- [get-flow](https://github.com/enricostara/get-flow): just yet another Node.js Flow Control Utility, powerful and easy to use
+
+- [get-log](https://github.com/enricostara/get-log): a Node.js Logging Utility, easy to use and ready for production.
+
+## Installation
+
+```bash
+$ git clone --branch=master git://github.com/enricostara/telegram.link.git
+$ cd telegram.link
+$ npm install
+```
+
+## Unit Testing 
+
+You can run unit-test executing the following command in the project-root folder:
+```bash
+$ npm test
+```
+## Documentation
+
+You can generate the api documentation executing the following command in the project-root folder: 
+```bash
+$ gulp apidocs
+```
+All the generated docs will be available under the `telegram.link/docs/api` folder
+
+
+### About Telegram.. 
+
+[Telegram](http://www.telegram.org ) is a cross-platform messenger whose clients are **open source**. 
 Telegram users can exchange encrypted and self-destructing messages, photos, videos and documents (all file-types supported). 
 Telegram is officially available for Android and iOS (including tablets and devices without Wi-Fi). 
 Unofficial clients for Windows Phone, as well as a web version, OS X version, Linux version and a Windows desktop client 
@@ -24,62 +84,13 @@ are available from independent developers using the **Telegram API**
 Node.js applications are written in JavaScript, and can be run within the Node.js runtime on OS X, Microsoft Windows and 
 Linux with no changes ([from Wikipedia](http://en.wikipedia.org/wiki/Node.js)).
 
-
-## Telegram.link project in short..
-
-**telegram.link** is an unofficial **porting in javascript** of [Telegram-API](https://core.telegram.org/api). 
-With Node.js technology and the javascript language, telegram.link enables to **write once** a Telegram-Client application 
-that **runs both on a Node.js server and on a standard web browser** 
-(using, in this case, a technology like [browserify](https://www.npmjs.org/package/browserify)).
-
-## Project Status
-
-This an **early version**, the current state of progress includes:
-
-- A first implementation of the **Builder** class that reads [Telegram schemas](https://core.telegram.org/schema) 
-and writes dynamically **javascript classes and functions** parsing [TypeLanguage](https://core.telegram.org/mtproto/TL).
-
-- A **TCP connection** and a **HTTP connection**  based on [Telegram protocol spec](https://core.telegram.org/mtproto#tcp-transport). 
-
-- A first [MTProto protocol](https://core.telegram.org/mtproto) implementation to 
-[create an authorization key](https://core.telegram.org/mtproto/auth_key) is on going.
-
-- A **unit-test suite** to cover them all!
-
-## Installation
-
-```bash
-$ git clone --branch=master git://github.com/enricostara/telegram.link.git
-$ cd telegram.link
-$ npm install
-```
-
-## Unit Testing 
-
-```bash
-$ npm test
-```
-
-## Telegram API Integration Testing 
-
-```bash
-$ gulp integration
-```
-
-## Documentation
- 
-The API documentation was generated [here](./docs/api/telegram.link.html)
-
-
-## License
-
-The project is released under the [Simplified BSD license](./LICENSE) 
-
-### About the Logo..
+### About the telegram.link logo  <img src="./telegram.link.png" width="20"/>..
 
 Logo crafted by [Diego Pasquali](http://dribbble.com/diegopq)
 
-## That's it, check back later :)
+## License
+
+The project is released under the [MIT license](./LICENSE) 
 
 
 [npm-url]: https://www.npmjs.org/package/telegram.link
@@ -87,6 +98,9 @@ Logo crafted by [Diego Pasquali](http://dribbble.com/diegopq)
 
 [travis-url]: https://travis-ci.org/enricostara/telegram.link
 [travis-image]: https://travis-ci.org/enricostara/telegram.link.svg?branch=master
+
+[climate-url]: https://codeclimate.com/github/enricostara/telegram.link
+[climate-image]: https://codeclimate.com/github/enricostara/telegram.link/badges/gpa.svg
 
 [coverage-url]: https://coveralls.io/r/enricostara/telegram.link?branch=master
 [coverage-image]: https://img.shields.io/coveralls/enricostara/telegram.link.svg
@@ -96,4 +110,3 @@ Logo crafted by [Diego Pasquali](http://dribbble.com/diegopq)
 
 [sauce-url]: https://saucelabs.com/u/enricostara
 [sauce-image]: https://saucelabs.com/browser-matrix/enricostara.svg
-
