@@ -18,7 +18,6 @@
     },
     "license": "MIT",
     "dependencies": {
-        "telegram-tl-node": "latest",
         "telegram-mt-node": "latest",
         "get-log": "latest",
         "get-flow": "latest"
