@@ -14,8 +14,8 @@
 
 **telegram.link** is an unofficial **porting in javascript** of the [Telegram Application Programming Interface](https://core.telegram.org/api).
  
-**telegram.link** library enables to **write once**  a **client-application** (whole or only the communication part)  
-that runs both on **mobile and desktop browsers** and also on a **Node.js server**  and connect to the  
+**telegram.link** library enables to **write once**  a **client-application** (whole or only the communication part) that
+runs both on **mobile and desktop browsers** and also on a **Node.js server**  and connect to the  
 **Telegram data-centers** via standard [protocol](https://core.telegram.org/mtproto) and API.
 
 
@@ -37,7 +37,7 @@ When you write your **_'telegram-like-app'_** you should deal only with this mod
 the protocol level to establish a secure communication with the Telegram cloud.
 
 - [**telegram-tl-node**](https://github.com/enricostara/telegram-tl-node) (dependency): implements the core [**TypeLanguage types**](https://core.telegram.org/mtproto/TL) and 
-a type-builder that writes **Type classes and functions** in pure javascript parsing TypeLanguage [schemas](https://core.telegram.org/schema). 
+a **TypeBuilder** class that writes **Type classes and functions** in pure javascript parsing TypeLanguage [schemas](https://core.telegram.org/schema). 
 TypeLanguage types represent the **building blocks of the Telegram protocol**.
 
 ### Other direct dependencies
@@ -66,7 +66,7 @@ You can generate the api documentation executing the following command in the pr
 ```bash
 $ gulp apidocs
 ```
-All the generated docs will be available under the `telegram.link/docs/api` folder
+All the generated docs will be available under the `telegram.link/docs/api/` folder
 
 
 ### About Telegram.. 
