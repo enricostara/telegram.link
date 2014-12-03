@@ -29,13 +29,14 @@ describe('TelegramLink', function () {
                     done();
                     return;
                 }
-                telegramLink.authorization(function (ex) {
+                telegramLink.authorization(function (ex, authKey) {
                     if (ex) {
                         console.log('Authorization KO: %s', ex);
                         telegramLink.end();
                     }
                     else {
-                        console.log('Authorization OK');
+                        authKey.should.be.ok;
+                        console.log('Authorization OK: %s', authKey.toString());
                         telegramLink.end();
                     }
                     (!ex).should.be.true;
