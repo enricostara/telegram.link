@@ -25,7 +25,7 @@ build/Release
 node_modules/*
 
 #Generated docs files
-docs/api
+api-docs
 
 # IDE Project files
 *.iws

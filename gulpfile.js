@@ -8,7 +8,7 @@ gulp.task('apidocs', function () {
     del(['./docs/api'], function() {
         gulp.src('./lib/**/*.js')
             .pipe(docco({'layout': 'linear'}))
-            .pipe(gulp.dest('./docs/api'));
+            .pipe(gulp.dest('./api-docs'));
     });
 });
 gulp.task('quality', function () {
