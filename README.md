@@ -1,5 +1,6 @@
 
 # <img src="./telegram.link.png" width="40"/> telegram.link 
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/enricostara/telegram.link?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![npm version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Climate Status][climate-image]][climate-url] [![Dependency Status][gemnasium-image]][gemnasium-url]
 [![Sauce Test Status][sauce-image]][sauce-url]
 
