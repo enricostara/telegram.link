@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>telegram.link.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>telegram.link.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <pre><code>telegram.link
+Copyright <span class="hljs-number">2014</span> Enrico Stara <span class="hljs-string">'enrico.stara@gmail.com'</span>
+Released under the MIT License
+https:<span class="hljs-comment">//github.com/enricostara/telegram-mt-node</span>
+</code></pre>
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>This module is the entry-point of <strong>Telegram.link</strong> library and provides the highest-level <strong>interface</strong> to communicate
+with the <strong>Telegram</strong> data-center. When you write your <em>telegram-like-app</em> you should deal only with this module.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>Writing your app, you should import the module as follows:</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <pre><code> <span class="hljs-keyword">var</span> telegramLink = <span class="hljs-built_in">require</span>(<span class="hljs-string">'telegram.link'</span>);
+</code></pre>
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <hr>
+<p><strong>Function:</strong> telegramLink.<strong>createClient(appId, primaryDC, [options], [connectionListener])</strong></p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>This function creates the Client and connects to the supplied primary Telegram data center address.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>When the Client connection is established the <code>connect</code> event will be emitted.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>Usage example:</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <pre><code> <span class="hljs-keyword">var</span> client = telegramLink.createClient(
+     appId, primaryDC,
+     { connectionType: <span class="hljs-string">'TCP'</span> },
+     <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(ex)</span></span>{
+         <span class="hljs-keyword">if</span>(!ex) { <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'connected!'</span>); }
+     }
+ );
+</code></pre>
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <ul>
+<li><strong>appId</strong>: is the application ID, you can get it your own at <a href="https://core.telegram.org/myapp">https://core.telegram.org/myapp</a> (Required).</li>
+<li><strong>primaryDC</strong>: the primary data center address, you could use <code>telegramLink.TEST_PRIMARY_DC</code> or
+<code>telegramLink.PROD_PRIMARY_DC</code>(Required)</li>
+<li><strong>options</strong>: this argument should be an object which specifies:<ul>
+<li><strong>connectionType</strong>: the value could be <code>HTTP</code> or <code>TCP</code>, HTTP is the default.</li>
+<li><strong>authKey</strong>: an authentication key, already persisted by your app, can be supplied here and the
+<code>authKeyCreate</code> event will be emitted when the connection will be established, after the the <code>connect</code> event.</li>
+</ul>
+</li>
+<li><strong>connectionListener</strong>: a callback function, it will be registered as listener on <code>connect</code> event.</li>
+</ul>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>The code:</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createClient</span><span class="hljs-params">(appId, primaryDC)</span> </span>{
+    <span class="hljs-keyword">var</span> args = <span class="hljs-built_in">arguments</span>;
+    <span class="hljs-keyword">var</span> options = {};
+    <span class="hljs-keyword">var</span> callback;
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> args[<span class="hljs-number">2</span>] === <span class="hljs-string">'object'</span>) {
+        options = args[<span class="hljs-number">2</span>];
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> args[<span class="hljs-number">3</span>] === <span class="hljs-string">'function'</span>) {
+            callback = args[<span class="hljs-number">3</span>];
+        }
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> args[<span class="hljs-number">2</span>] === <span class="hljs-string">'function'</span>) {
+        callback = args[<span class="hljs-number">2</span>];
+    }
+    <span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> Client(appId, primaryDC, options.authKey, options.connectionType);
+    <span class="hljs-keyword">if</span> (callback) {
+        client.once(exports.EVENT.CONNECT, callback);
+    }
+    connect.apply(client);
+    <span class="hljs-keyword">return</span> client;
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <hr>
+<p><strong>Class:</strong> telegramLink.<strong>Client</strong></p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>This class is a connection client to Telegram. Client instances implement the Telegram API.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              <p>They must be created by the <code>createClient()</code> method above and the following constructor cannot be called directly (Private).</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <p>The code :</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Client</span><span class="hljs-params">(appId, primaryDC, authKey, connectionType)</span> </span>{
+    <span class="hljs-keyword">this</span>._appId = appId;
+    <span class="hljs-keyword">this</span>._authKey = authKey;
+    <span class="hljs-keyword">this</span>._sessionId = utility.createNonce(<span class="hljs-number">8</span>);
+    <span class="hljs-keyword">if</span> (connectionType &amp;&amp; <span class="hljs-string">'TCP'</span> === connectionType) {
+        <span class="hljs-keyword">this</span>._connection = <span class="hljs-keyword">new</span> TcpConnection(primaryDC);
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">this</span>._connection = <span class="hljs-keyword">new</span> HttpConnection(primaryDC);
+    }
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
+              <p>Extend <code>events.EventEmitter</code> class</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">require</span>(<span class="hljs-string">'util'</span>).inherits(Client, <span class="hljs-built_in">require</span>(<span class="hljs-string">'events'</span>).EventEmitter);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-17">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-17">&#182;</a>
+              </div>
+              <hr>
+<p>client.<strong>createAuthKey([callback])</strong></p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-18">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-18">&#182;</a>
+              </div>
+              <p>This method exchanges the authorization key with Telegram, see <a href="https://core.telegram.org/mtproto/auth_key">https://core.telegram.org/mtproto/auth_key</a></p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-19">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-19">&#182;</a>
+              </div>
+              <p>This function is asynchronous. When the authKey is exchanged ‘authKeyCreate’ event will be emitted.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-20">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-20">&#182;</a>
+              </div>
+              <p>The last parameter callback will be added as an listener for the ‘authKeyExchanged’ event, the callback
+could receive the following arguments:</p>
+<ul>
+<li><strong>error</strong>: the error if an exception occurs, null otherwise.</li>
+<li><strong>authKey</strong>: the authentication key exchanged with Telegram</li>
+</ul>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-21">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-21">&#182;</a>
+              </div>
+              <p>The code:</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Client.prototype.createAuthKey = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(callback)</span> </span>{
+    <span class="hljs-keyword">this</span>.once(exports.EVENT.AUTH_KEY_CREATE, callback);
+    auth.createAuthKey(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(ex, authKey)</span> </span>{
+        <span class="hljs-keyword">if</span> (ex) {
+            <span class="hljs-keyword">this</span>.emit(exports.EVENT.ERROR, ex);
+        } <span class="hljs-keyword">else</span> {
+            <span class="hljs-keyword">this</span>.emit(exports.EVENT.AUTH_KEY_CREATE, authKey);
+        }
+    }.bind(<span class="hljs-keyword">this</span>), <span class="hljs-keyword">this</span>._connection);
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-22">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-22">&#182;</a>
+              </div>
+              <hr>
+<p>client.<strong>end([callback])</strong></p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-23">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-23">&#182;</a>
+              </div>
+              <p>This method closes the communication with the DataCenter,</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-24">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-24">&#182;</a>
+              </div>
+              <p>The last parameter <strong>callback</strong> will be added as a listener for the <code>end</code> event</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-25">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-25">&#182;</a>
+              </div>
+              <p>The code:</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Client.prototype.end = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(callback)</span> </span>{
+    <span class="hljs-keyword">this</span>._connection.close(callback);
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-26">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-26">&#182;</a>
+              </div>
+              <hr>
+<p>connect()</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-27">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-27">&#182;</a>
+              </div>
+              <p>This method establishes the connection to the data center (Private)</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-28">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-28">&#182;</a>
+              </div>
+              <p>The code:</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">connect</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">this</span>._connection.connect(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(ex)</span> </span>{
+        <span class="hljs-keyword">if</span> (ex) {
+            <span class="hljs-keyword">this</span>.emit(exports.EVENT.ERROR, ex);
+        } <span class="hljs-keyword">else</span> {
+            <span class="hljs-keyword">this</span>.emit(exports.EVENT.CONNECT);
+        }
+    }.bind(<span class="hljs-keyword">this</span>));
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-29">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-29">&#182;</a>
+              </div>
+              <hr>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-30">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-30">&#182;</a>
+              </div>
+              <p>Print the library version</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> staticInfo = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./static'</span>);
+<span class="hljs-built_in">console</span>.log(staticInfo.signature);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">'v.%s'</span>, <span class="hljs-built_in">require</span>(<span class="hljs-string">'../package.json'</span>).version);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-31">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-31">&#182;</a>
+              </div>
+              <p>Import the dependencies</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> auth = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./auth'</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-32">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-32">&#182;</a>
+              </div>
+              <p>var flow = require(‘get-flow’);</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> telegramMt = <span class="hljs-built_in">require</span>(<span class="hljs-string">'telegram-mt-node'</span>);
+<span class="hljs-keyword">var</span> utility = telegramMt.utility;
+<span class="hljs-keyword">var</span> TcpConnection = telegramMt.net.TcpConnection;
+<span class="hljs-keyword">var</span> HttpConnection = telegramMt.net.HttpConnection;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-33">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-33">&#182;</a>
+              </div>
+              <p>Register the project name on the logging system</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> getLogger = <span class="hljs-built_in">require</span>(<span class="hljs-string">'get-log'</span>);
+getLogger.PROJECT_NAME = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../package.json'</span>).name;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-34">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-34">&#182;</a>
+              </div>
+              <p>Export the internals</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>exports.createClient = createClient;
+exports.TEST_PRIMARY_DC = staticInfo.telegram.test.primaryDataCenter;
+exports.PROD_PRIMARY_DC = staticInfo.telegram.prod.primaryDataCenter;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-35">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-35">&#182;</a>
+              </div>
+              <p>Export the event name</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>exports.EVENT = {
+    ERROR: <span class="hljs-string">'error'</span>,
+    CONNECT: <span class="hljs-string">'connect'</span>,
+    AUTH_KEY_CREATE: <span class="hljs-string">'authKeyCreate'</span>
+};</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
