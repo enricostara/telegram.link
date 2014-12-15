@@ -25,6 +25,14 @@ test
 # Generated docs files
 docs
 
+# Logo
+telegram.link.png
+
+# Dev-Config
+*.yml
+.npmignore
+gulpfile.js
+
 # Users Environment Variables
 .lock-wscript
 
