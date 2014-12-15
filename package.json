@@ -1,6 +1,6 @@
 {
     "name": "telegram.link",
-    "version": "0.2.2",
+    "version": "0.2.3",
     "description": "Telegram API library",
     "keywords": [
         "telegram",
@@ -16,12 +16,13 @@
     "bugs": {
         "url": "https://github.com/enricostara/telegram.link/issues"
     },
-    "license": "MIT",
     "dependencies": {
-        "telegram-mt-node": "latest",
+        "get-flow": "latest",
         "get-log": "latest",
-        "get-flow": "latest"
+        "requirish": "latest",
+        "telegram-mt-node": "latest"
     },
+    "license": "MIT",
     "devDependencies": {
         "gulp": "latest",
         "gulp-jshint": "latest",
@@ -42,7 +43,7 @@
         "node": "0.10.x"
     },
     "scripts": {
-        "test": "DEBUG=-mocha*,* gulp test",
+        "test": "DEBUG=-mocha*,-TypeBuilder,* gulp test",
         "coveralls": "DEBUG=-mocha*,* istanbul cover ./node_modules/gulp/bin/gulp.js cover && cat ./coverage/lcov.info | coveralls && codeclimate < ./coverage/lcov.info && rm -rf ./coverage",
         "zuul": "zuul -- ./test/**"
     }
