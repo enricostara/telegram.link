@@ -15,7 +15,7 @@
 **telegram.link** is an unofficial **porting in javascript** of the [Telegram Application Programming Interface](https://core.telegram.org/api).
  
 **telegram.link** library enables to **write once**  a **client-application** (whole or only the communication part) that
-runs both on **mobile and desktop browsers** and also on a **Node.js server**  and connect to the**Telegram data-centers**
+runs both on **mobile and desktop browsers** and also on a **Node.js server**  and connect to the **Telegram data-centers**
 via standard [protocol](https://core.telegram.org/mtproto) and API.
 
 
@@ -46,12 +46,22 @@ TypeLanguage types represent the **building blocks of the Telegram protocol**.
 
 - [get-log](https://github.com/enricostara/get-log): a Node.js logging utility, easy to use and ready for production environment.
 
+- [requirish](https://github.com/enricostara/requirish): a tool for avoiding the ../../../ relative paths problem, includes a
+browserify-transform to rewrites the require() for browser.
+
 ## Installation
 
+To get the complete package:
 ```bash
 $ git clone --branch=master git://github.com/enricostara/telegram.link.git
 $ cd telegram.link
 $ npm install
+```
+
+To install the library as dependency for your app (no tests, no docs, no dev files.. only pure code!):
+```bash
+$ cd YourApp
+$ npm install --save telegram.link
 ```
 
 ## Unit Testing 
@@ -62,12 +72,8 @@ $ npm test
 ```
 ## Documentation
 
-You can generate the api documentation executing the following command in the project-root folder: 
-```bash
-$ gulp apidocs
-```
-All the generated docs will be available under the `telegram.link/api-docs/` folder
-
+The api documentation is generated under the _docs/_ and folder parsing the main module `telegram.link.js`,
+you can browse it [here](https://cdn.rawgit.com/enricostara/telegram.link/master/docs/telegram.link.html). 
 
 ### About Telegram.. 
 
@@ -84,7 +90,7 @@ are available from independent developers using the **Telegram API**
 Node.js applications are written in JavaScript, and can be run within the Node.js runtime on OS X, Microsoft Windows and 
 Linux with no changes ([from Wikipedia](http://en.wikipedia.org/wiki/Node.js)).
 
-### About the telegram.link logo  <img src="./telegram.link.png" width="25"/>..
+### About the  <img src="./telegram.link.png" width="25"/> telegram.link logo  ..
 
 Logo crafted by [Diego Pasquali](http://dribbble.com/diegopq)
 
