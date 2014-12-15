@@ -17,12 +17,12 @@ gulp.task('quality', function () {
         .pipe(jshint.reporter('default'));
 });
 gulp.task('test', function () {
-    return gulp.src('./test/*.js')
+    return gulp.src('./test/telegram.link.test.js')
         .pipe(mocha({reporter: 'mocha-better-spec-reporter', timeout: '20s'}));
 });
 
 gulp.task('cover', function () {
-    return gulp.src('./test/*.js')
+    return gulp.src('./test/telegram.link.test.js')
         .pipe(mocha({reporter: 'mocha-lcov-reporter', timeout: '120s'}));
 });
 
