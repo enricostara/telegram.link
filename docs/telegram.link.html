@@ -481,6 +481,7 @@ could receive the following arguments:</p>
                 <a class="pilcrow" href="#section-29">&#182;</a>
               </div>
               <hr>
+<p><strong>Event: ‘connect’</strong></p>
 
             </div>
             
@@ -493,13 +494,9 @@ could receive the following arguments:</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-30">&#182;</a>
               </div>
-              <p>Print the library version</p>
+              <p>Emitted when the client connection is successfully established. See connect().</p>
 
             </div>
-            
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> staticInfo = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./static'</span>);
-<span class="hljs-built_in">console</span>.log(staticInfo.signature);
-<span class="hljs-built_in">console</span>.log(<span class="hljs-string">'v.%s'</span>, <span class="hljs-built_in">require</span>(<span class="hljs-string">'../package.json'</span>).version);</pre></div></div>
             
         </li>
         
@@ -510,11 +507,9 @@ could receive the following arguments:</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-31">&#182;</a>
               </div>
-              <p>Import the dependencies</p>
+              <p><strong>Event: ‘authKeyCreate’</strong></p>
 
             </div>
-            
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> auth = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./auth'</span>);</pre></div></div>
             
         </li>
         
@@ -525,14 +520,9 @@ could receive the following arguments:</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-32">&#182;</a>
               </div>
-              <p>var flow = require(‘get-flow’);</p>
+              <p>Emitted when the  authKey is successfully created. See client.<strong>createAuthKey()</strong>.</p>
 
             </div>
-            
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> telegramMt = <span class="hljs-built_in">require</span>(<span class="hljs-string">'telegram-mt-node'</span>);
-<span class="hljs-keyword">var</span> utility = telegramMt.utility;
-<span class="hljs-keyword">var</span> TcpConnection = telegramMt.net.TcpConnection;
-<span class="hljs-keyword">var</span> HttpConnection = telegramMt.net.HttpConnection;</pre></div></div>
             
         </li>
         
@@ -543,12 +533,9 @@ could receive the following arguments:</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-33">&#182;</a>
               </div>
-              <p>Register the project name on the logging system</p>
+              <p><strong>Event: ‘end’</strong></p>
 
             </div>
-            
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> getLogger = <span class="hljs-built_in">require</span>(<span class="hljs-string">'get-log'</span>);
-getLogger.PROJECT_NAME = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../package.json'</span>).name;</pre></div></div>
             
         </li>
         
@@ -558,6 +545,78 @@ getLogger.PROJECT_NAME = <span class="hljs-built_in">require</span>(<span class=
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-34">&#182;</a>
+              </div>
+              <p>Emitted when the data center close the connection. See client.<strong>end()</strong>.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-35">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-35">&#182;</a>
+              </div>
+              <p><strong>Event: ‘error’</strong></p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-36">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-36">&#182;</a>
+              </div>
+              <p>Emitted when an error occurs.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-37">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-37">&#182;</a>
+              </div>
+              <hr>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-38">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-38">&#182;</a>
+              </div>
+              <p>Export the event names:</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>exports.EVENT = {
+    ERROR: <span class="hljs-string">'error'</span>,
+    CONNECT: <span class="hljs-string">'connect'</span>,
+    AUTH_KEY_CREATE: <span class="hljs-string">'authKeyCreate'</span>,
+    END: <span class="hljs-string">'end'</span>
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-39">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-39">&#182;</a>
               </div>
               <p>Export the internals</p>
 
@@ -570,21 +629,80 @@ exports.PROD_PRIMARY_DC = staticInfo.telegram.prod.primaryDataCenter;</pre></div
         </li>
         
         
-        <li id="section-35">
+        <li id="section-40">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-35">&#182;</a>
+                <a class="pilcrow" href="#section-40">&#182;</a>
               </div>
-              <p>Export the event name</p>
+              <hr>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>exports.EVENT = {
-    ERROR: <span class="hljs-string">'error'</span>,
-    CONNECT: <span class="hljs-string">'connect'</span>,
-    AUTH_KEY_CREATE: <span class="hljs-string">'authKeyCreate'</span>
-};</pre></div></div>
+        </li>
+        
+        
+        <li id="section-41">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-41">&#182;</a>
+              </div>
+              <p>Print the library version</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> staticInfo = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./static'</span>);
+<span class="hljs-built_in">console</span>.log(staticInfo.signature);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">'v.%s'</span>, <span class="hljs-built_in">require</span>(<span class="hljs-string">'../package.json'</span>).version);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-42">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-42">&#182;</a>
+              </div>
+              <p>Register the project name on the logging system</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> getLogger = <span class="hljs-built_in">require</span>(<span class="hljs-string">'get-log'</span>);
+getLogger.PROJECT_NAME = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../package.json'</span>).name;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-43">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-43">&#182;</a>
+              </div>
+              <hr>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-44">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-44">&#182;</a>
+              </div>
+              <p>Import the dependencies</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> auth = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./auth'</span>);
+<span class="hljs-keyword">var</span> telegramMt = <span class="hljs-built_in">require</span>(<span class="hljs-string">'telegram-mt-node'</span>);
+<span class="hljs-keyword">var</span> utility = telegramMt.utility;
+<span class="hljs-keyword">var</span> TcpConnection = telegramMt.net.TcpConnection;
+<span class="hljs-keyword">var</span> HttpConnection = telegramMt.net.HttpConnection;</pre></div></div>
             
         </li>
         
