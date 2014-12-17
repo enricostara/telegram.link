@@ -34,16 +34,50 @@ describe('TelegramLink', function () {
     describe('#createClient()', function () {
         it('should callback on the TCP connection event', function (done) {
             var client = telegramLink.createClient(appId, primaryDC, {connectionType: 'TCP'}, function () {
-                client.end();
-                done();
+                client.end(done);
             });
-            client.on(telegramLink.EVENT.ERROR, function(ex){
+            client.on(telegramLink.EVENT.ERROR, function (ex) {
                 console.log(ex);
+                done();
             })
         });
     });
 
-    require('./telegram.link.createAuthKey.test');
+    describe('#createAuthKey()', function () {
+        var auth = require('telegram-mt-node').auth;
+        auth.createAuthKey = function (callback, connection) {
+            setTimeout(function () {
+                if (connection) {
+                    callback(null, new auth.AuthKey('id', 'value', 'serverSalt'));
 
+                } else {
+                    callback(new Error('no connection'));
+                }
+            }, 0);
+        };
+        it('should returns AuthKey', function (done) {
+            var client = telegramLink.createClient(appId, primaryDC, function () {
+                console.log('%s connected', client);
+                client.createAuthKey(function (authKey) {
+                    authKey.should.be.ok;
+                    console.log('Auth key OK: %s', authKey.toString());
+                    client.end(done);
+                });
+            });
+        });
+        it('should returns an error', function (done) {
+            var client = telegramLink.createClient(appId, primaryDC, function () {
+                var conn = client._connection;
+                client._connection = null;
+                client.createAuthKey(function () {
+                });
+                client.once(telegramLink.EVENT.ERROR, function (ex) {
+                    console.log('Error: %s', ex);
+                    ex.should.be.ok;
+                    client._connection = conn;
+                    client.end(done);
+                });
+            });
+        });
+    });
 });
-
