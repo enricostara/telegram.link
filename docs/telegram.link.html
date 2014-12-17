@@ -354,7 +354,9 @@ could receive the following arguments:</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>Client.prototype.createAuthKey = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(callback)</span> </span>{
-    <span class="hljs-keyword">this</span>.once(exports.EVENT.AUTH_KEY_CREATE, callback);
+    <span class="hljs-keyword">if</span>(callback) {
+        <span class="hljs-keyword">this</span>.once(exports.EVENT.AUTH_KEY_CREATE, callback);
+    }
     auth.createAuthKey(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(ex, authKey)</span> </span>{
         <span class="hljs-keyword">if</span> (ex) {
             <span class="hljs-keyword">this</span>.emit(exports.EVENT.ERROR, ex);
@@ -418,7 +420,16 @@ could receive the following arguments:</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>Client.prototype.end = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(callback)</span> </span>{
-    <span class="hljs-keyword">this</span>._connection.close(callback);
+    <span class="hljs-keyword">if</span>(callback) {
+        <span class="hljs-keyword">this</span>.once(exports.EVENT.END, callback);
+    }
+    <span class="hljs-keyword">this</span>._connection.close(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(ex)</span> </span>{
+        <span class="hljs-keyword">if</span> (ex) {
+            <span class="hljs-keyword">this</span>.emit(exports.EVENT.ERROR, ex);
+        } <span class="hljs-keyword">else</span> {
+            <span class="hljs-keyword">this</span>.emit(exports.EVENT.END);
+        }
+    }.bind(<span class="hljs-keyword">this</span>));
 };</pre></div></div>
             
         </li>
@@ -623,6 +634,7 @@ could receive the following arguments:</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>exports.createClient = createClient;
+<span class="hljs-keyword">var</span> staticInfo = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./static'</span>);
 exports.TEST_PRIMARY_DC = staticInfo.telegram.test.primaryDataCenter;
 exports.PROD_PRIMARY_DC = staticInfo.telegram.prod.primaryDataCenter;</pre></div></div>
             
@@ -652,8 +664,7 @@ exports.PROD_PRIMARY_DC = staticInfo.telegram.prod.primaryDataCenter;</pre></div
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> staticInfo = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./static'</span>);
-<span class="hljs-built_in">console</span>.log(staticInfo.signature);
+            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">console</span>.log(staticInfo.signature);
 <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'v.%s'</span>, <span class="hljs-built_in">require</span>(<span class="hljs-string">'../package.json'</span>).version);</pre></div></div>
             
         </li>
@@ -698,8 +709,8 @@ getLogger.PROJECT_NAME = <span class="hljs-built_in">require</span>(<span class=
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> auth = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./auth'</span>);
-<span class="hljs-keyword">var</span> telegramMt = <span class="hljs-built_in">require</span>(<span class="hljs-string">'telegram-mt-node'</span>);
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> telegramMt = <span class="hljs-built_in">require</span>(<span class="hljs-string">'telegram-mt-node'</span>);
+<span class="hljs-keyword">var</span> auth = telegramMt.auth;
 <span class="hljs-keyword">var</span> utility = telegramMt.utility;
 <span class="hljs-keyword">var</span> TcpConnection = telegramMt.net.TcpConnection;
 <span class="hljs-keyword">var</span> HttpConnection = telegramMt.net.HttpConnection;</pre></div></div>
