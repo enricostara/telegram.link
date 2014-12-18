@@ -1,6 +1,6 @@
 
 # <img src="./telegram.link.png" width="40"/> telegram.link 
-[![npm version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Climate Status][climate-image]][climate-url] [![Dependency Status][gemnasium-image]][gemnasium-url]
+[![npm version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coverage-image]][coverage-url] [![Climate Status][climate-image]][climate-url] [![Dependency Status][gemnasium-image]][gemnasium-url]
 [![Sauce Test Status][sauce-image]][sauce-url]
 
 
