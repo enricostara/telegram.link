@@ -73,7 +73,7 @@ $ npm test
 ## Documentation
 
 The api documentation is generated under the _docs/_ folder, parsing the main module `telegram.link.js`,
-you can [browse it here](https://cdn.rawgit.com/enricostara/telegram.link/master/docs/telegram.link.html). 
+you can [browse it here](https://rawgit.com/enricostara/telegram.link/master/docs/telegram.link.html). 
 
 ### About Telegram.. 
 
