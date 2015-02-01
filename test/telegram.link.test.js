@@ -45,22 +45,27 @@ describe('TelegramLink', function () {
 
     describe('#createAuthKey()', function () {
         var auth = require('telegram-mt-node').auth;
-        auth.createAuthKey = function (callback, connection) {
+        // mock the 'createAuthKey' function
+        auth.createAuthKey = function (callback, channel) {
             setTimeout(function () {
-                if (connection) {
-                    callback(null, new auth.AuthKey('id', 'value', 'serverSalt'));
+                if (channel) {
+                    callback(null, {
+                        key: new auth.AuthKey('id', 'value'),
+                        serverSalt: 'serverSalt'
+                    });
 
                 } else {
-                    callback(new Error('no connection'));
+                    callback(new Error('no channel'));
                 }
             }, 0);
         };
         it('should returns AuthKey', function (done) {
             var client = telegramLink.createClient(appId, primaryDC, function () {
                 console.log('%s connected', client);
-                client.createAuthKey(function (authKey) {
-                    authKey.should.be.ok;
-                    console.log('Auth key OK: %s', authKey.toString());
+                client.createAuthKey(function (auth) {
+                    auth.key.should.be.ok;
+                    auth.serverSalt.should.be.ok;
+                    console.log('Auth key OK: %s', auth.key.toString());
                     client.end(done);
                 });
             });
@@ -69,13 +74,13 @@ describe('TelegramLink', function () {
             var client = telegramLink.createClient(appId, primaryDC, function () {
                 var conn = client._connection;
                 client._connection = null;
-                client.createAuthKey(function () {
-                });
                 client.once(telegramLink.EVENT.ERROR, function (ex) {
                     console.log('Error: %s', ex);
                     ex.should.be.ok;
                     client._connection = conn;
                     client.end(done);
+                });
+                client.createAuthKey(function () {
                 });
             });
         });
