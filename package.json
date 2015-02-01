@@ -1,6 +1,6 @@
 {
     "name": "telegram.link",
-    "version": "0.2.4",
+    "version": "0.2.5",
     "description": "Telegram API library",
     "keywords": [
         "telegram",
@@ -31,7 +31,7 @@
         "del": "latest",
         "should": "latest",
         "mocha": "latest",
-        "mocha-better-spec-reporter": "latest",
+        "mocha-better-spec-reporter": "1.x",
         "mocha-lcov-reporter": "latest",
         "coveralls": "latest",
         "codeclimate-test-reporter": "latest",
