@@ -1,5 +1,6 @@
 {
-  "constructors": [{
+  "constructors": [
+    {
     "id": "-1132882121",
     "predicate": "boolFalse",
     "params": [],
@@ -3457,7 +3458,8 @@
     }],
     "type": "messages.AllStickers"
   }],
-  "methods": [{
+  "methods": [
+    {
     "id": "-878758099",
     "method": "invokeAfterMsg",
     "params": [{
