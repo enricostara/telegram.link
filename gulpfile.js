@@ -5,7 +5,7 @@ var docco = require('gulp-docco');
 var del = require('del');
 
 gulp.task('docs', function () {
-    del(['./docs'], function() {
+    del(['./docs'], function () {
         gulp.src('./lib/telegram.link.js')
             .pipe(docco(/*{'layout': 'linear'}*/))
             .pipe(gulp.dest('./docs'));
