@@ -1,50 +1,51 @@
 {
-    "name": "telegram.link",
-    "version": "0.2.5",
-    "description": "Telegram API library",
-    "keywords": [
-        "telegram",
-        "api",
-        "library"
-    ],
-    "author": "Enrico Stara <enrico.stara@gmail.com>",
-    "homepage": "http://telegram.link",
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/enricostara/telegram.link.git"
-    },
-    "bugs": {
-        "url": "https://github.com/enricostara/telegram.link/issues"
-    },
-    "dependencies": {
-        "get-flow": "latest",
-        "get-log": "latest",
-        "requirish": "latest",
-        "telegram-mt-node": "latest"
-    },
-    "license": "MIT",
-    "devDependencies": {
-        "gulp": "latest",
-        "gulp-jshint": "latest",
-        "gulp-mocha": "latest",
-        "gulp-docco": "latest",
-        "del": "latest",
-        "should": "latest",
-        "mocha": "latest",
-        "mocha-better-spec-reporter": "1.x",
-        "mocha-lcov-reporter": "latest",
-        "coveralls": "latest",
-        "codeclimate-test-reporter": "latest",
-        "istanbul": "latest",
-        "zuul": "latest"
-    },
-    "main": "./lib/telegram.link",
-    "engines": {
-        "node": "0.10.x"
-    },
-    "scripts": {
-        "test": "DEBUG=-mocha*,-TypeBuilder,* gulp test",
-        "coveralls": "DEBUG=-mocha*,* istanbul cover ./node_modules/gulp/bin/gulp.js cover && cat ./coverage/lcov.info | coveralls && codeclimate < ./coverage/lcov.info && rm -rf ./coverage",
-        "zuul": "zuul -- ./test/**"
-    }
+  "name": "telegram.link",
+  "version": "0.2.6",
+  "description": "Telegram API library",
+  "keywords": [
+    "telegram",
+    "api",
+    "library"
+  ],
+  "author": "Enrico Stara <enrico.stara@gmail.com>",
+  "homepage": "http://telegram.link",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/enricostara/telegram.link.git"
+  },
+  "bugs": {
+    "url": "https://github.com/enricostara/telegram.link/issues"
+  },
+  "dependencies": {
+    "get-flow": "latest",
+    "get-log": "latest",
+    "requirish": "latest",
+    "telegram-mt-node": "latest",
+    "colors": "latest"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "latest",
+    "gulp-jshint": "latest",
+    "gulp-mocha": "latest",
+    "gulp-docco": "latest",
+    "del": "latest",
+    "should": "latest",
+    "mocha": "latest",
+    "mocha-better-spec-reporter": "1.x",
+    "mocha-lcov-reporter": "latest",
+    "coveralls": "latest",
+    "codeclimate-test-reporter": "latest",
+    "istanbul": "latest",
+    "zuul": "latest"
+  },
+  "main": "./lib/telegram.link",
+  "engines": {
+    "node": ">0.10.30"
+  },
+  "scripts": {
+    "test": "DEBUG=-mocha*,-TypeBuilder,* ./node_modules/gulp/bin/gulp.js test",
+    "coveralls": "DEBUG=-mocha*,* istanbul cover ./node_modules/gulp/bin/gulp.js cover && cat ./coverage/lcov.info | coveralls && codeclimate < ./coverage/lcov.info && rm -rf ./coverage",
+    "zuul": "zuul -- ./test/**"
+  }
 }
