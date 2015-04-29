@@ -1,6 +1,6 @@
 {
   "name": "telegram.link",
-  "version": "0.2.6",
+  "version": "0.3.0",
   "description": "Telegram API library",
   "keywords": [
     "telegram",
@@ -20,6 +20,7 @@
     "get-flow": "latest",
     "get-log": "latest",
     "requirish": "latest",
+    "telegram-tl-node": "latest",
     "telegram-mt-node": "latest",
     "colors": "latest"
   },
@@ -46,6 +47,7 @@
   "scripts": {
     "test": "DEBUG=-mocha*,-TypeBuilder,* ./node_modules/gulp/bin/gulp.js test",
     "coveralls": "DEBUG=-mocha*,* istanbul cover ./node_modules/gulp/bin/gulp.js cover && cat ./coverage/lcov.info | coveralls && codeclimate < ./coverage/lcov.info && rm -rf ./coverage",
-    "zuul": "zuul -- ./test/**"
+    "zuul": "zuul -- ./test/**",
+    "doc": "./node_modules/gulp/bin/gulp.js doc"
   }
 }
