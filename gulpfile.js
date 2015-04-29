@@ -4,11 +4,11 @@ var mocha = require('gulp-mocha');
 var docco = require('gulp-docco');
 var del = require('del');
 
-gulp.task('docs', function () {
-    del(['./docs'], function () {
+gulp.task('doc', function () {
+    del(['./doc'], function () {
         gulp.src('./lib/telegram.link.js')
             .pipe(docco(/*{'layout': 'linear'}*/))
-            .pipe(gulp.dest('./docs'));
+            .pipe(gulp.dest('./doc'));
     });
 });
 gulp.task('quality', function () {

@@ -23,7 +23,7 @@ build/Release
 test
 
 # Generated docs files
-docs
+doc
 
 # Logo
 telegram.link.png
