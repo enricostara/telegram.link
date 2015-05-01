@@ -70,6 +70,13 @@ You can run unit-test executing the following command in the project-root folder
 ```bash
 $ npm test
 ```
+## HowTo 
+
+To start with the **telegram.link** library, you can install and study the [Termgram](http://termgram.me) application.
+**Termgram** is a terminal client to connect with Telegram and uses all the features currently available in **telegram.link**.
+The source code is quite straightforward and you'll be able to take inspiration to build your own application!
+As soon as a new feature will be available in **telegram.link** it will be exploited by **Termgram**. 
+
 ## Documentation
 
 The api documentation is generated under the _docs/_ folder, parsing the main module `telegram.link.js`,
