@@ -79,7 +79,7 @@ As soon as a new feature will be available in **telegram.link** it will be explo
 
 ## Documentation
 
-The api documentation is generated under the _docs/_ folder, parsing the main module `telegram.link.js`,
+The api documentation is generated under the _doc/_ folder, parsing the main module `telegram.link.js`,
 you can [browse it here](https://rawgit.com/enricostara/telegram.link/master/doc/telegram.link.html). 
 
 ### About Telegram.. 
