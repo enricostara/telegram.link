@@ -2,6 +2,7 @@ require('should');
 require('requirish')._(module);
 var telegramLink = require('lib/telegram.link')();
 var net = require('telegram-mt-node').net;
+var api = require('lib/api');
 
 
 describe('TelegramLink', function () {
@@ -53,7 +54,7 @@ describe('TelegramLink', function () {
             app.connectionType = 'TCP';
             var client = telegramLink.createClient(app, primaryDC, function () {
                 client._connection.should.be.an.instanceOf(net.TcpConnection);
-                client.end(function() {
+                client.end(function () {
                     done();
                 });
             });
@@ -107,6 +108,31 @@ describe('TelegramLink', function () {
                 });
                 client.createAuthKey(function () {
                 });
+            });
+        });
+    });
+
+    describe('#sendCodeToPhone()', function () {
+        api.service.auth.sendCode = function (input) {
+            input.callback(null, true);
+        };
+        it('should returns ok', function (done) {
+            var client = telegramLink.createClient({authKey: {}}, primaryDC, function () {
+                client.sendCodeToPhone('1234', function (result) {
+                    result.should.be.ok;
+                    done();
+                })
+            });
+        });
+        it('should returns error', function (done) {
+            var client = telegramLink.createClient({}, primaryDC, function () {
+                client.once(telegramLink.EVENT.ERROR, function (ex) {
+                    console.log('Error: %s', ex);
+                    ex.should.be.ok;
+                    client.end(done);
+                });
+                client.sendCodeToPhone('1234', function () {
+                })
             });
         });
     });
