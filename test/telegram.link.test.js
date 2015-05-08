@@ -58,7 +58,7 @@ describe('TelegramLink', function () {
                     done();
                 });
             });
-            client.on(telegramLink.EVENT.ERROR, function (ex) {
+            client.on('error', function (ex) {
                 console.error(ex);
                 done();
             })
@@ -100,7 +100,7 @@ describe('TelegramLink', function () {
             var client = telegramLink.createClient(app, primaryDC, function () {
                 var conn = client._connection;
                 client._connection = null;
-                client.once(telegramLink.EVENT.ERROR, function (ex) {
+                client.once('error', function (ex) {
                     console.log('Error: %s', ex);
                     ex.should.be.ok;
                     client._connection = conn;
@@ -126,7 +126,7 @@ describe('TelegramLink', function () {
         });
         it('should returns error', function (done) {
             var client = telegramLink.createClient({}, primaryDC, function () {
-                client.once(telegramLink.EVENT.ERROR, function (ex) {
+                client.once('error', function (ex) {
                     console.log('Error: %s', ex);
                     ex.should.be.ok;
                     client.end(done);
