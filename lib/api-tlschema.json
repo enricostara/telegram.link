@@ -2064,25 +2064,6 @@
       "type": "messages.Message"
     },
     {
-      "id": "-7289833",
-      "predicate": "messages.message",
-      "params": [
-        {
-          "name": "message",
-          "type": "Message"
-        },
-        {
-          "name": "chats",
-          "type": "Vector<Chat>"
-        },
-        {
-          "name": "users",
-          "type": "Vector<User>"
-        }
-      ],
-      "type": "messages.Message"
-    },
-    {
       "id": "-1768654661",
       "predicate": "messages.statedMessages",
       "params": [
@@ -2302,21 +2283,6 @@
     {
       "id": "-1456734682",
       "predicate": "updateDeleteMessages",
-      "params": [
-        {
-          "name": "messages",
-          "type": "Vector<int>"
-        },
-        {
-          "name": "pts",
-          "type": "int"
-        }
-      ],
-      "type": "Update"
-    },
-    {
-      "id": "-782376883",
-      "predicate": "updateRestoreMessages",
       "params": [
         {
           "name": "messages",
@@ -2833,11 +2799,15 @@
       "type": "DcOption"
     },
     {
-      "id": "777313652",
+      "id": "2108568544",
       "predicate": "config",
       "params": [
         {
           "name": "date",
+          "type": "int"
+        },
+        {
+          "name": "expires",
           "type": "int"
         },
         {
@@ -2853,12 +2823,20 @@
           "type": "Vector<DcOption>"
         },
         {
+          "name": "chat_big_size",
+          "type": "int"
+        },
+        {
           "name": "chat_size_max",
           "type": "int"
         },
         {
           "name": "broadcast_size_max",
           "type": "int"
+        },
+        {
+          "name": "disabled_features",
+          "type": "Vector<DisabledFeature>"
         }
       ],
       "type": "Config"
@@ -4464,36 +4442,6 @@
       "type": "Update"
     },
     {
-      "id": "1467017129",
-      "predicate": "account.noPassword",
-      "params": [
-        {
-          "name": "new_salt",
-          "type": "bytes"
-        }
-      ],
-      "type": "account.Password"
-    },
-    {
-      "id": "1939758962",
-      "predicate": "account.password",
-      "params": [
-        {
-          "name": "current_salt",
-          "type": "bytes"
-        },
-        {
-          "name": "new_salt",
-          "type": "bytes"
-        },
-        {
-          "name": "hint",
-          "type": "string"
-        }
-      ],
-      "type": "account.Password"
-    },
-    {
       "id": "1815593308",
       "predicate": "documentAttributeImageSize",
       "params": [
@@ -4621,6 +4569,21 @@
         }
       ],
       "type": "messages.AllStickers"
+    },
+    {
+      "id": "-1369215196",
+      "predicate": "disabledFeature",
+      "params": [
+        {
+          "name": "feature",
+          "type": "string"
+        },
+        {
+          "name": "description",
+          "type": "string"
+        }
+      ],
+      "type": "DisabledFeature"
     }
   ],
   "methods": [
@@ -5217,17 +5180,6 @@
     {
       "id": "351460618",
       "method": "messages.deleteMessages",
-      "params": [
-        {
-          "name": "id",
-          "type": "Vector<int>"
-        }
-      ],
-      "type": "Vector<int>"
-    },
-    {
-      "id": "962567550",
-      "method": "messages.restoreMessages",
       "params": [
         {
           "name": "id",
@@ -6274,46 +6226,6 @@
       "type": "User"
     },
     {
-      "id": "1418342645",
-      "method": "account.getPassword",
-      "params": [],
-      "type": "account.Password"
-    },
-    {
-      "id": "-584430193",
-      "method": "account.setPassword",
-      "params": [
-        {
-          "name": "current_password_hash",
-          "type": "bytes"
-        },
-        {
-          "name": "new_salt",
-          "type": "bytes"
-        },
-        {
-          "name": "new_password_hash",
-          "type": "bytes"
-        },
-        {
-          "name": "hint",
-          "type": "string"
-        }
-      ],
-      "type": "Bool"
-    },
-    {
-      "id": "174260510",
-      "method": "auth.checkPassword",
-      "params": [
-        {
-          "name": "password_hash",
-          "type": "bytes"
-        }
-      ],
-      "type": "auth.Authorization"
-    },
-    {
       "id": "-1373446075",
       "method": "messages.getStickers",
       "params": [
@@ -6338,6 +6250,17 @@
         }
       ],
       "type": "messages.AllStickers"
+    },
+    {
+      "id": "954152242",
+      "method": "account.updateDeviceLocked",
+      "params": [
+        {
+          "name": "period",
+          "type": "int"
+        }
+      ],
+      "type": "Bool"
     }
   ]
 }
