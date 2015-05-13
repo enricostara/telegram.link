@@ -136,4 +136,33 @@ describe('TelegramLink', function () {
             });
         });
     });
+
+    describe('#getDataCenters()', function () {
+        api.service.help.getConfig = function (input) {
+            input.callback(null, {dc_options: {list: [{id: 1}]}});
+        };
+        api.service.help.getNearestDc = function (input) {
+            input.callback(null, {this_dc: 1, nearest_dc: 1});
+        };
+        it('should returns ok', function (done) {
+            var client = telegramLink.createClient({authKey: {}}, primaryDC, function () {
+                client.getDataCenters(function (result) {
+                    result.should.be.ok;
+                    result.should.have.properties(['DC_1', 'current', 'nearest']);
+                    done();
+                })
+            });
+        });
+        it('should returns error', function (done) {
+            var client = telegramLink.createClient({}, primaryDC, function () {
+                client.once('error', function (ex) {
+                    console.log('Error: %s', ex);
+                    ex.should.be.ok;
+                    client.end(done);
+                });
+                client.getDataCenters(function () {
+                })
+            });
+        });
+    });
 });
