@@ -6,7 +6,7 @@ var del = require('del');
 
 gulp.task('doc', function () {
     del(['./doc'], function () {
-        gulp.src('./lib/telegram.link.js')
+        gulp.src('./lib/*.js')
             .pipe(docco(/*{'layout': 'linear'}*/))
             .pipe(gulp.dest('./doc'));
     });
@@ -17,12 +17,12 @@ gulp.task('quality', function () {
         .pipe(jshint.reporter('default'));
 });
 gulp.task('test', function () {
-    return gulp.src('./test/telegram.link.test.js')
+    return gulp.src('./test/*.js')
         .pipe(mocha({reporter: 'mocha-better-spec-reporter', timeout: '20s'}));
 });
 
 gulp.task('cover', function () {
-    return gulp.src('./test/telegram.link.test.js')
+    return gulp.src('./test/*.js')
         .pipe(mocha({reporter: 'mocha-lcov-reporter', timeout: '120s'}));
 });
 

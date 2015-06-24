@@ -19,18 +19,37 @@ runs both on **mobile and desktop browsers** and also on a **Node.js server**  a
 via standard [protocol](https://core.telegram.org/mtproto) and API.
 
 
+## Telegram.link in action! 
+
+To start with the **telegram.link** library, you can install and study the [Termgram](http://termgram.me) application.
+**Termgram** is a terminal client to connect with Telegram and uses all the features currently available in **telegram.link**.
+The source code is quite straightforward and you'll be able to take inspiration to build your own application!
+As soon as a new feature will be available in **telegram.link** it will be exploited by **Termgram**. 
+
+
 ## Project Status
 
 - [Creating an Authorization Key](https://core.telegram.org/mtproto/auth_key): completed
 
-- [User Autorization](https://core.telegram.org/api/auth): ongoing
+- [User Autorization](https://core.telegram.org/api/auth): completed
+
+- Contact and update management, message exchange : ongoing
+
+
+## Documentation
+
+The api documentation is generated under the _doc/_ folder, you can browse it here:
+
+- [main module](https://rawgit.com/enricostara/telegram.link/master/doc/telegram.link.html)
+
+- [auth module](https://rawgit.com/enricostara/telegram.link/master/doc/auth.html)
 
 
 ## Project Architecture
 
-The whole project is split in **three modules**:
+The whole library is split in **three projects**:
   
-- **telegram.link** (this library): is the main module and provides the **highest-level interface** to communicate with the Telegram data-center. 
+- **telegram.link** (this library): is the main project and provides the **highest-level interface** to communicate with the Telegram data-center. 
 When you write your **_'telegram-like-app'_** you should deal only with this module.
 
 - [**telegram-mt-node**](https://github.com/enricostara/telegram-mt-node) (dependency): implements the **Telegram Mobile Protocol** [(MTProto)](https://core.telegram.org/mtproto),
@@ -40,6 +59,7 @@ the protocol level to establish a secure communication with the Telegram cloud.
 a **TypeBuilder** class that writes **Type classes and functions** in pure javascript parsing TypeLanguage [schemas](https://core.telegram.org/schema). 
 TypeLanguage types represent the **building blocks of the Telegram protocol**.
 
+
 ### Other direct dependencies
 
 - [get-flow](https://github.com/enricostara/get-flow): just yet another Node.js flow control utility, powerful and easy to use
@@ -48,6 +68,7 @@ TypeLanguage types represent the **building blocks of the Telegram protocol**.
 
 - [requirish](https://github.com/enricostara/requirish): a tool for avoiding the ../../../ relative paths problem, includes a
 browserify-transform to rewrites the require() for browser.
+
 
 ## Installation
 
@@ -64,23 +85,14 @@ $ cd YourApp
 $ npm install --save telegram.link
 ```
 
+
 ## Unit Testing 
 
 You can run unit-test executing the following command in the project-root folder:
 ```bash
 $ npm test
 ```
-## HowTo 
 
-To start with the **telegram.link** library, you can install and study the [Termgram](http://termgram.me) application.
-**Termgram** is a terminal client to connect with Telegram and uses all the features currently available in **telegram.link**.
-The source code is quite straightforward and you'll be able to take inspiration to build your own application!
-As soon as a new feature will be available in **telegram.link** it will be exploited by **Termgram**. 
-
-## Documentation
-
-The api documentation is generated under the _doc/_ folder, parsing the main module `telegram.link.js`,
-you can [browse it here](https://rawgit.com/enricostara/telegram.link/master/doc/telegram.link.html). 
 
 ### About Telegram.. 
 
@@ -100,6 +112,7 @@ Linux with no changes ([from Wikipedia](http://en.wikipedia.org/wiki/Node.js)).
 ### About the  <img src="./telegram.link.png" width="25"/> telegram.link logo  ..
 
 Logo crafted by [Diego Pasquali](http://dribbble.com/diegopq)
+
 
 ## License
 
