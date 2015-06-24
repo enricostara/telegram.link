@@ -60,11 +60,11 @@ http:<span class="hljs-comment">//telegram.link</span>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> mt = <span class="hljs-built_in">require</span>(<span class="hljs-string">'telegram-mt-node'</span>);
-<span class="hljs-keyword">var</span> auth = mt.auth;
-<span class="hljs-keyword">var</span> utility = mt.utility;
-<span class="hljs-keyword">var</span> net = mt.net;
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> tl = <span class="hljs-built_in">require</span>(<span class="hljs-string">'telegram-tl-node'</span>);
+<span class="hljs-keyword">var</span> mt = <span class="hljs-built_in">require</span>(<span class="hljs-string">'telegram-mt-node'</span>);
 <span class="hljs-keyword">var</span> api = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./api'</span>);
+<span class="hljs-keyword">var</span> Auth = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./auth'</span>);
+<span class="hljs-keyword">var</span> utility = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./utility'</span>);
 <span class="hljs-keyword">var</span> SequenceNumber = mt.SequenceNumber;
 <span class="hljs-keyword">var</span> logger = <span class="hljs-built_in">require</span>(<span class="hljs-string">'get-log'</span>)(<span class="hljs-string">'telegram-link'</span>);</pre></div></div>
             
@@ -111,8 +111,8 @@ http:<span class="hljs-comment">//telegram.link</span>
             
             <div class="content"><div class='highlight'><pre><span class="hljs-built_in">require</span>(<span class="hljs-string">'colors'</span>);
 <span class="hljs-keyword">var</span> printed = <span class="hljs-literal">false</span>;
-<span class="hljs-built_in">module</span>.exports = exports = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(signature)</span> </span>{
-    <span class="hljs-keyword">if</span>(!printed) {
+<span class="hljs-built_in">module</span>.exports = exports = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">signature</span>) </span>{
+    <span class="hljs-keyword">if</span> (!printed) {
         <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'\n'</span> + (signature || <span class="hljs-built_in">require</span>(<span class="hljs-string">'./static'</span>).signature.cyan));
         <span class="hljs-keyword">var</span> caption = signature ?
             <span class="hljs-string">'powered by telegram.link'</span> :
@@ -249,7 +249,7 @@ should deal only with this module.</p>
          [, connectionType: <span class="hljs-string">'TCP'</span>]
      },
      primaryDC
-     [, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(ex)</span></span>{
+     [, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">ex</span>)</span>{
              <span class="hljs-keyword">if</span>(!ex) { <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Connected to Telegram!'</span>); }
          }]
  );
@@ -297,7 +297,7 @@ event will be emitted when the connection will be established, after the the <co
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createClient</span><span class="hljs-params">(app, dataCenter, callback)</span> </span>{
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createClient</span>(<span class="hljs-params">app, dataCenter, callback</span>) </span>{
     <span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> Client(app, dataCenter);
     <span class="hljs-keyword">if</span> (callback) {
         client.once(<span class="hljs-string">'connect'</span>, callback);
@@ -316,7 +316,7 @@ event will be emitted when the connection will be established, after the the <co
                 <a class="pilcrow" href="#section-18">&#182;</a>
               </div>
               <hr>
-<p><strong>Class:</strong> telegramLink.<strong>Client</strong></p>
+<p><strong>Function:</strong> telegramLink.<strong>retrieveAuthKey(authKeyBuffer, authKeyPassword)</strong></p>
 
             </div>
             
@@ -329,7 +329,7 @@ event will be emitted when the connection will be established, after the the <co
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-19">&#182;</a>
               </div>
-              <p>Represents the connection client to Telegram and implements the Telegram API.</p>
+              <p>Decrypts the <code>authKeyBuffer</code> using the <code>authKeyPassword</code>, returns the authKey instance or null if the password is wrong</p>
 
             </div>
             
@@ -342,10 +342,13 @@ event will be emitted when the connection will be established, after the the <co
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-20">&#182;</a>
               </div>
-              <p>It must be created by the <code>createClient()</code> method above and the following constructor
-cannot be called directly <em>(private)</em>.</p>
+              <p>The code:</p>
 
             </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">retrieveAuthKey</span>(<span class="hljs-params">authKeyBuffer, authKeyPassword</span>) </span>{
+    <span class="hljs-keyword">return</span> mt.auth.AuthKey.decryptAuthKey(authKeyBuffer, authKeyPassword);
+}</pre></div></div>
             
         </li>
         
@@ -356,23 +359,10 @@ cannot be called directly <em>(private)</em>.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-21">&#182;</a>
               </div>
-              <p>The code :</p>
+              <hr>
+<p><strong>Class:</strong> telegramLink.<strong>Client</strong></p>
 
             </div>
-            
-            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Client</span><span class="hljs-params">(app, dataCenter)</span> </span>{
-    <span class="hljs-keyword">this</span>._app = app;
-
-    <span class="hljs-keyword">if</span> (<span class="hljs-string">'TCP'</span> === app.connectionType) {
-        <span class="hljs-keyword">this</span>._connection = <span class="hljs-keyword">new</span> net.TcpConnection(dataCenter);
-    } <span class="hljs-keyword">else</span> {
-        <span class="hljs-keyword">this</span>._connection = <span class="hljs-keyword">new</span> net.HttpConnection(dataCenter);
-    }
-
-    <span class="hljs-keyword">if</span> (app.authKey) {
-        <span class="hljs-keyword">this</span>._channel = createEncryptedChannel(<span class="hljs-keyword">this</span>._connection, app, app.authKey, NULL_SERVER_SALT);
-    }
-}</pre></div></div>
             
         </li>
         
@@ -383,11 +373,9 @@ cannot be called directly <em>(private)</em>.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-22">&#182;</a>
               </div>
-              <p>Extend the <code>events.EventEmitter</code> class</p>
+              <p>Represents the connection client to Telegram and implements the Telegram API.</p>
 
             </div>
-            
-            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">require</span>(<span class="hljs-string">'util'</span>).inherits(Client, <span class="hljs-built_in">require</span>(<span class="hljs-string">'events'</span>).EventEmitter);</pre></div></div>
             
         </li>
         
@@ -398,8 +386,8 @@ cannot be called directly <em>(private)</em>.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-23">&#182;</a>
               </div>
-              <hr>
-<p><em>createEncryptedChannel()</em></p>
+              <p>It must be created by the <code>createClient()</code> method above and the following constructor
+cannot be called directly <em>(private)</em>.</p>
 
             </div>
             
@@ -412,9 +400,22 @@ cannot be called directly <em>(private)</em>.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-24">&#182;</a>
               </div>
-              <p>Creates the encrypted channel used to call all the Telegram API methods <em>(private)</em></p>
+              <p>The code :</p>
 
             </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Client</span>(<span class="hljs-params">app, dataCenter</span>) </span>{
+    <span class="hljs-keyword">this</span>._app = app;
+
+    <span class="hljs-keyword">if</span> (<span class="hljs-string">'TCP'</span> === app.connectionType) {
+        <span class="hljs-keyword">this</span>._connection = <span class="hljs-keyword">new</span> mt.net.TcpConnection(dataCenter);
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">this</span>._connection = <span class="hljs-keyword">new</span> mt.net.HttpConnection(dataCenter);
+    }
+
+    <span class="hljs-keyword">if</span> (app.authKey) {
+        <span class="hljs-keyword">this</span>._channel = createEncryptedChannel(<span class="hljs-keyword">this</span>._connection, app, app.authKey, NULL_SERVER_SALT);
+    }</pre></div></div>
             
         </li>
         
@@ -425,19 +426,12 @@ cannot be called directly <em>(private)</em>.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-25">&#182;</a>
               </div>
-              <p>The code:</p>
+              <p>creates the authorization module bound with the client to call all the API methods
+required to the user authorization</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createEncryptedChannel</span><span class="hljs-params">(connection, app, authKey, serverSalt)</span> </span>{
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> net.EncryptedRpcChannel(
-        connection, {
-            authKey: authKey,
-            serverSalt: serverSalt,
-            sessionId: utility.createNonce(<span class="hljs-number">8</span>),
-            sequenceNumber: <span class="hljs-keyword">new</span> SequenceNumber()
-        }, app
-    );
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">this</span>.auth = <span class="hljs-keyword">new</span> Auth(<span class="hljs-keyword">this</span>);
 }</pre></div></div>
             
         </li>
@@ -449,10 +443,11 @@ cannot be called directly <em>(private)</em>.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-26">&#182;</a>
               </div>
-              <hr>
-<p>client.<strong>createAuthKey([callback])</strong></p>
+              <p>Extend the <code>events.EventEmitter</code> class</p>
 
             </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">require</span>(<span class="hljs-string">'util'</span>).inherits(Client, <span class="hljs-built_in">require</span>(<span class="hljs-string">'events'</span>).EventEmitter);</pre></div></div>
             
         </li>
         
@@ -463,7 +458,8 @@ cannot be called directly <em>(private)</em>.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-27">&#182;</a>
               </div>
-              <p>Exchanges the authorization key with Telegram, see <a href="https://core.telegram.org/mtproto/auth_key">https://core.telegram.org/mtproto/auth_key</a></p>
+              <hr>
+<p><em>createEncryptedChannel()</em></p>
 
             </div>
             
@@ -476,8 +472,7 @@ cannot be called directly <em>(private)</em>.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-28">&#182;</a>
               </div>
-              <p>This method is asynchronous and the client must be already connected before calling this function.
-When the authKey is created, the <code>authKeyCreate</code> event will be emitted.</p>
+              <p>Creates the encrypted channel used to call all the Telegram API methods <em>(private)</em></p>
 
             </div>
             
@@ -489,6 +484,71 @@ When the authKey is created, the <code>authKeyCreate</code> event will be emitte
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-29">&#182;</a>
+              </div>
+              <p>The code:</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createEncryptedChannel</span>(<span class="hljs-params">connection, app, authKey, serverSalt</span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> mt.net.EncryptedRpcChannel(
+        connection, {
+            authKey: authKey,
+            serverSalt: serverSalt,
+            sessionId: mt.utility.createNonce(<span class="hljs-number">8</span>),
+            sequenceNumber: <span class="hljs-keyword">new</span> SequenceNumber()
+        }, app
+    );
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-30">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-30">&#182;</a>
+              </div>
+              <hr>
+<p>client.<strong>createAuthKey([callback])</strong></p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-31">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-31">&#182;</a>
+              </div>
+              <p>Exchanges the authorization key with Telegram, see <a href="https://core.telegram.org/mtproto/auth_key">https://core.telegram.org/mtproto/auth_key</a></p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-32">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-32">&#182;</a>
+              </div>
+              <p>This method is asynchronous and the client must be already connected before calling this function.
+When the authKey is created, the <code>authKeyCreate</code> event will be emitted.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-33">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-33">&#182;</a>
               </div>
               <p>The last parameter callback will be added as a listener for the <code>authKeyCreate</code> event, the callback
 could receive the following arguments:</p>
@@ -502,27 +562,27 @@ could receive the following arguments:</p>
         </li>
         
         
-        <li id="section-30">
+        <li id="section-34">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-30">&#182;</a>
+                <a class="pilcrow" href="#section-34">&#182;</a>
               </div>
               <p>The code:</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>Client.prototype.createAuthKey = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(callback)</span> </span>{
+            <div class="content"><div class='highlight'><pre>Client.prototype.createAuthKey = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">callback</span>) </span>{
     <span class="hljs-keyword">if</span> (callback) {
-        <span class="hljs-keyword">this</span>.once(<span class="hljs-string">'authKeyCreate'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(auth)</span> </span>{
+        <span class="hljs-keyword">this</span>.once(<span class="hljs-string">'authKeyCreate'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">auth</span>) </span>{
             <span class="hljs-keyword">this</span>._channel = createEncryptedChannel(<span class="hljs-keyword">this</span>._connection, <span class="hljs-keyword">this</span>._app, auth.key, auth.serverSalt);
             callback(auth);
         });
     }
     <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>._connection &amp;&amp; <span class="hljs-keyword">this</span>._connection.isConnected()) {
-        auth.createAuthKey(
-            createEventEmitterCallback(<span class="hljs-string">'authKeyCreate'</span>).bind(<span class="hljs-keyword">this</span>),
-            <span class="hljs-keyword">new</span> net.RpcChannel(<span class="hljs-keyword">this</span>._connection));
+        mt.auth.createAuthKey(
+            utility.createEventEmitterCallback(<span class="hljs-string">'authKeyCreate'</span>, <span class="hljs-keyword">this</span>),
+            <span class="hljs-keyword">new</span> mt.net.RpcChannel(<span class="hljs-keyword">this</span>._connection));
     } <span class="hljs-keyword">else</span> {
         <span class="hljs-keyword">var</span> msg = <span class="hljs-string">'Client is not yet connected! Wait until it\'s connected before call this method!'</span>;
         logger.error(msg);
@@ -533,76 +593,14 @@ could receive the following arguments:</p>
         </li>
         
         
-        <li id="section-31">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-31">&#182;</a>
-              </div>
-              <hr>
-<p>client.<strong>getDataCenterList([callback])</strong></p>
-
-            </div>
-            
-        </li>
-        
-        
-        <li id="section-32">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-32">&#182;</a>
-              </div>
-              <p>Gets the data center list, the current data center and the nearest one</p>
-
-            </div>
-            
-        </li>
-        
-        
-        <li id="section-33">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-33">&#182;</a>
-              </div>
-              <p>The code:</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>Client.prototype.getDataCenters = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(callback)</span> </span>{
-    <span class="hljs-keyword">if</span> (callback) {
-        <span class="hljs-keyword">this</span>.once(<span class="hljs-string">'dataCenter'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(result)</span> </span>{
-            callback(result);
-        });
-    }
-
-};</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-34">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-34">&#182;</a>
-              </div>
-              <hr>
-<p>client.<strong>sendCodeToPhone(phoneNumber, [callback])</strong></p>
-
-            </div>
-            
-        </li>
-        
-        
         <li id="section-35">
             <div class="annotation">
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-35">&#182;</a>
               </div>
-              <p>Sends a text message with the confirmation code required for registration to the given phone number</p>
+              <hr>
+<p>client.<strong>getDataCenterList([callback])</strong></p>
 
             </div>
             
@@ -615,46 +613,9 @@ could receive the following arguments:</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-36">&#182;</a>
               </div>
-              <p>The code:</p>
+              <p>Gets the data center list, the current data center and the nearest one</p>
 
             </div>
-            
-            <div class="content"><div class='highlight'><pre>Client.prototype.sendCodeToPhone = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(phoneNumber, callback)</span> </span>{
-    <span class="hljs-keyword">if</span> (callback) {
-        <span class="hljs-keyword">this</span>.once(<span class="hljs-string">'sendCode'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(result)</span> </span>{
-            callback(result);
-        });
-    }
-    <span class="hljs-keyword">var</span> props = {
-        phone_number: phoneNumber,
-        sms_type: <span class="hljs-number">5</span>,
-        api_id: <span class="hljs-keyword">this</span>._app.id,
-        api_hash: <span class="hljs-keyword">this</span>._app.hash,
-        lang_code: <span class="hljs-string">'en'</span>
-    };
-    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.isReady()) {
-        <span class="hljs-keyword">var</span> self = <span class="hljs-keyword">this</span>;
-        <span class="hljs-keyword">try</span> {
-            api.service.auth.sendCode({
-                props: props,
-                channel: <span class="hljs-keyword">this</span>._channel,
-                callback: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(ex, resObj)</span> </span>{
-                    <span class="hljs-keyword">if</span> (ex) {
-                        self.emit(<span class="hljs-string">'error'</span>, ex);
-                    } <span class="hljs-keyword">else</span> {
-                        callback(resObj);
-                    }
-                }
-            });
-        } <span class="hljs-keyword">catch</span> (err) {
-            <span class="hljs-keyword">this</span>.emit(<span class="hljs-string">'error'</span>, err);
-        }
-    } <span class="hljs-keyword">else</span> {
-        <span class="hljs-keyword">var</span> msg = <span class="hljs-string">'Client is not yet ready!'</span>;
-        logger.error(msg);
-        <span class="hljs-keyword">this</span>.emit(<span class="hljs-string">'error'</span>, <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(msg));
-    }
-};</pre></div></div>
             
         </li>
         
@@ -665,10 +626,58 @@ could receive the following arguments:</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-37">&#182;</a>
               </div>
-              <hr>
-<p>client.<strong>isReady()</strong></p>
+              <p>The code:</p>
 
             </div>
+            
+            <div class="content"><div class='highlight'><pre>Client.prototype.getDataCenters = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">callback</span>) </span>{
+    <span class="hljs-keyword">if</span> (callback) {
+        <span class="hljs-keyword">this</span>.once(<span class="hljs-string">'dataCenter'</span>, callback);
+    }
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.isReady(<span class="hljs-literal">true</span>)) {
+        <span class="hljs-keyword">var</span> self = <span class="hljs-keyword">this</span>;
+        <span class="hljs-keyword">try</span> {
+            api.service.help.getConfig({
+                props: {},
+                channel: self._channel,
+                callback: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">ex, config</span>) </span>{
+                    <span class="hljs-keyword">if</span> (ex) {
+                        self.emit(<span class="hljs-string">'error'</span>, ex);
+                    } <span class="hljs-keyword">else</span> {
+                        <span class="hljs-keyword">var</span> dcs = {
+                            toPrintable: tl.utility.toPrintable
+                        };
+                        <span class="hljs-keyword">var</span> dcList = config.dc_options.list;
+                        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; dcList.length; i++) {
+                            <span class="hljs-keyword">var</span> dc = dcList[i];
+                            dcs[<span class="hljs-string">'DC_'</span> + dc.id] = {
+                                host: dc.ip_address,
+                                port: dc.port,
+                                toPrintable: tl.utility.toPrintable
+                            };
+                        }
+                        api.service.help.getNearestDc({
+                            props: {},
+                            channel: self._channel,
+                            callback: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">ex, nearestDc</span>) </span>{
+                                <span class="hljs-keyword">if</span> (ex) {
+                                    logger.error(<span class="hljs-string">'error: '</span>, ex);
+                                    self.emit(<span class="hljs-string">'error'</span>, ex);
+                                } <span class="hljs-keyword">else</span> {
+                                    dcs.current = <span class="hljs-string">'DC_'</span> + nearestDc.this_dc;
+                                    dcs.nearest = <span class="hljs-string">'DC_'</span> + nearestDc.nearest_dc;
+                                    self.emit(<span class="hljs-string">'dataCenter'</span>, dcs);
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        } <span class="hljs-keyword">catch</span> (err) {
+            <span class="hljs-keyword">this</span>.emit(<span class="hljs-string">'error'</span>, err);
+        }
+    }
+};</pre></div></div>
             
         </li>
         
@@ -679,7 +688,8 @@ could receive the following arguments:</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-38">&#182;</a>
               </div>
-              <p>Checks if the client is ready to communicate with Telegram</p>
+              <hr>
+<p>client.<strong>isReady()</strong></p>
 
             </div>
             
@@ -692,13 +702,9 @@ could receive the following arguments:</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-39">&#182;</a>
               </div>
-              <p>The code:</p>
+              <p>Checks if the client is ready to communicate with Telegram and immediately emits the error-event if required</p>
 
             </div>
-            
-            <div class="content"><div class='highlight'><pre>Client.prototype.isReady = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>._channel ? <span class="hljs-literal">true</span> : <span class="hljs-literal">false</span>;
-};</pre></div></div>
             
         </li>
         
@@ -709,10 +715,19 @@ could receive the following arguments:</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-40">&#182;</a>
               </div>
-              <hr>
-<p>client.<strong>end([callback])</strong></p>
+              <p>The code:</p>
 
             </div>
+            
+            <div class="content"><div class='highlight'><pre>Client.prototype.isReady = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">emitError</span>) </span>{
+    <span class="hljs-keyword">var</span> isReady = <span class="hljs-keyword">this</span>._channel ? <span class="hljs-literal">true</span> : <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">if</span> (!isReady &amp;&amp; emitError) {
+        <span class="hljs-keyword">var</span> msg = <span class="hljs-string">'Client is not yet ready!'</span>;
+        logger.error(msg);
+        <span class="hljs-keyword">this</span>.emit(<span class="hljs-string">'error'</span>, <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(msg));
+    }
+    <span class="hljs-keyword">return</span> isReady;
+};</pre></div></div>
             
         </li>
         
@@ -723,7 +738,8 @@ could receive the following arguments:</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-41">&#182;</a>
               </div>
-              <p>Closes the communication with the DataCenter,</p>
+              <hr>
+<p>client.<strong>end([callback])</strong></p>
 
             </div>
             
@@ -736,7 +752,7 @@ could receive the following arguments:</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-42">&#182;</a>
               </div>
-              <p>The last parameter <strong>callback</strong> will be added as a listener for the <code>end</code> event</p>
+              <p>Closes the communication with the DataCenter,</p>
 
             </div>
             
@@ -749,16 +765,9 @@ could receive the following arguments:</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-43">&#182;</a>
               </div>
-              <p>The code:</p>
+              <p>The last parameter <strong>callback</strong> will be added as a listener for the <code>end</code> event</p>
 
             </div>
-            
-            <div class="content"><div class='highlight'><pre>Client.prototype.end = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(callback)</span> </span>{
-    <span class="hljs-keyword">if</span> (callback) {
-        <span class="hljs-keyword">this</span>.once(<span class="hljs-string">'end'</span>, callback);
-    }
-    <span class="hljs-keyword">this</span>._connection.close(createEventEmitterCallback(<span class="hljs-string">'end'</span>).bind(<span class="hljs-keyword">this</span>));
-};</pre></div></div>
             
         </li>
         
@@ -769,10 +778,16 @@ could receive the following arguments:</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-44">&#182;</a>
               </div>
-              <hr>
-<p><em>connect()</em></p>
+              <p>The code:</p>
 
             </div>
+            
+            <div class="content"><div class='highlight'><pre>Client.prototype.end = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">callback</span>) </span>{
+    <span class="hljs-keyword">if</span> (callback) {
+        <span class="hljs-keyword">this</span>.once(<span class="hljs-string">'end'</span>, callback);
+    }
+    <span class="hljs-keyword">this</span>._connection.close(utility.createEventEmitterCallback(<span class="hljs-string">'end'</span>, <span class="hljs-keyword">this</span>));
+};</pre></div></div>
             
         </li>
         
@@ -783,7 +798,8 @@ could receive the following arguments:</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-45">&#182;</a>
               </div>
-              <p>Establishes the connection with the data center <em>(private)</em></p>
+              <hr>
+<p><em>connect()</em></p>
 
             </div>
             
@@ -796,13 +812,9 @@ could receive the following arguments:</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-46">&#182;</a>
               </div>
-              <p>The code:</p>
+              <p>Establishes the connection with the data center <em>(private)</em></p>
 
             </div>
-            
-            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">connect</span><span class="hljs-params">()</span> </span>{
-    <span class="hljs-keyword">this</span>._connection.connect(createEventEmitterCallback(<span class="hljs-string">'connect'</span>).bind(<span class="hljs-keyword">this</span>));
-}</pre></div></div>
             
         </li>
         
@@ -813,10 +825,13 @@ could receive the following arguments:</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-47">&#182;</a>
               </div>
-              <hr>
-<p><em>createEventEmitterCallback()</em></p>
+              <p>The code:</p>
 
             </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">connect</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">this</span>._connection.connect(utility.createEventEmitterCallback(<span class="hljs-string">'connect'</span>, <span class="hljs-keyword">this</span>));
+}</pre></div></div>
             
         </li>
         
@@ -827,7 +842,9 @@ could receive the following arguments:</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-48">&#182;</a>
               </div>
-              <p>Provides a callback function that emits the supplied event type or an error event <em>(private)</em></p>
+              <hr>
+<p><strong>Event: ‘connect’</strong>
+Emitted when the client connection is successfully established. See <strong>createClient()</strong>.</p>
 
             </div>
             
@@ -840,21 +857,10 @@ could receive the following arguments:</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-49">&#182;</a>
               </div>
-              <p>The code:</p>
+              <p><strong>Event: ‘authKeyCreate’</strong>
+Emitted when the  authKey is successfully created. See client.<strong>createAuthKey()</strong>.</p>
 
             </div>
-            
-            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createEventEmitterCallback</span><span class="hljs-params">(event)</span> </span>{
-    <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(ex)</span> </span>{
-        <span class="hljs-keyword">if</span> (ex) {
-            <span class="hljs-keyword">this</span>.emit(<span class="hljs-string">'error'</span>, ex);
-        } <span class="hljs-keyword">else</span> {
-            <span class="hljs-keyword">var</span> args = <span class="hljs-built_in">Array</span>.prototype.slice.call(<span class="hljs-built_in">arguments</span>);
-            args[<span class="hljs-number">0</span>] = event;
-            <span class="hljs-keyword">this</span>.emit.apply(<span class="hljs-keyword">this</span>, args);
-        }
-    };
-}</pre></div></div>
             
         </li>
         
@@ -865,9 +871,8 @@ could receive the following arguments:</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-50">&#182;</a>
               </div>
-              <hr>
-<p><strong>Event: ‘connect’</strong>
-Emitted when the client connection is successfully established. See connect().</p>
+              <p><strong>Event: ‘sendCode’</strong>
+Emitted when the registration code is successfully sent. See client.<strong>sendCode()</strong>.</p>
 
             </div>
             
@@ -880,8 +885,8 @@ Emitted when the client connection is successfully established. See connect().</
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-51">&#182;</a>
               </div>
-              <p><strong>Event: ‘authKeyCreate’</strong>
-Emitted when the  authKey is successfully created. See client.<strong>createAuthKey()</strong>.</p>
+              <p><strong>Event: ‘dataCenter’</strong>
+Emitted when the data-center map is available. See client.<strong>getDataCenters()</strong>.</p>
 
             </div>
             
@@ -894,8 +899,8 @@ Emitted when the  authKey is successfully created. See client.<strong>createAuth
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-52">&#182;</a>
               </div>
-              <p><strong>Event: ‘sendCode’</strong>
-Emitted when the registration code is successfully sent. See client.<strong>sendCode()</strong>.</p>
+              <p><strong>Event: ‘end’</strong>
+Emitted when the data center close the connection. See client.<strong>end()</strong>.</p>
 
             </div>
             
@@ -908,8 +913,8 @@ Emitted when the registration code is successfully sent. See client.<strong>send
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-53">&#182;</a>
               </div>
-              <p><strong>Event: ‘dataCenter’</strong>
-Emitted when the data-center map is available. See client.<strong>getDataCenters()</strong>.</p>
+              <p><strong>Event: ‘error’</strong>
+Emitted when an error occurs.</p>
 
             </div>
             
@@ -922,8 +927,7 @@ Emitted when the data-center map is available. See client.<strong>getDataCenters
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-54">&#182;</a>
               </div>
-              <p><strong>Event: ‘end’</strong>
-Emitted when the data center close the connection. See client.<strong>end()</strong>.</p>
+              <hr>
 
             </div>
             
@@ -936,38 +940,12 @@ Emitted when the data center close the connection. See client.<strong>end()</str
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-55">&#182;</a>
               </div>
-              <p><strong>Event: ‘error’</strong>
-Emitted when an error occurs.</p>
-
-            </div>
-            
-        </li>
-        
-        
-        <li id="section-56">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-56">&#182;</a>
-              </div>
-              <hr>
-
-            </div>
-            
-        </li>
-        
-        
-        <li id="section-57">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-57">&#182;</a>
-              </div>
               <p>Export the internals</p>
 
             </div>
             
             <div class="content"><div class='highlight'><pre>exports.createClient = createClient;
+exports.retrieveAuthKey = retrieveAuthKey;
 <span class="hljs-keyword">var</span> staticInfo = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./static'</span>);
 exports.TEST_PRIMARY_DC = staticInfo.telegram.test.primaryDataCenter;
 exports.PROD_PRIMARY_DC = staticInfo.telegram.prod.primaryDataCenter;</pre></div></div>
