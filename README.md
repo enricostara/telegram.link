@@ -29,11 +29,15 @@ As soon as a new feature will be available in **telegram.link** it will be explo
 
 ## Project Status
 
+
 - [Creating an Authorization Key](https://core.telegram.org/mtproto/auth_key): completed
 
 - [User Autorization](https://core.telegram.org/api/auth): completed
 
-- Contact and update management, message exchange : ongoing
+- user-contact/update-message management, message exchange: ongoing
+
+_See the project status page on the [wiki](https://github.com/enricostara/telegram.link/wiki/Project-Status) for the last notes_
+
 
 
 ## Documentation
