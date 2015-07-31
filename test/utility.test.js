@@ -24,7 +24,8 @@ describe('utility', function () {
                 done();
             };
             (function testCall(first, second, callback) {
-                utility.callService(api.service.auth.testCall, emitter, 'channel', callback, arguments);
+                var promise = utility.callService(api.service.auth.testCall, emitter, 'channel', callback, arguments);
+                promise.should.be.an.instanceOf(Promise);
             })(1, 2, 'callback');
         });
     });
