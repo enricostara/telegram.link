@@ -1,6 +1,6 @@
 {
   "name": "telegram.link",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "description": "Telegram API library",
   "keywords": [
     "telegram",
@@ -22,7 +22,8 @@
     "requirish": "latest",
     "telegram-tl-node": "latest",
     "telegram-mt-node": "latest",
-    "colors": "latest"
+    "colors": "latest",
+    "es6-promise": "latest"
   },
   "license": "MIT",
   "devDependencies": {
