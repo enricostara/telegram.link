@@ -4,6 +4,8 @@
 [![Sauce Test Status][sauce-image]][sauce-url]
 
 
+**ALPHA SOFTWARE**
+
 ###_telegram.link_ is a Telegram API library for
 
 - **Hybrid Mobile Apps** (phone and tablet)
@@ -11,6 +13,8 @@
 - **Desktop Web Apps** (standard HTML5 browsers)
 
 - **Server-side Apps**  (i.e. a Command-Line Interface) 
+
+- **Desktop Apps**  (i.e. as third party module using the [NW.js](https://github.com/nwjs/nw.js) runtime) 
 
 **telegram.link** is an unofficial **porting in javascript** of the [Telegram Application Programming Interface](https://core.telegram.org/api).
  
@@ -34,19 +38,19 @@ As soon as a new feature will be available in **telegram.link** it will be explo
 
 - [User Autorization](https://core.telegram.org/api/auth): completed
 
-- user-contact/update-message management, message exchange: ongoing
+- user-contact/update-message management, message exchange: completed
 
-_See the project status page on the [wiki](https://github.com/enricostara/telegram.link/wiki/Project-Status) for the last notes_
+- Starts the [ALPHA](https://en.wikipedia.org/wiki/Software_release_life_cycle#Alpha) phase.
+
+_See the project status page on the [wiki](https://github.com/enricostara/telegram.link/wiki/Project-Status) for the last notes._
 
 
 
 ## Documentation
 
-The api documentation is generated under the _doc/_ folder, you can browse it here:
+The api documentation is generated under the _doc/_ folder.
 
-- [main module](https://rawgit.com/enricostara/telegram.link/master/doc/telegram.link.html)
-
-- [auth module](https://rawgit.com/enricostara/telegram.link/master/doc/auth.html)
+_See the documentation page on the [wiki](https://github.com/enricostara/telegram.link/wiki/Docs)._
 
 
 ## Project Architecture
