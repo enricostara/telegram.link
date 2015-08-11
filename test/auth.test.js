@@ -14,7 +14,7 @@ describe('auth', function () {
         };
         it('should returns ok', function (done) {
             var client = telegramLink.createClient({authKey: {}}, primaryDC, function () {
-                client.auth.sendCode('1234', function (result) {
+                client.auth.sendCode('1234', 5, 'en', function (result) {
                     result.should.be.ok;
                     done();
                 })
@@ -27,7 +27,7 @@ describe('auth', function () {
                     ex.should.be.ok;
                     client.end(done);
                 });
-                client.auth.sendCode('1234', function () {
+                client.auth.sendCode('1234', 5, 'en', function () {
                 })
             });
         });
