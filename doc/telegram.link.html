@@ -460,8 +460,7 @@ user authorization</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">this</span>.updates = <span class="hljs-keyword">new</span> (<span class="hljs-built_in">require</span>(<span class="hljs-string">'./updates'</span>))(<span class="hljs-keyword">this</span>);
-}</pre></div></div>
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">this</span>.updates = <span class="hljs-keyword">new</span> (<span class="hljs-built_in">require</span>(<span class="hljs-string">'./updates'</span>))(<span class="hljs-keyword">this</span>);</pre></div></div>
             
         </li>
         
@@ -472,11 +471,12 @@ user authorization</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-28">&#182;</a>
               </div>
-              <p>Extend the <code>events.EventEmitter</code> class</p>
+              <p>chat messages</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">require</span>(<span class="hljs-string">'util'</span>).inherits(Client, <span class="hljs-built_in">require</span>(<span class="hljs-string">'events'</span>).EventEmitter);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">this</span>.messages = <span class="hljs-keyword">new</span> (<span class="hljs-built_in">require</span>(<span class="hljs-string">'./messages'</span>))(<span class="hljs-keyword">this</span>);
+}</pre></div></div>
             
         </li>
         
@@ -487,10 +487,11 @@ user authorization</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-29">&#182;</a>
               </div>
-              <hr>
-<p><em>createEncryptedChannel()</em></p>
+              <p>Extend the <code>events.EventEmitter</code> class</p>
 
             </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">require</span>(<span class="hljs-string">'util'</span>).inherits(Client, <span class="hljs-built_in">require</span>(<span class="hljs-string">'events'</span>).EventEmitter);</pre></div></div>
             
         </li>
         
@@ -501,7 +502,8 @@ user authorization</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-30">&#182;</a>
               </div>
-              <p>Creates the encrypted channel used to call all the Telegram API methods <em>(private)</em>.</p>
+              <hr>
+<p><em>createEncryptedChannel()</em></p>
 
             </div>
             
@@ -513,6 +515,19 @@ user authorization</p>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-31">&#182;</a>
+              </div>
+              <p>Creates the encrypted channel used to call all the Telegram API methods <em>(private)</em>.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-32">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-32">&#182;</a>
               </div>
               <p>The code:</p>
 
@@ -532,27 +547,14 @@ user authorization</p>
         </li>
         
         
-        <li id="section-32">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-32">&#182;</a>
-              </div>
-              <hr>
-<p>client.<strong>createAuthKey([callback])</strong></p>
-
-            </div>
-            
-        </li>
-        
-        
         <li id="section-33">
             <div class="annotation">
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-33">&#182;</a>
               </div>
-              <p>Exchanges the authorization key with Telegram, see <a href="https://core.telegram.org/mtproto/auth_key">https://core.telegram.org/mtproto/auth_key</a></p>
+              <hr>
+<p>client.<strong>createAuthKey([callback])</strong></p>
 
             </div>
             
@@ -565,8 +567,7 @@ user authorization</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-34">&#182;</a>
               </div>
-              <p>This method is asynchronous and the client must be already connected before calling this function.
-When the authKey is created, the <code>authKeyCreate</code> event will be emitted.</p>
+              <p>Exchanges the authorization key with Telegram, see <a href="https://core.telegram.org/mtproto/auth_key">https://core.telegram.org/mtproto/auth_key</a></p>
 
             </div>
             
@@ -578,6 +579,20 @@ When the authKey is created, the <code>authKeyCreate</code> event will be emitte
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-35">&#182;</a>
+              </div>
+              <p>This method is asynchronous and the client must be already connected before calling this function.
+When the authKey is created, the <code>authKeyCreate</code> event will be emitted.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-36">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-36">&#182;</a>
               </div>
               <p>The last parameter callback will be added as a listener for the <code>authKeyCreate</code> event, the callback
 could receive the following arguments:</p>
@@ -591,11 +606,11 @@ could receive the following arguments:</p>
         </li>
         
         
-        <li id="section-36">
+        <li id="section-37">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-36">&#182;</a>
+                <a class="pilcrow" href="#section-37">&#182;</a>
               </div>
               <p>The code:</p>
 
@@ -622,27 +637,14 @@ could receive the following arguments:</p>
         </li>
         
         
-        <li id="section-37">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-37">&#182;</a>
-              </div>
-              <hr>
-<p>client.<strong>getDataCenterList([callback])</strong></p>
-
-            </div>
-            
-        </li>
-        
-        
         <li id="section-38">
             <div class="annotation">
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-38">&#182;</a>
               </div>
-              <p>Gets the data center list, the current data center and the nearest one.</p>
+              <hr>
+<p>client.<strong>getDataCenterList([callback])</strong></p>
 
             </div>
             
@@ -654,6 +656,19 @@ could receive the following arguments:</p>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-39">&#182;</a>
+              </div>
+              <p>Gets the data center list, the current data center and the nearest one.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-40">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-40">&#182;</a>
               </div>
               <p>The code:</p>
 
@@ -711,27 +726,14 @@ could receive the following arguments:</p>
         </li>
         
         
-        <li id="section-40">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-40">&#182;</a>
-              </div>
-              <hr>
-<p>client.<strong>isReady()</strong></p>
-
-            </div>
-            
-        </li>
-        
-        
         <li id="section-41">
             <div class="annotation">
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-41">&#182;</a>
               </div>
-              <p>Checks if the client is ready to communicate with Telegram and immediately emits the error-event if required.</p>
+              <hr>
+<p>client.<strong>isReady()</strong></p>
 
             </div>
             
@@ -743,6 +745,19 @@ could receive the following arguments:</p>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-42">&#182;</a>
+              </div>
+              <p>Checks if the client is ready to communicate with Telegram and immediately emits the error-event if required.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-43">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-43">&#182;</a>
               </div>
               <p>The code:</p>
 
@@ -761,27 +776,14 @@ could receive the following arguments:</p>
         </li>
         
         
-        <li id="section-43">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-43">&#182;</a>
-              </div>
-              <hr>
-<p>client.<strong>end([callback])</strong></p>
-
-            </div>
-            
-        </li>
-        
-        
         <li id="section-44">
             <div class="annotation">
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-44">&#182;</a>
               </div>
-              <p>Closes the communication with the DataCenter,</p>
+              <hr>
+<p>client.<strong>end([callback])</strong></p>
 
             </div>
             
@@ -794,7 +796,7 @@ could receive the following arguments:</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-45">&#182;</a>
               </div>
-              <p>The last parameter <strong>callback</strong> will be added as a listener for the <code>end</code> event.</p>
+              <p>Closes the communication with the DataCenter,</p>
 
             </div>
             
@@ -806,6 +808,19 @@ could receive the following arguments:</p>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-46">&#182;</a>
+              </div>
+              <p>The last parameter <strong>callback</strong> will be added as a listener for the <code>end</code> event.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-47">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-47">&#182;</a>
               </div>
               <p>The code:</p>
 
@@ -821,27 +836,14 @@ could receive the following arguments:</p>
         </li>
         
         
-        <li id="section-47">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-47">&#182;</a>
-              </div>
-              <hr>
-<p><em>connect()</em></p>
-
-            </div>
-            
-        </li>
-        
-        
         <li id="section-48">
             <div class="annotation">
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-48">&#182;</a>
               </div>
-              <p>Establishes the connection with the data center <em>(private)</em>.</p>
+              <hr>
+<p><em>connect()</em></p>
 
             </div>
             
@@ -854,6 +856,19 @@ could receive the following arguments:</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-49">&#182;</a>
               </div>
+              <p>Establishes the connection with the data center <em>(private)</em>.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-50">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-50">&#182;</a>
+              </div>
               <p>The code:</p>
 
             </div>
@@ -865,29 +880,15 @@ could receive the following arguments:</p>
         </li>
         
         
-        <li id="section-50">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-50">&#182;</a>
-              </div>
-              <hr>
-<p><strong>Event: ‘connect’</strong>
-Emitted when the client connection is successfully established. See <strong>createClient()</strong>.</p>
-
-            </div>
-            
-        </li>
-        
-        
         <li id="section-51">
             <div class="annotation">
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-51">&#182;</a>
               </div>
-              <p><strong>Event: ‘authKeyCreate’</strong>
-Emitted when the  authKey is successfully created. See client.<strong>createAuthKey()</strong>.</p>
+              <hr>
+<p><strong>Event: ‘connect’</strong>
+Emitted when the client connection is successfully established. See <strong>createClient()</strong>.</p>
 
             </div>
             
@@ -900,8 +901,8 @@ Emitted when the  authKey is successfully created. See client.<strong>createAuth
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-52">&#182;</a>
               </div>
-              <p><strong>Event: ‘dataCenter’</strong>
-Emitted when the data-center map is available. See client.<strong>getDataCenters()</strong>.</p>
+              <p><strong>Event: ‘authKeyCreate’</strong>
+Emitted when the  authKey is successfully created. See client.<strong>createAuthKey()</strong>.</p>
 
             </div>
             
@@ -914,8 +915,8 @@ Emitted when the data-center map is available. See client.<strong>getDataCenters
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-53">&#182;</a>
               </div>
-              <p><strong>Event: ‘end’</strong>
-Emitted when the data center close the connection. See client.<strong>end()</strong>.</p>
+              <p><strong>Event: ‘dataCenter’</strong>
+Emitted when the data-center map is available. See client.<strong>getDataCenters()</strong>.</p>
 
             </div>
             
@@ -928,8 +929,8 @@ Emitted when the data center close the connection. See client.<strong>end()</str
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-54">&#182;</a>
               </div>
-              <p><strong>Event: ‘error’</strong>
-Emitted when an error occurs.</p>
+              <p><strong>Event: ‘end’</strong>
+Emitted when the data center close the connection. See client.<strong>end()</strong>.</p>
 
             </div>
             
@@ -942,7 +943,8 @@ Emitted when an error occurs.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-55">&#182;</a>
               </div>
-              <hr>
+              <p><strong>Event: ‘error’</strong>
+Emitted when an error occurs.</p>
 
             </div>
             
@@ -955,6 +957,19 @@ Emitted when an error occurs.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-56">&#182;</a>
               </div>
+              <hr>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-57">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-57">&#182;</a>
+              </div>
               <p>Export the internals.</p>
 
             </div>
@@ -964,6 +979,21 @@ exports.retrieveAuthKey = retrieveAuthKey;
 <span class="hljs-keyword">var</span> staticInfo = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./static'</span>);
 exports.TEST_PRIMARY_DC = staticInfo.telegram.test.primaryDataCenter;
 exports.PROD_PRIMARY_DC = staticInfo.telegram.prod.primaryDataCenter;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-58">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-58">&#182;</a>
+              </div>
+              <p>Export all the API types. (no methods)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>exports.type = api.type;</pre></div></div>
             
         </li>
         
