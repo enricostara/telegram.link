@@ -156,7 +156,7 @@ http:<span class="hljs-comment">//telegram.link</span>
                 <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
               <hr>
-<p>messages.<strong>getDialogs(hash, [callback])</strong></p>
+<p>messages.<strong>getDialogs(offset, max_id, limit, [callback])</strong></p>
 
             </div>
             
@@ -199,7 +199,7 @@ http:<span class="hljs-comment">//telegram.link</span>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>Messages.prototype.getDialogs = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">hash, callback</span>) </span>{
+            <div class="content"><div class='highlight'><pre>Messages.prototype.getDialogs = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">offset, max_id, limit, callback</span>) </span>{
     <span class="hljs-keyword">return</span> utility.callService(api.service.messages.getDialogs, <span class="hljs-keyword">this</span>.client, <span class="hljs-keyword">this</span>.client._channel, callback, <span class="hljs-built_in">arguments</span>);
 };</pre></div></div>
             
@@ -212,7 +212,163 @@ http:<span class="hljs-comment">//telegram.link</span>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-14">&#182;</a>
               </div>
-              <p>Exports the class</p>
+              <hr>
+<p>messages.<strong>getHistory(peer, offset, max_id, limit, [callback])</strong></p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <p>Returns a Promise for get the message history for a chat.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
+              <p><a href="https://core.telegram.org/method/messages.getHistory">Click here for more details</a></p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-17">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-17">&#182;</a>
+              </div>
+              <p>The code:</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Messages.prototype.getHistory = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">peer, offset, max_id, limit, callback</span>) </span>{
+    <span class="hljs-keyword">return</span> utility.callService(api.service.messages.getHistory, <span class="hljs-keyword">this</span>.client, <span class="hljs-keyword">this</span>.client._channel, callback, <span class="hljs-built_in">arguments</span>);
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-18">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-18">&#182;</a>
+              </div>
+              <hr>
+<p>messages.<strong>sendMessage(peer, message, random_id, [callback])</strong></p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-19">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-19">&#182;</a>
+              </div>
+              <p>Returns a Promise for get the message history for a chat.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-20">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-20">&#182;</a>
+              </div>
+              <p><a href="https://core.telegram.org/method/messages.sendMessage">Click here for more details</a></p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-21">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-21">&#182;</a>
+              </div>
+              <p>Usage example (<code>user_id</code> must be a real contact id, of course):</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-22">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-22">&#182;</a>
+              </div>
+              <pre><code> <span class="hljs-keyword">var</span> api = <span class="hljs-built_in">require</span>(<span class="hljs-string">'telegram.link'</span>)();
+
+ <span class="hljs-keyword">var</span> client = api.createClient( ...
+
+ <span class="hljs-keyword">var</span> peer = <span class="hljs-keyword">new</span> api.type.InputPeerContact({
+      props: {
+           user_id: <span class="hljs-number">12345678</span>
+      }
+ });
+
+ client.messages.sendMessage(
+      peer,
+      <span class="hljs-string">'My UTF8 first msg!!'</span>,
+      <span class="hljs-number">9876543211</span>  <span class="hljs-comment">// random id...</span>
+ ).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">sentMsg</span>) </span>{
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'sentMsg:'</span>, sentMsg.toPrintable());
+ });
+</code></pre>
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-23">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-23">&#182;</a>
+              </div>
+              <p>The code:</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Messages.prototype.sendMessage = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">peer, message, random_id, callback</span>) </span>{
+    <span class="hljs-keyword">return</span> utility.callService(api.service.messages.sendMessage, <span class="hljs-keyword">this</span>.client, <span class="hljs-keyword">this</span>.client._channel, callback, <span class="hljs-built_in">arguments</span>);
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-24">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-24">&#182;</a>
+              </div>
+              <p>Exports the class.</p>
 
             </div>
             
