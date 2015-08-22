@@ -3,6 +3,7 @@ require('requirish')._(module);
 var telegramLink = require('lib/telegram.link')();
 var net = require('telegram-mt-node').net;
 var api = require('lib/api');
+var mt = require('telegram-mt-node');
 
 
 describe('TelegramLink', function () {
@@ -140,4 +141,48 @@ describe('TelegramLink', function () {
             });
         });
     });
+
+    describe('#start/stop httpPoll()', function () {
+        mt.service.http_wait = function (input) {
+            input.callback(null, {});
+        };
+
+        it('should returns ok', function (done) {
+            var client = telegramLink.createClient({authKey: {}}, primaryDC, function () {
+                client.httpPoll(function (result) {
+                    result.should.be.ok;
+                    done();
+                })
+            });
+        });
+
+        it('should start', function (done) {
+            var client = telegramLink.createClient({authKey: {}}, primaryDC, function () {
+                mt.service.http_wait = function (input) {
+                    client._httpPollLoop = false;
+                    input.callback(null, {});
+                };
+                client.startHttpPollLoop(function (result) {
+                    result.should.be.ok;
+                    client._httpPollLoop.should.be.false();
+                    done();
+                });
+                client._httpPollLoop.should.be.true();
+            });
+        });
+
+        it('should start', function (done) {
+            var client = telegramLink.createClient({authKey: {}}, primaryDC, function () {
+                mt.service.http_wait = function (input) {
+                    client._httpPollLoop = false;
+                    input.callback(null, {});
+                };
+                client.startHttpPollLoop();
+                client.stopHttpPollLoop();
+                client._httpPollLoop.should.be.false();
+                done();
+            });
+        });
+    });
+
 });
