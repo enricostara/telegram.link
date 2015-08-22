@@ -6,7 +6,7 @@ var del = require('del');
 
 gulp.task('doc', function () {
     del(['./doc'], function () {
-        gulp.src('./lib/*.js')
+        gulp.src('./lib/**/*.js')
             .pipe(docco(/*{'layout': 'linear'}*/))
             .pipe(gulp.dest('./doc'));
     });

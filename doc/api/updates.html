@@ -2,10 +2,10 @@
 
 <html>
 <head>
-  <title>contacts.js</title>
+  <title>updates.js</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
-  <link rel="stylesheet" media="all" href="docco.css" />
+  <link rel="stylesheet" media="all" href="../docco.css" />
 </head>
 <body>
   <div id="container">
@@ -15,7 +15,7 @@
         
           <li id="title">
               <div class="annotation">
-                  <h1>contacts.js</h1>
+                  <h1>updates.js</h1>
               </div>
           </li>
         
@@ -47,8 +47,8 @@ http:<span class="hljs-comment">//telegram.link</span>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> api = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./api'</span>);
-<span class="hljs-keyword">var</span> utility = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./utility'</span>);</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> api = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../api'</span>);
+<span class="hljs-keyword">var</span> utility = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../utility'</span>);</pre></div></div>
             
         </li>
         
@@ -72,7 +72,7 @@ http:<span class="hljs-comment">//telegram.link</span>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <p>This module wraps API methods required to manage the user contacts.</p>
+              <p>This module wraps API methods required to manage the session updates</p>
 
             </div>
             
@@ -85,7 +85,7 @@ http:<span class="hljs-comment">//telegram.link</span>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
-              <p>See <a href="https://core.telegram.org/methods#working-with-contacts">Api Methods</a></p>
+              <p>See <a href="https://core.telegram.org/methods#working-with-updates">Api Methods</a></p>
 
             </div>
             
@@ -98,12 +98,12 @@ http:<span class="hljs-comment">//telegram.link</span>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
-              <p>Access only via Client object and <code>contacts</code> instance property</p>
+              <p>Access only via Client object and <code>updates</code> instance property</p>
 
             </div>
             
             <div class="content"><div class='highlight'><pre>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Contacts</span>(<span class="hljs-params">client</span>) </span>{
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Updates</span>(<span class="hljs-params">client</span>) </span>{
     <span class="hljs-keyword">this</span>.client = client;
 }</pre></div></div>
             
@@ -156,7 +156,7 @@ http:<span class="hljs-comment">//telegram.link</span>
                 <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
               <hr>
-<p>contacts.<strong>getContacts(hash, [callback])</strong></p>
+<p>updates.<strong>getState([callback])</strong></p>
 
             </div>
             
@@ -169,7 +169,7 @@ http:<span class="hljs-comment">//telegram.link</span>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-11">&#182;</a>
               </div>
-              <p>Returns a Promise for get the current user’s contact list.</p>
+              <p>Return a Promise to get the current state of updates.</p>
 
             </div>
             
@@ -182,7 +182,7 @@ http:<span class="hljs-comment">//telegram.link</span>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
-              <p><a href="https://core.telegram.org/method/contacts.getContacts">Click here for more details</a></p>
+              <p><a href="https://core.telegram.org/method/updates.getState">Click here for more details</a></p>
 
             </div>
             
@@ -199,8 +199,8 @@ http:<span class="hljs-comment">//telegram.link</span>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>Contacts.prototype.getContacts = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">hash, callback</span>) </span>{
-    <span class="hljs-keyword">return</span> utility.callService(api.service.contacts.getContacts, <span class="hljs-keyword">this</span>.client, <span class="hljs-keyword">this</span>.client._channel, callback, <span class="hljs-built_in">arguments</span>);
+            <div class="content"><div class='highlight'><pre>Updates.prototype.getState = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">callback</span>) </span>{
+    <span class="hljs-keyword">return</span> utility.callService(api.service.updates.getState, <span class="hljs-keyword">this</span>.client, <span class="hljs-keyword">this</span>.client._channel, callback, <span class="hljs-built_in">arguments</span>);
 };</pre></div></div>
             
         </li>
@@ -212,11 +212,68 @@ http:<span class="hljs-comment">//telegram.link</span>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-14">&#182;</a>
               </div>
-              <p>Exports the class</p>
+              <hr>
+<p>updates.<strong>getDifference(pts, date, qts, [callback])</strong></p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">module</span>.exports = exports = Contacts;</pre></div></div>
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <p>Return a Promise to get the difference between the current state of updates and transmitted.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
+              <p><a href="https://core.telegram.org/method/updates.getDifference">Click here for more details</a></p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-17">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-17">&#182;</a>
+              </div>
+              <p>The code:</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Updates.prototype.getDifference = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">pts, date, qts, callback</span>) </span>{
+    <span class="hljs-keyword">return</span> utility.callService(api.service.updates.getDifference, <span class="hljs-keyword">this</span>.client, <span class="hljs-keyword">this</span>.client._channel, callback, <span class="hljs-built_in">arguments</span>);
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-18">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-18">&#182;</a>
+              </div>
+              <p>Export the class</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">module</span>.exports = exports = Updates;</pre></div></div>
             
         </li>
         

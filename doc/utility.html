@@ -88,7 +88,8 @@ http:<span class="hljs-comment">//telegram.link</span>
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">fulfill, reject</span>) </span>{
         emitter.once(<span class="hljs-string">'error'</span>, reject);
         emitter.once(eventName, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">result</span>) </span>{
-            <span class="hljs-keyword">if</span> (<span class="hljs-string">'mtproto.type.Rpc_error'</span> == result.typeName) {
+            emitter.removeListener(<span class="hljs-string">'error'</span>, reject);
+            <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> result !== <span class="hljs-string">'boolean'</span> &amp;&amp; result.instanceOf(<span class="hljs-string">'mtproto.type.Rpc_error'</span>)) {
                 reject(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(result.error_message));
             } <span class="hljs-keyword">else</span> {
                 fulfill(result);

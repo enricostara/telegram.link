@@ -2,10 +2,10 @@
 
 <html>
 <head>
-  <title>auth.js</title>
+  <title>messages.js</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
-  <link rel="stylesheet" media="all" href="docco.css" />
+  <link rel="stylesheet" media="all" href="../docco.css" />
 </head>
 <body>
   <div id="container">
@@ -15,7 +15,7 @@
         
           <li id="title">
               <div class="annotation">
-                  <h1>auth.js</h1>
+                  <h1>messages.js</h1>
               </div>
           </li>
         
@@ -47,8 +47,8 @@ http:<span class="hljs-comment">//telegram.link</span>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> api = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./api'</span>);
-<span class="hljs-keyword">var</span> utility = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./utility'</span>);</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> api = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../api'</span>);
+<span class="hljs-keyword">var</span> utility = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../utility'</span>);</pre></div></div>
             
         </li>
         
@@ -72,7 +72,7 @@ http:<span class="hljs-comment">//telegram.link</span>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <p>This module wraps API methods required to the user to gain the authorization.</p>
+              <p>This module wraps API methods required to manage the messages.</p>
 
             </div>
             
@@ -85,8 +85,7 @@ http:<span class="hljs-comment">//telegram.link</span>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
-              <p>See <a href="https://core.telegram.org/api/auth">User Authorization</a>
-and <a href="https://core.telegram.org/methods#registration-authorization">Api Methods</a></p>
+              <p>See <a href="https://core.telegram.org/methods#working-with-messages">Api Methods</a></p>
 
             </div>
             
@@ -99,12 +98,12 @@ and <a href="https://core.telegram.org/methods#registration-authorization">Api M
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
-              <p>Access only via Client object and <code>auth</code> instance property</p>
+              <p>Access only via Client object and <code>messages</code> instance property</p>
 
             </div>
             
             <div class="content"><div class='highlight'><pre>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Auth</span>(<span class="hljs-params">client</span>) </span>{
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Messages</span>(<span class="hljs-params">client</span>) </span>{
     <span class="hljs-keyword">this</span>.client = client;
 }</pre></div></div>
             
@@ -157,7 +156,7 @@ and <a href="https://core.telegram.org/methods#registration-authorization">Api M
                 <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
               <hr>
-<p>auth.<strong>sendCode(phone_number, sms_type, lang_code, [callback])</strong></p>
+<p>messages.<strong>getDialogs(offset, max_id, limit, [callback])</strong></p>
 
             </div>
             
@@ -170,7 +169,7 @@ and <a href="https://core.telegram.org/methods#registration-authorization">Api M
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-11">&#182;</a>
               </div>
-              <p>Sends a text message with the confirmation code required for registration to the given phone number.</p>
+              <p>Return a Promise to get the current user dialog list.</p>
 
             </div>
             
@@ -183,7 +182,7 @@ and <a href="https://core.telegram.org/methods#registration-authorization">Api M
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
-              <p><a href="https://core.telegram.org/method/auth.sendCode">Click here for more details</a></p>
+              <p><a href="https://core.telegram.org/method/messages.getDialogs">Click here for more details</a></p>
 
             </div>
             
@@ -200,28 +199,8 @@ and <a href="https://core.telegram.org/methods#registration-authorization">Api M
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>Auth.prototype.sendCode = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">phone_number, sms_type, lang_code, callback</span>) </span>{
-    <span class="hljs-keyword">if</span> (callback) {
-        <span class="hljs-keyword">this</span>.client.once(<span class="hljs-string">'sendCode'</span>, callback);
-    }
-    <span class="hljs-keyword">var</span> props = {
-        phone_number: phone_number,
-        sms_type: sms_type,
-        api_id: <span class="hljs-keyword">this</span>.client._app.id,
-        api_hash: <span class="hljs-keyword">this</span>.client._app.hash,
-        lang_code: lang_code
-    };
-    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.client.isReady(<span class="hljs-literal">true</span>)) {
-        <span class="hljs-keyword">try</span> {
-            api.service.auth.sendCode({
-                props: props,
-                channel: <span class="hljs-keyword">this</span>.client._channel,
-                callback: utility.createEventEmitterCallback(<span class="hljs-string">'sendCode'</span>, <span class="hljs-keyword">this</span>.client)
-            });
-        } <span class="hljs-keyword">catch</span> (err) {
-            <span class="hljs-keyword">this</span>.client.emit(<span class="hljs-string">'error'</span>, err);
-        }
-    }
+            <div class="content"><div class='highlight'><pre>Messages.prototype.getDialogs = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">offset, max_id, limit, callback</span>) </span>{
+    <span class="hljs-keyword">return</span> utility.callService(api.service.messages.getDialogs, <span class="hljs-keyword">this</span>.client, <span class="hljs-keyword">this</span>.client._channel, callback, <span class="hljs-built_in">arguments</span>);
 };</pre></div></div>
             
         </li>
@@ -234,7 +213,7 @@ and <a href="https://core.telegram.org/methods#registration-authorization">Api M
                 <a class="pilcrow" href="#section-14">&#182;</a>
               </div>
               <hr>
-<p>auth.<strong>sendCall(phone_number, phone_code_hash, [callback])</strong></p>
+<p>messages.<strong>getHistory(peer, offset, max_id, limit, [callback])</strong></p>
 
             </div>
             
@@ -247,8 +226,7 @@ and <a href="https://core.telegram.org/methods#registration-authorization">Api M
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-15">&#182;</a>
               </div>
-              <p>Makes a voice call to the passed phone number. A robot will repeat the confirmation code from a previously sent SMS message.
-Returns a Promise.</p>
+              <p>Return a Promise to get the message history for a chat.</p>
 
             </div>
             
@@ -261,7 +239,7 @@ Returns a Promise.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-16">&#182;</a>
               </div>
-              <p><a href="https://core.telegram.org/method/auth.sendCall">Click here for more details</a></p>
+              <p><a href="https://core.telegram.org/method/messages.getHistory">Click here for more details</a></p>
 
             </div>
             
@@ -274,13 +252,9 @@ Returns a Promise.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-17">&#182;</a>
               </div>
-              <p>The code:</p>
+              <p>Usage example (<code>user_id</code> must be a real contact id, of course):</p>
 
             </div>
-            
-            <div class="content"><div class='highlight'><pre>Auth.prototype.sendCall = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">phone_number, phone_code_hash, callback</span>) </span>{
-    <span class="hljs-keyword">return</span> utility.callService(api.service.auth.sendCall, <span class="hljs-keyword">this</span>.client, <span class="hljs-keyword">this</span>.client._channel, callback, <span class="hljs-built_in">arguments</span>);
-};</pre></div></div>
             
         </li>
         
@@ -291,9 +265,24 @@ Returns a Promise.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-18">&#182;</a>
               </div>
-              <hr>
-<p>auth.<strong>signIn(phone_number, phone_code_hash, phone_code, [callback])</strong></p>
+              <pre><code> <span class="hljs-keyword">var</span> api = <span class="hljs-built_in">require</span>(<span class="hljs-string">'telegram.link'</span>)();
 
+ <span class="hljs-keyword">var</span> client = api.createClient( ...
+
+ <span class="hljs-keyword">var</span> peer = <span class="hljs-keyword">new</span> api.type.InputPeerContact({
+      props: {
+           user_id: <span class="hljs-number">12345678</span>
+      }
+ });
+
+ client.messages.getHistory(
+      peer,
+      <span class="hljs-number">0</span>, <span class="hljs-number">0</span>,
+      <span class="hljs-number">10</span>  <span class="hljs-comment">// num of messages to be returned</span>
+ ).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">messages</span>) </span>{
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'messages:'</span>, messages.toPrintable());
+ });
+</code></pre>
             </div>
             
         </li>
@@ -305,10 +294,13 @@ Returns a Promise.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-19">&#182;</a>
               </div>
-              <p>Signs in a user with a validated phone number.
-Returns a Promise.</p>
+              <p>The code:</p>
 
             </div>
+            
+            <div class="content"><div class='highlight'><pre>Messages.prototype.getHistory = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">peer, offset, max_id, limit, callback</span>) </span>{
+    <span class="hljs-keyword">return</span> utility.callService(api.service.messages.getHistory, <span class="hljs-keyword">this</span>.client, <span class="hljs-keyword">this</span>.client._channel, callback, <span class="hljs-built_in">arguments</span>);
+};</pre></div></div>
             
         </li>
         
@@ -319,7 +311,8 @@ Returns a Promise.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-20">&#182;</a>
               </div>
-              <p><a href="https://core.telegram.org/method/auth.signIn">Click here for more details</a></p>
+              <hr>
+<p>messages.<strong>readHistory(peer, max_id, offset, read_contents, [callback])</strong></p>
 
             </div>
             
@@ -332,13 +325,9 @@ Returns a Promise.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-21">&#182;</a>
               </div>
-              <p>The code:</p>
+              <p>Return a Promise to mark the message history as read..</p>
 
             </div>
-            
-            <div class="content"><div class='highlight'><pre>Auth.prototype.signIn = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">phone_number, phone_code_hash, phone_code, callback</span>) </span>{
-    <span class="hljs-keyword">return</span> utility.callService(api.service.auth.signIn, <span class="hljs-keyword">this</span>.client, <span class="hljs-keyword">this</span>.client._channel, callback, <span class="hljs-built_in">arguments</span>);
-};</pre></div></div>
             
         </li>
         
@@ -349,8 +338,7 @@ Returns a Promise.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-22">&#182;</a>
               </div>
-              <hr>
-<p>auth.<strong>signUp(phone_number, phone_code_hash, phone_code, first_name, last_name, [callback])</strong></p>
+              <p><a href="https://core.telegram.org/method/messages.readHistory">Click here for more details</a></p>
 
             </div>
             
@@ -363,10 +351,17 @@ Returns a Promise.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-23">&#182;</a>
               </div>
-              <p>Registers a validated phone number in the system.
-Returns a Promise.</p>
+              <p>The code:</p>
 
             </div>
+            
+            <div class="content"><div class='highlight'><pre>Messages.prototype.readHistory = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">peer, max_id, offset, read_contents, callback</span>) </span>{
+
+    read_contents = read_contents === <span class="hljs-literal">false</span> ? <span class="hljs-keyword">new</span> api.type.BoolFalse() :
+        ( read_contents === <span class="hljs-literal">true</span> ? <span class="hljs-keyword">new</span> api.type.BoolTrue() : read_contents);
+
+    <span class="hljs-keyword">return</span> utility.callService(api.service.messages.readHistory, <span class="hljs-keyword">this</span>.client, <span class="hljs-keyword">this</span>.client._channel, callback, <span class="hljs-built_in">arguments</span>);
+};</pre></div></div>
             
         </li>
         
@@ -377,7 +372,8 @@ Returns a Promise.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-24">&#182;</a>
               </div>
-              <p><a href="https://core.telegram.org/method/auth.signUp">Click here for more details</a></p>
+              <hr>
+<p>messages.<strong>sendMessage(peer, message, random_id, [callback])</strong></p>
 
             </div>
             
@@ -390,13 +386,9 @@ Returns a Promise.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-25">&#182;</a>
               </div>
-              <p>The code:</p>
+              <p>Return a Promise to send a message to the peer.</p>
 
             </div>
-            
-            <div class="content"><div class='highlight'><pre>Auth.prototype.signUp = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">phone_number, phone_code_hash, phone_code, first_name, last_name, callback</span>) </span>{
-    <span class="hljs-keyword">return</span> utility.callService(api.service.auth.signUp, <span class="hljs-keyword">this</span>.client, <span class="hljs-keyword">this</span>.client._channel, callback, <span class="hljs-built_in">arguments</span>);
-};</pre></div></div>
             
         </li>
         
@@ -407,8 +399,7 @@ Returns a Promise.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-26">&#182;</a>
               </div>
-              <hr>
-<p>auth.<strong>checkPhone(phone_number, [callback])</strong></p>
+              <p><a href="https://core.telegram.org/method/messages.sendMessage">Click here for more details</a></p>
 
             </div>
             
@@ -421,7 +412,7 @@ Returns a Promise.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-27">&#182;</a>
               </div>
-              <p>Returns a Promise for get the information on whether the passed phone number was registered.</p>
+              <p>Usage example (<code>user_id</code> must be a real contact id, of course):</p>
 
             </div>
             
@@ -434,8 +425,24 @@ Returns a Promise.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-28">&#182;</a>
               </div>
-              <p><a href="https://core.telegram.org/method/auth.checkPhone">Click here for more details</a></p>
+              <pre><code> <span class="hljs-keyword">var</span> api = <span class="hljs-built_in">require</span>(<span class="hljs-string">'telegram.link'</span>)();
 
+ <span class="hljs-keyword">var</span> client = api.createClient( ...
+
+ <span class="hljs-keyword">var</span> peer = <span class="hljs-keyword">new</span> api.type.InputPeerContact({
+      props: {
+           user_id: <span class="hljs-number">12345678</span>
+      }
+ });
+
+ client.messages.sendMessage(
+      peer,
+      <span class="hljs-string">'My UTF8 first msg!!'</span>,
+      <span class="hljs-number">9876543211</span>  <span class="hljs-comment">// random id...</span>
+ ).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">sentMsg</span>) </span>{
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'sentMsg:'</span>, sentMsg.toPrintable());
+ });
+</code></pre>
             </div>
             
         </li>
@@ -451,8 +458,8 @@ Returns a Promise.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>Auth.prototype.checkPhone = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">phone_number, callback</span>) </span>{
-    <span class="hljs-keyword">return</span> utility.callService(api.service.auth.checkPhone, <span class="hljs-keyword">this</span>.client, <span class="hljs-keyword">this</span>.client._channel, callback, <span class="hljs-built_in">arguments</span>);
+            <div class="content"><div class='highlight'><pre>Messages.prototype.sendMessage = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">peer, message, random_id, callback</span>) </span>{
+    <span class="hljs-keyword">return</span> utility.callService(api.service.messages.sendMessage, <span class="hljs-keyword">this</span>.client, <span class="hljs-keyword">this</span>.client._channel, callback, <span class="hljs-built_in">arguments</span>);
 };</pre></div></div>
             
         </li>
@@ -464,11 +471,11 @@ Returns a Promise.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-30">&#182;</a>
               </div>
-              <p>Exports the class.</p>
+              <p>Export the class.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">module</span>.exports = exports = Auth;</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">module</span>.exports = exports = Messages;</pre></div></div>
             
         </li>
         
