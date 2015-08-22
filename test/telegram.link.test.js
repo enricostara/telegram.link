@@ -185,4 +185,17 @@ describe('TelegramLink', function () {
         });
     });
 
+    describe('#un/registerOnUpdates()', function () {
+
+        it('should returns ok', function (done) {
+            var client = telegramLink.createClient({authKey: {}}, primaryDC, function () {
+                var callback = function() {};
+                client.registerOnUpdates(callback);
+                (client._channel.getParser().listeners('api.type.Updates')[0] === callback).should.be.true();
+                client.unregisterOnUpdates(callback);
+                (client._channel.getParser().listeners('api.type.Updates').length).should.be.equal(0);
+                done();
+            });
+        });
+    });
 });

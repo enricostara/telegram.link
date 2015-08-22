@@ -5,14 +5,17 @@ var utility = require('lib/utility');
 
 describe('utility', function () {
     describe('#callService()', function () {
+        var theCallback;
         var emitter = {
             isReady: function() { return true; },
             once: function(event, callback) {
                 console.log('once ', event);
-                callback.should.be.equal('callback');
+                (typeof callback).should.be.equal('function');
+                theCallback = callback;
             },
-            emit: function(event, error) {
-                console.log('emit ', event, error.stack);
+            emit: function(event, obj) {
+                console.log('emit ', event, obj);
+                theCallback(obj);
             }
         };
         it('should returns ok', function (done) {
@@ -21,12 +24,13 @@ describe('utility', function () {
                 input.props.should.have.property('second', 2);
                 input.channel.should.be.equal('channel');
                 (typeof input.callback).should.be.equal('function');
-                done();
+                input.callback();
             };
             (function testCall(first, second, callback) {
                 var promise = utility.callService(api.service.auth.testCall, emitter, 'channel', callback, arguments);
                 promise.should.be.an.instanceOf(Promise);
-            })(1, 2, 'callback');
+                promise.then(done);
+            })(1, 2, done);
         });
     });
 });
