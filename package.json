@@ -1,6 +1,6 @@
 {
   "name": "telegram.link",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "description": "Telegram API library",
   "keywords": [
     "telegram",
@@ -22,24 +22,24 @@
     "requirish": "latest",
     "telegram-tl-node": "latest",
     "telegram-mt-node": "latest",
-    "colors": "latest",
-    "es6-promise": "latest"
+    "colors": "1.1.2",
+    "es6-promise": "2.3.0"
   },
   "license": "MIT",
   "devDependencies": {
-    "gulp": "latest",
-    "gulp-jshint": "latest",
-    "gulp-mocha": "latest",
-    "gulp-docco": "latest",
-    "del": "latest",
-    "should": "latest",
-    "mocha": "latest",
-    "mocha-better-spec-reporter": "1.x",
-    "mocha-lcov-reporter": "latest",
-    "coveralls": "latest",
-    "codeclimate-test-reporter": "latest",
-    "istanbul": "latest",
-    "zuul": "latest"
+    "gulp": "3.9.0",
+    "gulp-jshint": "1.11.2",
+    "gulp-mocha": "2.1.3",
+    "gulp-docco": "0.0.4",
+    "del": "1.2.0",
+    "should": "7.0.2",
+    "mocha": "2.2.5",
+    "mocha-better-spec-reporter": "1.1.2",
+    "mocha-lcov-reporter": "0.0.2",
+    "coveralls": "2.11.3",
+    "codeclimate-test-reporter": "0.1.0",
+    "istanbul": "0.3.17",
+    "zuul": "1.15.2"
   },
   "main": "./lib/telegram.link",
   "engines": {
