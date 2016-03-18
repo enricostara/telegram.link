@@ -20,7 +20,7 @@
     "get-flow": "latest",
     "get-log": "latest",
     "requirish": "latest",
-    "telegram-tl-node": "latest",
+    "telegram-tl-node": "https://github.com/amurchick/telegram-tl-node",
     "telegram-mt-node": "https://github.com/amurchick/telegram-mt-node",
     "colors": "1.1.2",
     "es6-promise": "2.3.0"
