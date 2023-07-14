@@ -6,7 +6,7 @@
 
 **ALPHA SOFTWARE**
 
-###_telegram.link_ is a Telegram API library for
+### _telegram.link_ is a Telegram API library for
 
 - **Hybrid Mobile Apps** (phone and tablet)
 
